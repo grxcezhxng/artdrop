@@ -1,0 +1,6 @@
+framework module Pods_ArtDrop_ArtDropUITests {
+  umbrella header "Pods-ArtDrop-ArtDropUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

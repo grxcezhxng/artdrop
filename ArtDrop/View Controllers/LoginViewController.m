@@ -8,11 +8,13 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import "Parse/Parse.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface LoginViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @end
 
@@ -22,6 +24,8 @@
     [super viewDidLoad];
     self.usernameField.delegate = self;
     self.passwordField.delegate = self;
+    
+    [self _renderStyling];
 }
 
 #pragma mark - UITextField Delegate methods
@@ -71,6 +75,21 @@
     [alert addAction:okAction];
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:^{
     }];
+}
+
+- (void)_renderStyling {
+    self.usernameField.layer.cornerRadius= 8.0f;
+    self.usernameField.layer.masksToBounds=YES;
+    self.usernameField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.usernameField.layer.borderWidth= 1.0f;
+    
+    self.passwordField.layer.cornerRadius= 8.0f;
+    self.passwordField.layer.masksToBounds=YES;
+    self.passwordField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.passwordField.layer.borderWidth= 1.0f;
+    
+    self.loginButton.layer.cornerRadius = 10;
+    self.loginButton.layer.masksToBounds=YES;
 }
 
 @end

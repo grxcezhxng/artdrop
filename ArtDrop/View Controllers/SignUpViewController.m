@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *signupButton;
 
 @end
 
@@ -21,7 +22,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.usernameField.delegate = self;
+    self.passwordField.delegate = self;
+    self.nameField.delegate = self;
+    [self _renderStyling];
 }
 
 #pragma mark - UITextField Delegate methods
@@ -36,11 +40,16 @@
 #pragma mark - IBActions
 
 - (IBAction)handleSignUp:(id)sender {
-    if([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""] || [self.nameField.text isEqual:@""] ) {
+    if(([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) || [self.nameField.text isEqual:@""] ) {
         [self _showErrorAlert];
     }
     [self _registerUser];
 }
+
+- (IBAction)handleLogin:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 #pragma mark - Private methods
 
@@ -69,8 +78,27 @@
     UIAlertAction *const okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alert addAction:okAction];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:^{
-    }];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)_renderStyling {
+    self.usernameField.layer.cornerRadius= 8.0f;
+    self.usernameField.layer.masksToBounds=YES;
+    self.usernameField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.usernameField.layer.borderWidth= 1.0f;
+    
+    self.passwordField.layer.cornerRadius= 8.0f;
+    self.passwordField.layer.masksToBounds=YES;
+    self.passwordField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.passwordField.layer.borderWidth= 1.0f;
+    
+    self.nameField.layer.cornerRadius= 8.0f;
+    self.nameField.layer.masksToBounds=YES;
+    self.nameField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.nameField.layer.borderWidth= 1.0f;
+    
+    self.signupButton.layer.cornerRadius = 10;
+    self.signupButton.layer.masksToBounds=YES;
 }
 
 @end

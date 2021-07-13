@@ -9,8 +9,13 @@
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "Post.h"
+#import "PostCell.h"
 
-@interface FeedViewController ()
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *arrayOfPosts;
 
 @end
 
@@ -18,17 +23,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    UIRefreshControl *const refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
 }
 
-#pragma mark - IBAction
+#pragma mark - Table View Delegate Methods
 
-- (IBAction)handleLogout:(id)sender {
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        UIStoryboard *const storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginViewController *const loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        [[UIApplication sharedApplication].keyWindow setRootViewController:loginViewController];
-    }];
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PostCell *const cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    Post *const post = self.arrayOfPosts[indexPath.row];
+    cell.post = post;
+    [cell setCellData];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arrayOfPosts.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - Refresh Control
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    NSURLSession *const session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                                                                delegate:nil
+                                                           delegateQueue:[NSOperationQueue mainQueue]];
+    session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+//    [self _fetchFeed];
+    [self.tableView reloadData];
+    [refreshControl endRefreshing];
 }
 
 /*

@@ -1,5 +1,5 @@
 //
-//  FeedViewController.h
+//  SellViewController.h
 //  ArtDrop
 //
 //  Created by gracezhg on 7/12/21.
@@ -9,9 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FeedViewController : UIViewController
-
-- (void)setCellData;
+@interface SellViewController : UIViewController
 
 @end
 

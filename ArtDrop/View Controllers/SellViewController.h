@@ -6,10 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Artist.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SellViewController : UIViewController
+
+@property (strong, nonatomic) Artist *artist;
 
 @end
 

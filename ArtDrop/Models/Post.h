@@ -6,6 +6,7 @@
 //
 
 #import <Parse/Parse.h>
+#import "Artist.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *postID;
 @property (nonatomic, strong) NSString *userID;
-@property (nonatomic, strong) PFUser *artist;
+@property (nonatomic, strong) PFUser *author;
+@property (nonatomic, strong) Artist *artist;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) PFFileObject *image;
 @property (nonatomic, strong) NSNumber *likeCount;
@@ -24,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *size;
 @property (nonatomic, strong) NSString *price;
 
-+ (void)postUserImage: ( UIImage * _Nullable )image withTitle: ( NSString * _Nullable )title withMedium: ( NSString * _Nullable )medium withYear: ( NSString * _Nullable )year withSize: ( NSString * _Nullable )size withPrice: ( NSString * _Nullable )price withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void)postUserImage: ( UIImage * _Nullable )image withTitle: ( NSString * _Nullable )title withArtist: ( Artist * _Nullable )artist withMedium: ( NSString * _Nullable )medium withYear: ( NSString * _Nullable )year withSize: ( NSString * _Nullable )size withPrice: ( NSString * _Nullable )price withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

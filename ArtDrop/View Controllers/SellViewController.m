@@ -7,11 +7,13 @@
 
 #import "SellViewController.h"
 #import "Post.h"
+#import "Artist.h"
 
 @interface SellViewController () <UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
+@property (weak, nonatomic) IBOutlet UITextField *artistField;
 @property (weak, nonatomic) IBOutlet UITextField *yearField;
 @property (weak, nonatomic) IBOutlet UITextField *mediumField;
 @property (weak, nonatomic) IBOutlet UITextField *dimensionsField;
@@ -27,9 +29,9 @@
     self.imageView.userInteractionEnabled = YES;
 }
 
-#pragma mark - UIImagePickerController Delegate Methods
+#pragma mark - IB Actions
 
-- (IBAction)handleTapPhoto:(id)sender {
+- (IBAction)handleTapPhoto:(id)fsender {
     UIImagePickerController *const imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
@@ -45,15 +47,48 @@
 }
 
 - (IBAction)handleSubmit:(id)sender {
-    [Post postUserImage:self.imageView.image withTitle:self.titleField.text withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded){
-            NSLog(@"Posted successfully");
-            [self dismissViewControllerAnimated:true completion:nil];
+    [self _fetchArtist];
+}
+
+#pragma mark - API Call
+
+- (void)_fetchArtist {
+    NSString *artistName = self.artistField.text;
+    PFQuery *const artistQuery = [PFQuery queryWithClassName:@"Artist"];
+    [artistQuery includeKey:@"name"];
+    [artistQuery whereKey:@"name" equalTo:artistName];
+    artistQuery.limit = 1;
+    
+    [artistQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"Successlyfully fetched artist");
+            if([objects count] == 0) {
+                self.artist = [Artist createArtist:artistName withBio:@"" withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (succeeded){
+                        NSLog(@"Artist created successfully");
+                    } else {
+                        NSLog(@"Artist error: %@", error);
+                    }
+                }];
+            }
+            else {
+                self.artist = objects[0];
+            }
+            
+            [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded){
+                    NSLog(@"Posted successfully");
+                    [self dismissViewControllerAnimated:true completion:nil];
+                } else {
+                    NSLog(@"Posting error: %@", error);
+                }
+            }];
+            
         } else {
-            NSLog(@"error: %@", error);
+            NSLog(@"Artist error: %@", error);
         }
     }];
-    //    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 #pragma mark - UIImagePickerController Delegate Methods

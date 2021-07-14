@@ -24,6 +24,7 @@
 		A632CB97269D54770078E0AF /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB96269D54770078E0AF /* PostCell.m */; };
 		A632CB9A269D569E0078E0AF /* SellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB99269D569E0078E0AF /* SellViewController.m */; };
 		A632CB9D269D58B10078E0AF /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB9C269D58B10078E0AF /* ProfileViewController.m */; };
+		A632CBA0269E53B30078E0AF /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB9F269E53B30078E0AF /* Artist.m */; };
 		A9D37C84EF904A146AA35D1A /* Pods_ArtDrop_ArtDropUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199082B368D18557D77A009D /* Pods_ArtDrop_ArtDropUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		A632CB99269D569E0078E0AF /* SellViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SellViewController.m; sourceTree = "<group>"; };
 		A632CB9B269D58B10078E0AF /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		A632CB9C269D58B10078E0AF /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		A632CB9E269E53B30078E0AF /* Artist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Artist.h; sourceTree = "<group>"; };
+		A632CB9F269E53B30078E0AF /* Artist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Artist.m; sourceTree = "<group>"; };
 		C001863EC7CBA639455B91DB /* Pods_ArtDrop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArtDrop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7343A087CFA40A7D43EE332 /* Pods-ArtDrop-ArtDropUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtDrop-ArtDropUITests.debug.xcconfig"; path = "Target Support Files/Pods-ArtDrop-ArtDropUITests/Pods-ArtDrop-ArtDropUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EDB99C11005522252F3CA526 /* Pods-ArtDropTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtDropTests.release.xcconfig"; path = "Target Support Files/Pods-ArtDropTests/Pods-ArtDropTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 			children = (
 				A632CB92269D52370078E0AF /* Post.h */,
 				A632CB93269D52370078E0AF /* Post.m */,
+				A632CB9E269E53B30078E0AF /* Artist.h */,
+				A632CB9F269E53B30078E0AF /* Artist.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 				A632CB8B269D2AAB0078E0AF /* LoginViewController.m in Sources */,
 				A632CB8E269D30BB0078E0AF /* SignUpViewController.m in Sources */,
 				A632CB53269CD5280078E0AF /* AppDelegate.m in Sources */,
+				A632CBA0269E53B30078E0AF /* Artist.m in Sources */,
 				A632CB9D269D58B10078E0AF /* ProfileViewController.m in Sources */,
 				A632CB97269D54770078E0AF /* PostCell.m in Sources */,
 				A632CB64269CD52B0078E0AF /* main.m in Sources */,

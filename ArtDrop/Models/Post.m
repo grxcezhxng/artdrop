@@ -6,11 +6,13 @@
 //
 
 #import "Post.h"
+#import "Artist.h"
 
 @implementation Post
 
 @dynamic postID;
 @dynamic userID;
+@dynamic author;
 @dynamic artist;
 @dynamic title;
 @dynamic image;
@@ -26,10 +28,11 @@
     return @"Post";
 }
 
-+ (void)postUserImage: ( UIImage * _Nullable )image withTitle: ( NSString * _Nullable )title withMedium: ( NSString * _Nullable )medium withYear: ( NSString * _Nullable )year withSize: ( NSString * _Nullable )size withPrice: ( NSString * _Nullable )price withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void)postUserImage: ( UIImage * _Nullable )image withTitle: ( NSString * _Nullable )title withArtist: ( Artist * _Nullable )artist withMedium: ( NSString * _Nullable )medium withYear: ( NSString * _Nullable )year withSize: ( NSString * _Nullable )size withPrice: ( NSString * _Nullable )price withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     Post *const newPost = [Post new];
     newPost.image = [self _getPFFileFromImage:image];
-    newPost.artist = [PFUser currentUser];
+    newPost.author = [PFUser currentUser];
+    newPost.artist = artist;
     newPost.title = title;
     newPost.medium = medium;
     newPost.year = year;

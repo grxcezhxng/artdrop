@@ -25,6 +25,7 @@
 		A632CB9A269D569E0078E0AF /* SellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB99269D569E0078E0AF /* SellViewController.m */; };
 		A632CB9D269D58B10078E0AF /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB9C269D58B10078E0AF /* ProfileViewController.m */; };
 		A632CBA0269E53B30078E0AF /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB9F269E53B30078E0AF /* Artist.m */; };
+		A632CBA3269FA0E50078E0AF /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CBA2269FA0E50078E0AF /* DetailViewController.m */; };
 		A9D37C84EF904A146AA35D1A /* Pods_ArtDrop_ArtDropUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199082B368D18557D77A009D /* Pods_ArtDrop_ArtDropUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,8 @@
 		A632CB9C269D58B10078E0AF /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		A632CB9E269E53B30078E0AF /* Artist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Artist.h; sourceTree = "<group>"; };
 		A632CB9F269E53B30078E0AF /* Artist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Artist.m; sourceTree = "<group>"; };
+		A632CBA1269FA0E50078E0AF /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		A632CBA2269FA0E50078E0AF /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		C001863EC7CBA639455B91DB /* Pods_ArtDrop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArtDrop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7343A087CFA40A7D43EE332 /* Pods-ArtDrop-ArtDropUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtDrop-ArtDropUITests.debug.xcconfig"; path = "Target Support Files/Pods-ArtDrop-ArtDropUITests/Pods-ArtDrop-ArtDropUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EDB99C11005522252F3CA526 /* Pods-ArtDropTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtDropTests.release.xcconfig"; path = "Target Support Files/Pods-ArtDropTests/Pods-ArtDropTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 				A632CB99269D569E0078E0AF /* SellViewController.m */,
 				A632CB9B269D58B10078E0AF /* ProfileViewController.h */,
 				A632CB9C269D58B10078E0AF /* ProfileViewController.m */,
+				A632CBA1269FA0E50078E0AF /* DetailViewController.h */,
+				A632CBA2269FA0E50078E0AF /* DetailViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -484,6 +489,7 @@
 				A632CB91269D411B0078E0AF /* FeedViewController.m in Sources */,
 				A632CB56269CD5280078E0AF /* SceneDelegate.m in Sources */,
 				A632CB94269D52370078E0AF /* Post.m in Sources */,
+				A632CBA3269FA0E50078E0AF /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

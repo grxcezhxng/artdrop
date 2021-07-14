@@ -50,7 +50,7 @@
     [self _fetchArtist];
 }
 
-#pragma mark - API Call
+#pragma mark - Private Helper Methods
 
 - (void)_fetchArtist {
     NSString *artistName = self.artistField.text;
@@ -78,7 +78,8 @@
             [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded){
                     NSLog(@"Posted successfully");
-                    [self dismissViewControllerAnimated:true completion:nil];
+                    [self _showSubmitConfirmation];
+                    [self _resetForm];
                 } else {
                     NSLog(@"Posting error: %@", error);
                 }
@@ -88,7 +89,24 @@
             NSLog(@"Artist error: %@", error);
         }
     }];
-    
+}
+
+- (void)_showSubmitConfirmation {
+    UIAlertController *const alert = [UIAlertController alertControllerWithTitle:@"Successfully uploaded :)" message:@"" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *const okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:okAction];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:^{
+    }];
+}
+
+- (void)_resetForm {
+    self.titleField.text = @"";
+    self.artistField.text = @"";
+    self.mediumField.text = @"";
+    self.yearField.text = @"";
+    self.dimensionsField.text = @"";
+    self.priceField.text = @"";
 }
 
 #pragma mark - UIImagePickerController Delegate Methods
@@ -117,7 +135,6 @@
     
     return newImage;
 }
-
 
 /*
  #pragma mark - Navigation

@@ -13,6 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PostCell : UITableViewCell
 
 @property (strong, nonatomic) Post *post;
+@property (weak, nonatomic) IBOutlet UIImageView *artworkView;
+@property (weak, nonatomic) IBOutlet UILabel *artistLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yearLabel;
 
 - (void)setCellData;
 

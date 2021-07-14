@@ -7,6 +7,7 @@ target 'ArtDrop' do
 
   # Pods for ArtDrop
   pod 'Parse'
+  pod 'AFNetworking'
 
   target 'ArtDropTests' do
     inherit! :search_paths

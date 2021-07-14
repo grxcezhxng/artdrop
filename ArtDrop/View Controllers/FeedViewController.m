@@ -31,6 +31,29 @@
     [self.tableView insertSubview:refreshControl atIndex:0];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self _fetchFeed];
+}
+
+#pragma mark - Table View Data Source Methods
+
+- (void)_fetchFeed {
+    PFQuery *const postQuery = [PFQuery queryWithClassName:@"Post"];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"artist"];
+    postQuery.limit = 40;
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            self.arrayOfPosts = posts;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
 #pragma mark - Table View Delegate Methods
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -57,7 +80,7 @@
                                                                 delegate:nil
                                                            delegateQueue:[NSOperationQueue mainQueue]];
     session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-//    [self _fetchFeed];
+    [self _fetchFeed];
     [self.tableView reloadData];
     [refreshControl endRefreshing];
 }

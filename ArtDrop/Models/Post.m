@@ -37,10 +37,15 @@
     newPost.medium = medium;
     newPost.year = year;
     newPost.size = size;
-    newPost.price = price;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     newPost.createdAt = [NSDate date];
+    if ([price isEqualToString:@""]) {
+        newPost.price = @"Not for sale";
+    }
+    else {
+        newPost.price = [NSString stringWithFormat:@"%@%@", @"$", price];
+    }
     
     [newPost saveInBackgroundWithBlock: completion];
 }

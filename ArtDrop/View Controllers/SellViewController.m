@@ -29,9 +29,14 @@
     self.imageView.userInteractionEnabled = YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self _renderStyling];
+}
+
 #pragma mark - IB Actions
 
-- (IBAction)handleTapPhoto:(id)fsender {
+- (IBAction)handleTapPhoto:(id)sender {
     UIImagePickerController *const imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
@@ -48,6 +53,18 @@
 
 - (IBAction)handleSubmit:(id)sender {
     [self _fetchArtist];
+}
+
+#pragma mark - UIImagePickerController Delegate Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *const editedImage = info[UIImagePickerControllerEditedImage];
+    
+    self.imageView.backgroundColor = UIColor.whiteColor;
+    UIImage *const resizedImage = [self _resizeImage:editedImage withSize:CGSizeMake(350, 350)];
+    self.imageView.image = resizedImage;
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Private Helper Methods
@@ -109,20 +126,6 @@
     self.priceField.text = @"";
 }
 
-#pragma mark - UIImagePickerController Delegate Methods
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    UIImage *const editedImage = info[UIImagePickerControllerEditedImage];
-    
-    self.imageView.backgroundColor = UIColor.whiteColor;
-    UIImage *const resizedImage = [self _resizeImage:editedImage withSize:CGSizeMake(350, 350)];
-    self.imageView.image = resizedImage;
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - Private Image Helper Methods
-
 - (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *const resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -134,6 +137,41 @@
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+- (void)_renderStyling {
+    self.titleField.layer.cornerRadius= 8.0f;
+    self.titleField.layer.masksToBounds=YES;
+    self.titleField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.titleField.layer.borderWidth= 1.0f;
+    
+    self.artistField.layer.cornerRadius= 8.0f;
+    self.artistField.layer.masksToBounds=YES;
+    self.artistField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.artistField.layer.borderWidth= 1.0f;
+    
+    self.yearField.layer.cornerRadius= 8.0f;
+    self.yearField.layer.masksToBounds=YES;
+    self.yearField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.yearField.layer.borderWidth= 1.0f;
+    
+    self.mediumField.layer.cornerRadius= 8.0f;
+    self.mediumField.layer.masksToBounds=YES;
+    self.mediumField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.mediumField.layer.borderWidth= 1.0f;
+    
+    self.dimensionsField.layer.cornerRadius= 8.0f;
+    self.dimensionsField.layer.masksToBounds=YES;
+    self.dimensionsField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.dimensionsField.layer.borderWidth= 1.0f;
+    
+    self.priceField.layer.cornerRadius= 8.0f;
+    self.priceField.layer.masksToBounds=YES;
+    self.priceField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.priceField.layer.borderWidth= 1.0f;
+    
+    self.submitButton.layer.cornerRadius = 10;
+    self.submitButton.layer.masksToBounds=YES;
 }
 
 /*

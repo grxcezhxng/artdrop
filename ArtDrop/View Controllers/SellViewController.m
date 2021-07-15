@@ -124,6 +124,8 @@
     self.yearField.text = @"";
     self.dimensionsField.text = @"";
     self.priceField.text = @"";
+    self.imageView.image = [self.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.imageView setTintColor:[UIColor lightGrayColor]];
 }
 
 - (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {

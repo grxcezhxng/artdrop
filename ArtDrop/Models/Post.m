@@ -40,6 +40,7 @@
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     newPost.createdAt = [NSDate date];
+    
     if ([price isEqualToString:@""]) {
         newPost.price = @"Not for sale";
     }

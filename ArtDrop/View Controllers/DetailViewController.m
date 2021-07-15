@@ -38,7 +38,7 @@
     self.titleLabel.text = self.post[@"title"];
     self.yearLabel.text = self.post[@"year"];
     self.mediumLabel.text = self.post[@"medium"];
-//    self.priceLabel.text = self.post[@"price"];
+    self.priceLabel.text = self.post[@"price"];
 }
 
 /*

@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self _renderData];
     [self _renderStyling];
 }
 
@@ -63,8 +64,6 @@
     UIImage *const editedImage = info[UIImagePickerControllerEditedImage];
     UIImage *const resizedImage = [self _resizeImage:editedImage withSize:CGSizeMake(100, 100)];
     self.profilePhoto.image = resizedImage;
-    
-//    self.usernameLabel.text  = PFUser.currentUser[@"username"];
     self.profilePhoto.layer.cornerRadius = 50;
     
     UIImage *const latestPhoto = [self _resizeImage:self.profilePhoto.image withSize:CGSizeMake(100, 100)];
@@ -83,6 +82,33 @@
         }
     }];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UITextView Delegate methods
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    self.bioField.text = @"";
+    self.bioField.textColor = [UIColor blackColor];
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if(self.bioField.text.length == 0) {
+        self.bioField.textColor = [UIColor lightGrayColor];
+        self.bioField.text = @"Your bio goes here!";
+        [self.bioField resignFirstResponder];
+    }
+    else {
+        [PFUser.currentUser setObject:self.bioField.text forKey:@"bio"];
+    }
+    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded) {
+            NSLog(@"Sucessfully saved user bio");
+        }
+        else {
+            NSLog(@"error: %@", error);
+        }
+    }];
 }
 
 #pragma mark - Private Helper Methods
@@ -111,7 +137,7 @@
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
-- (void)_renderStyling {
+- (void)_renderData {
     self.nameLabel.text = PFUser.currentUser[@"name"];
     self.usernameLabel.text = PFUser.currentUser[@"username"];
     self.bioField.delegate = self;
@@ -122,10 +148,6 @@
         self.bioField.textColor = [UIColor lightGrayColor];
         self.bioField.text = @"Your bio goes here!";
     }
-    self.bioField.layer.cornerRadius=8.0f;
-    self.bioField.layer.masksToBounds=YES;
-    self.bioField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
-    self.bioField.layer.borderWidth= 1.0f;
     
     self.profilePhoto.userInteractionEnabled = YES;
     self.profilePhoto.layer.cornerRadius = 60;
@@ -136,32 +158,11 @@
     }
 }
 
-#pragma mark - UITextView Delegate methods
-
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    self.bioField.text = @"";
-    self.bioField.textColor = [UIColor blackColor];
-    return YES;
-}
-
-- (BOOL)textViewDidEndEditing:(UITextView *)textView {
-    if(self.bioField.text.length == 0) {
-        self.bioField.textColor = [UIColor lightGrayColor];
-        self.bioField.text = @"Your bio goes here!";
-        [self.bioField resignFirstResponder];
-    }
-    else {
-        [PFUser.currentUser setObject:self.bioField.text forKey:@"bio"];
-    }
-    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if(succeeded) {
-            NSLog(@"Sucessfully saved user bio");
-        }
-        else {
-            NSLog(@"error: %@", error);
-        }
-    }];
-    return YES;
+- (void)_renderStyling {
+    self.bioField.layer.cornerRadius=8.0f;
+    self.bioField.layer.masksToBounds=YES;
+    self.bioField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+    self.bioField.layer.borderWidth= 1.0f;
 }
 
 /*

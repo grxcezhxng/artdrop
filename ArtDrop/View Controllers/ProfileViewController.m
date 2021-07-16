@@ -28,12 +28,13 @@
     [super viewDidLoad];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.profilePhoto.userInteractionEnabled = YES;
+    [self _renderStyling];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self _fetchUserPosts];
+    [self _renderData];
     [self _renderStyling];
 }
 
@@ -74,21 +75,24 @@
 
 #pragma mark - Private Helper Methods
 
-- (void)_renderStyling {
+- (void)_renderData {
     self.nameLabel.text = PFUser.currentUser[@"name"];
     self.usernameLabel.text  = [NSString stringWithFormat:@"%@%@", @"@", PFUser.currentUser.username];
+    self.profilePhoto.userInteractionEnabled = YES;
     self.profilePhoto.layer.cornerRadius = 50;
     if(PFUser.currentUser[@"profilePhoto"]) {
         PFFileObject *const file = PFUser.currentUser[@"profilePhoto"];
         NSURL *const url = [NSURL URLWithString: file.url];
         [self.profilePhoto setImageWithURL:url];
     }
+}
 
+- (void)_renderStyling {
     UICollectionViewFlowLayout *const layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.minimumInteritemSpacing = 1;
     layout.minimumLineSpacing = 1;
-
-    const CGFloat margin = 24;
+    
+    const CGFloat margin = 21;
     const CGFloat postersPerLine = 3;
     const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine ;
     const CGFloat itemHeight = itemWidth;
@@ -96,13 +100,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

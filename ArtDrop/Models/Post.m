@@ -28,7 +28,7 @@
     return @"Post";
 }
 
-+ (void)postUserImage: ( UIImage * _Nullable )image withTitle: ( NSString * _Nullable )title withArtist: ( Artist * _Nullable )artist withMedium: ( NSString * _Nullable )medium withYear: ( NSString * _Nullable )year withSize: ( NSString * _Nullable )size withPrice: ( NSString * _Nullable )price withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void)postUserImage: ( UIImage * _Nullable )image withTitle: ( NSString * _Nullable )title withArtist: ( Artist * _Nullable )artist withMedium: ( NSString * _Nullable )medium withYear: ( NSString * _Nullable )year withSize: ( NSString * _Nullable )size withPrice: ( NSString * _Nullable )price withDescription: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     Post *const newPost = [Post new];
     newPost.image = [self _getPFFileFromImage:image];
     newPost.author = [PFUser currentUser];
@@ -37,6 +37,7 @@
     newPost.medium = medium;
     newPost.year = year;
     newPost.size = size;
+    newPost.description = description;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     newPost.createdAt = [NSDate date];

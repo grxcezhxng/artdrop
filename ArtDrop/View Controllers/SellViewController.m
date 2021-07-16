@@ -9,7 +9,7 @@
 #import "Post.h"
 #import "Artist.h"
 
-@interface SellViewController () <UIImagePickerControllerDelegate>
+@interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *mediumField;
 @property (weak, nonatomic) IBOutlet UITextField *dimensionsField;
 @property (weak, nonatomic) IBOutlet UITextField *priceField;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
 @end
@@ -26,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.descriptionTextView.delegate = self;
     self.imageView.userInteractionEnabled = YES;
 }
 
@@ -67,6 +69,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - UITextView Delegate methods
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    self.descriptionTextView.text = @"";
+    self.descriptionTextView.textColor = [UIColor blackColor];
+    return YES;
+}
+
 #pragma mark - Private Helper Methods
 
 - (void)_fetchArtist {
@@ -92,7 +102,7 @@
                 self.artist = objects[0];
             }
             
-            [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withDescription:self.descriptionTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded){
                     NSLog(@"Posted successfully");
                     [self _showSubmitConfirmation];
@@ -142,6 +152,14 @@
 }
 
 - (void)_renderStyling {
+    self.descriptionTextView.textColor = [UIColor lightGrayColor];
+    self.descriptionTextView.text = @"Description";
+    
+    self.descriptionTextView.layer.cornerRadius=8.0f;
+    self.descriptionTextView.layer.masksToBounds=YES;
+    self.descriptionTextView.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+    self.descriptionTextView.layer.borderWidth= 1.0f;
+    
     self.titleField.layer.cornerRadius= 8.0f;
     self.titleField.layer.masksToBounds=YES;
     self.titleField.layer.borderColor=[[UIColor grayColor]CGColor];

@@ -8,9 +8,17 @@
 #import "ProfileViewController.h"
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
-#import"LoginViewController.h"
+#import "PostCollectionCell.h"
+#import "Post.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UIImageView *profilePhoto;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) NSArray *arrayOfPosts;
 
 @end
 
@@ -18,15 +26,73 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.profilePhoto.userInteractionEnabled = YES;
 }
 
-- (IBAction)handleLogout:(id)sender {
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        UIStoryboard *const storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginViewController *const loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        [[UIApplication sharedApplication].keyWindow setRootViewController:loginViewController];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self _fetchUserPosts];
+    [self _renderStyling];
+}
+
+#pragma mark - Collection View Data Source Methods
+
+- (void)_fetchUserPosts {
+    PFQuery *const userQuery = [PFQuery queryWithClassName:@"Post"];
+    [userQuery whereKey:@"author" equalTo:[PFUser currentUser]];
+    [userQuery orderByDescending:@"createdAt"];
+    [userQuery includeKey:@"author"]; // pointers
+    userQuery.limit = 30;
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            self.arrayOfPosts = posts;
+            [self.collectionView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
     }];
+}
+
+#pragma mark - Collection View Delegate Methods
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.arrayOfPosts.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    PostCollectionCell *const cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PostCollectionCell" forIndexPath:indexPath];
+    Post *const post = self.arrayOfPosts[indexPath.row];
+    
+    PFFileObject *const postFile = post[@"image"];
+    NSURL *const postUrl = [NSURL URLWithString: postFile.url];
+    [cell.imageView setImageWithURL:postUrl];
+    
+    return cell;
+}
+
+#pragma mark - Private Helper Methods
+
+- (void)_renderStyling {
+    self.nameLabel.text = PFUser.currentUser[@"name"];
+    self.usernameLabel.text  = [NSString stringWithFormat:@"%@%@", @"@", PFUser.currentUser.username];
+    self.profilePhoto.layer.cornerRadius = 60;
+    if(PFUser.currentUser[@"profilePhoto"]) {
+        PFFileObject *const file = PFUser.currentUser[@"profilePhoto"];
+        NSURL *const url = [NSURL URLWithString: file.url];
+        [self.profilePhoto setImageWithURL:url];
+    }
+    
+    UICollectionViewFlowLayout *const layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    layout.minimumInteritemSpacing = 1;
+    layout.minimumLineSpacing = 1;
+    
+    const CGFloat margin = 24;
+    const CGFloat postersPerLine = 3;
+    const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine ;
+    const CGFloat itemHeight = itemWidth;
+    layout.itemSize = CGSizeMake(itemWidth, itemHeight);
 }
 
 /*

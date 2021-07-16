@@ -17,6 +17,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mediumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *sellerProfilePhoto;
+
+@property (weak, nonatomic) IBOutlet UILabel *sellerNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sellerBioLabel;
 
 @end
 
@@ -40,6 +44,18 @@
     self.yearLabel.text = self.post[@"year"];
     self.mediumLabel.text = self.post[@"medium"];
     self.priceLabel.text = self.post[@"price"];
+    self.sellerNameLabel.text = self.post.author[@"name"];
+    self.sellerBioLabel.text = self.post.author[@"bio"];
+    if(self.post.author[@"profilePhoto"]) {
+        PFFileObject *const file = self.post.author[@"profilePhoto"];
+        NSURL *const url = [NSURL URLWithString: file.url];
+        [self.sellerProfilePhoto setImageWithURL:url];
+    }
+}
+
+- (void)_renderStyling {
+    self.sellerProfilePhoto.layer.cornerRadius = 33;
+
 }
 
 /*

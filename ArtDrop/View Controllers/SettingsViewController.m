@@ -13,6 +13,9 @@
 @interface SettingsViewController () <UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *profilePhoto;
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UITextView *bioField;
 
 @end
 
@@ -108,6 +111,12 @@
 }
 
 - (void)_renderStyling {
+    self.nameField.text = PFUser.currentUser[@"name"];
+    self.usernameLabel.text = PFUser.currentUser[@"username"];
+    if(PFUser.currentUser[@"bio"]) {
+        self.bioField.text = PFUser.currentUser[@"bio"];
+    }
+    
     self.profilePhoto.userInteractionEnabled = YES;
     self.profilePhoto.layer.cornerRadius = 60;
     if(PFUser.currentUser[@"profilePhoto"]) {

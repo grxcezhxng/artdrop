@@ -9,11 +9,12 @@
 #import "LoginViewController.h"
 #import "Parse/Parse.h"
 #import "UIImageView+AFNetworking.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface SettingsViewController () <UIImagePickerControllerDelegate>
+@interface SettingsViewController () <UIImagePickerControllerDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *profilePhoto;
-@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *bioField;
 
@@ -111,11 +112,20 @@
 }
 
 - (void)_renderStyling {
-    self.nameField.text = PFUser.currentUser[@"name"];
+    self.nameLabel.text = PFUser.currentUser[@"name"];
     self.usernameLabel.text = PFUser.currentUser[@"username"];
+    self.bioField.delegate = self;
     if(PFUser.currentUser[@"bio"]) {
         self.bioField.text = PFUser.currentUser[@"bio"];
     }
+    else {
+        self.bioField.textColor = [UIColor lightGrayColor];
+        self.bioField.text = @"Your bio goes here!";
+    }
+    self.bioField.layer.cornerRadius=8.0f;
+    self.bioField.layer.masksToBounds=YES;
+    self.bioField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+    self.bioField.layer.borderWidth= 1.0f;
     
     self.profilePhoto.userInteractionEnabled = YES;
     self.profilePhoto.layer.cornerRadius = 60;
@@ -124,6 +134,34 @@
         NSURL *const url = [NSURL URLWithString: file.url];
         [self.profilePhoto setImageWithURL:url];
     }
+}
+
+#pragma mark - UITextView Delegate methods
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    self.bioField.text = @"";
+    self.bioField.textColor = [UIColor blackColor];
+    return YES;
+}
+
+- (BOOL)textViewDidEndEditing:(UITextView *)textView {
+    if(self.bioField.text.length == 0) {
+        self.bioField.textColor = [UIColor lightGrayColor];
+        self.bioField.text = @"Your bio goes here!";
+        [self.bioField resignFirstResponder];
+    }
+    else {
+        [PFUser.currentUser setObject:self.bioField.text forKey:@"bio"];
+    }
+    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded) {
+            NSLog(@"Sucessfully saved user bio");
+        }
+        else {
+            NSLog(@"error: %@", error);
+        }
+    }];
+    return YES;
 }
 
 /*

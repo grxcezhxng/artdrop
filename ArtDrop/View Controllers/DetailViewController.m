@@ -54,8 +54,8 @@
 }
 
 - (void)_renderStyling {
-    self.sellerProfilePhoto.layer.cornerRadius = 33;
-
+    self.sellerProfilePhoto.layer.masksToBounds = YES;
+    self.sellerProfilePhoto.layer.cornerRadius = 60;
 }
 
 /*

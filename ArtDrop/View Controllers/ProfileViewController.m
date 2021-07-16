@@ -77,17 +77,17 @@
 - (void)_renderStyling {
     self.nameLabel.text = PFUser.currentUser[@"name"];
     self.usernameLabel.text  = [NSString stringWithFormat:@"%@%@", @"@", PFUser.currentUser.username];
-    self.profilePhoto.layer.cornerRadius = 60;
+    self.profilePhoto.layer.cornerRadius = 50;
     if(PFUser.currentUser[@"profilePhoto"]) {
         PFFileObject *const file = PFUser.currentUser[@"profilePhoto"];
         NSURL *const url = [NSURL URLWithString: file.url];
         [self.profilePhoto setImageWithURL:url];
     }
-    
+
     UICollectionViewFlowLayout *const layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.minimumInteritemSpacing = 1;
     layout.minimumLineSpacing = 1;
-    
+
     const CGFloat margin = 24;
     const CGFloat postersPerLine = 3;
     const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine ;

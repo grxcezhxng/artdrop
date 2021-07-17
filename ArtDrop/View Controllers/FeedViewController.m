@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
 
@@ -26,6 +27,7 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.nameLabel.text = PFUser.currentUser[@"name"];
     
     UIRefreshControl *const refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -85,7 +87,6 @@
     [self.tableView reloadData];
     [refreshControl endRefreshing];
 }
-
 
 #pragma mark - Navigation
 

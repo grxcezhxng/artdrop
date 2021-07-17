@@ -29,11 +29,11 @@
     [super viewDidLoad];
     self.descriptionTextView.delegate = self;
     self.imageView.userInteractionEnabled = YES;
+    [self _renderStyling];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self _renderStyling];
 }
 
 #pragma mark - IB Actions
@@ -71,9 +71,21 @@
 
 #pragma mark - UITextView Delegate methods
 
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     self.descriptionTextView.text = @"";
     self.descriptionTextView.textColor = [UIColor blackColor];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if([text isEqualToString:@"\n"]) {
+        if(self.descriptionTextView.text.length == 0) {
+            self.descriptionTextView.textColor = [UIColor lightGrayColor];
+            self.descriptionTextView.text = @"Description!";
+            [self.descriptionTextView resignFirstResponder];
+        }
+        [self.descriptionTextView resignFirstResponder];
+        return NO;
+    }
     return YES;
 }
 
@@ -134,6 +146,7 @@
     self.yearField.text = @"";
     self.dimensionsField.text = @"";
     self.priceField.text = @"";
+    self.descriptionTextView.text = @"";
     self.imageView.image = [self.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.imageView setTintColor:[UIColor lightGrayColor]];
 }

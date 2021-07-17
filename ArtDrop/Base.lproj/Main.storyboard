@@ -19,7 +19,7 @@
                         <viewLayoutGuide key="safeArea" id="i8b-7u-mAX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Explore" id="a7g-wI-MKM"/>
+                    <tabBarItem key="tabBarItem" title="Explore" image="magnifyingglass" catalog="system" id="a7g-wI-MKM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXT-xa-Dfi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -118,7 +118,7 @@
                                                     <constraint firstAttribute="height" constant="100" id="A9r-gp-gDL"/>
                                                 </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                         </subviews>
@@ -174,7 +174,7 @@
                             <constraint firstItem="utQ-ky-hEO" firstAttribute="trailing" secondItem="S2A-cD-aB9" secondAttribute="trailing" id="ygB-y4-nnl"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Sell" id="GEq-7x-6cV"/>
+                    <tabBarItem key="tabBarItem" title="Sell" image="tag.fill" catalog="system" id="GEq-7x-6cV"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="artistField" destination="Vd0-yj-7br" id="N0u-8I-FPg"/>
@@ -286,7 +286,7 @@
                             <constraint firstItem="D3o-JV-RiZ" firstAttribute="bottom" secondItem="Tnf-Aq-FMs" secondAttribute="bottom" id="zHG-ti-bLd"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="bBf-MB-nEN"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle.fill" catalog="system" id="bBf-MB-nEN"/>
                     <connections>
                         <outlet property="collectionView" destination="D3o-JV-RiZ" id="uae-Yu-FeX"/>
                         <outlet property="nameLabel" destination="Gpi-GK-dmG" id="Ojm-Of-iUO"/>
@@ -408,7 +408,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DuQ-eK-tvE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
+                                <rect key="frame" x="0.0" y="102" width="414" height="657"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" id="4DP-mk-mbb" customClass="PostCell">
@@ -476,17 +476,26 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header" translatesAutoresizingMaskIntoConstraints="NO" id="fdt-1P-Xmm">
+                                <rect key="frame" x="153.5" y="60" width="107" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="107" id="CN7-c1-dAc"/>
+                                    <constraint firstAttribute="height" constant="30" id="nt7-Qe-Naw"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5ZD-3X-AcO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="DuQ-eK-tvE" firstAttribute="top" secondItem="fdt-1P-Xmm" secondAttribute="bottom" constant="12" id="2Gn-SW-mvO"/>
                             <constraint firstItem="DuQ-eK-tvE" firstAttribute="leading" secondItem="5ZD-3X-AcO" secondAttribute="leading" id="2Ra-iH-PkX"/>
-                            <constraint firstItem="DuQ-eK-tvE" firstAttribute="top" secondItem="5ZD-3X-AcO" secondAttribute="top" id="AyS-9c-dri"/>
+                            <constraint firstItem="fdt-1P-Xmm" firstAttribute="top" secondItem="qOo-ue-skQ" secondAttribute="top" constant="60" id="3iM-GZ-9N2"/>
                             <constraint firstItem="5ZD-3X-AcO" firstAttribute="trailing" secondItem="DuQ-eK-tvE" secondAttribute="trailing" id="ETO-B3-8nC"/>
                             <constraint firstItem="5ZD-3X-AcO" firstAttribute="bottom" secondItem="DuQ-eK-tvE" secondAttribute="bottom" id="Zk0-2q-qYT"/>
+                            <constraint firstItem="fdt-1P-Xmm" firstAttribute="centerX" secondItem="qOo-ue-skQ" secondAttribute="centerX" id="qVG-sx-vc1"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Feed" id="yOj-35-uO0"/>
+                    <tabBarItem key="tabBarItem" title="Feed" image="house.fill" catalog="system" id="yOj-35-uO0"/>
                     <connections>
                         <outlet property="tableView" destination="DuQ-eK-tvE" id="eAE-wW-vXh"/>
                     </connections>
@@ -956,6 +965,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="header" width="483" height="135"/>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="person.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="tag.fill" catalog="system" width="128" height="119"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

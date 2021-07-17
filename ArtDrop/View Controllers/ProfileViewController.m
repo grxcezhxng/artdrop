@@ -28,6 +28,7 @@
     [super viewDidLoad];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    [self _renderData];
     [self _renderStyling];
 }
 

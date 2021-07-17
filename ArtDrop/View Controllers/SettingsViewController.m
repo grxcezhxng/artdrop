@@ -86,29 +86,33 @@
 
 #pragma mark - UITextView Delegate methods
 
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     self.bioField.text = @"";
     self.bioField.textColor = [UIColor blackColor];
-    return YES;
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    if(self.bioField.text.length == 0) {
-        self.bioField.textColor = [UIColor lightGrayColor];
-        self.bioField.text = @"Your bio goes here!";
-        [self.bioField resignFirstResponder];
-    }
-    else {
-        [PFUser.currentUser setObject:self.bioField.text forKey:@"bio"];
-    }
-    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if(succeeded) {
-            NSLog(@"Sucessfully saved user bio");
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if([text isEqualToString:@"\n"]) {
+        if(self.bioField.text.length == 0) {
+            self.bioField.textColor = [UIColor lightGrayColor];
+            self.bioField.text = @"Your bio goes here!";
+            [self.bioField resignFirstResponder];
         }
         else {
-            NSLog(@"error: %@", error);
+            [PFUser.currentUser setObject:self.bioField.text forKey:@"bio"];
         }
-    }];
+        [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if(succeeded) {
+                NSLog(@"Sucessfully saved user bio");
+            }
+            else {
+                NSLog(@"error: %@", error);
+            }
+        }];
+            [self.bioField resignFirstResponder];
+            return NO;
+        }
+    return YES;
 }
 
 #pragma mark - Private Helper Methods

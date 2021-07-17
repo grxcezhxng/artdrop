@@ -23,6 +23,7 @@
 @dynamic year;
 @dynamic size;
 @dynamic price;
+@dynamic isLiked;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -38,6 +39,7 @@
     newPost.year = year;
     newPost.size = size;
     newPost.description = description;
+    newPost.isLiked = NO;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     newPost.createdAt = [NSDate date];

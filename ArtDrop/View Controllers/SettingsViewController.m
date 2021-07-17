@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *bioField;
+@property (weak, nonatomic) IBOutlet UILabel *bioLabel;
 
 @end
 
@@ -89,6 +90,9 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     self.bioField.text = @"";
     self.bioField.textColor = [UIColor blackColor];
+    self.bioField.layer.borderColor=[[UIColor systemIndigoColor]CGColor];
+    self.bioField.layer.borderWidth= 1.5f;
+    self.bioLabel.textColor = [UIColor systemIndigoColor];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -109,6 +113,8 @@
                 NSLog(@"error: %@", error);
             }
         }];
+            self.bioField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+            self.bioField.layer.borderWidth= 1.0f;
             [self.bioField resignFirstResponder];
             return NO;
         }

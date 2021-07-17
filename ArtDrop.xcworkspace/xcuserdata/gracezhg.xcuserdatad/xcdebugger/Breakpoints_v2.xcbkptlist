@@ -46,9 +46,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withCompletion:"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,9 +62,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withCompletion:"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -94,9 +94,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withCompletion:"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,8 +110,8 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>

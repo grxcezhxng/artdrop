@@ -99,6 +99,7 @@
     if([text isEqualToString:@"\n"]) {
         if(self.bioField.text.length == 0) {
             self.bioField.textColor = [UIColor lightGrayColor];
+            self.bioLabel.textColor = [UIColor lightGrayColor];
             self.bioField.text = @"Your bio goes here!";
             [self.bioField resignFirstResponder];
         }

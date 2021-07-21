@@ -8,11 +8,13 @@
 #import "PostCell.h"
 #import "Artist.h"
 #import "UIImageView+AFNetworking.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation PostCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    [self _renderStyling];
 }
 
 - (void)setCellData {
@@ -30,22 +32,22 @@
     self.yearLabel.text = self.post[@"year"];
     self.priceLabel.text = self.post[@"price"];
     [self.likeButton setTintColor:(self.post.isLiked ? [UIColor redColor] :  [UIColor whiteColor])];
-    [self.likeButton setBackgroundImage: (self.post.isLiked ? [UIImage systemImageNamed:@"heart.fill"] : [UIImage systemImageNamed:@"heart"]) forState: UIControlStateNormal];
+    [self.likeButton setImage: (self.post.isLiked ? [UIImage systemImageNamed:@"heart.fill"] : [UIImage systemImageNamed:@"heart"]) forState: UIControlStateNormal];
 }
-
-//- (void)setHighlighted:(BOOL)highlighted {
-//    [super setHighlighted:highlighted];
-//
-//    if (highlighted) {
-//        self.likeButton.backgroundColor = [UIColor lightGrayColor];
-//    } else {
-//        self.likeButton.backgroundColor = [UIColor blackColor];
-//    }
-//}
 
 - (IBAction)handleLike:(id)sender {
     self.post.isLiked = !self.post.isLiked;
+    [self.post saveInBackgroundWithBlock: nil];
     [self setCellData];
+}
+
+- (void)_renderStyling {
+    self.likeButton.layer.cornerRadius = 16;
+    self.likeButton.layer.opacity = 0.65;
+    self.likeButton.layer.zPosition = MAXFLOAT;
+    self.likeButton.backgroundColor = UIColor.blackColor;
+    const CGFloat spacing = 1;
+    self.likeButton.imageEdgeInsets = UIEdgeInsetsMake(spacing, spacing, spacing, spacing);
 }
 
 @end

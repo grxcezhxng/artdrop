@@ -7,6 +7,8 @@
 
 #import "DetailViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "ArtistViewController.h"
+#import "Artist.h"
 
 @interface DetailViewController ()
 
@@ -72,15 +74,5 @@
     const CGFloat spacing = 1;
     self.likeButton.imageEdgeInsets = UIEdgeInsetsMake(spacing, spacing, spacing, spacing);
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

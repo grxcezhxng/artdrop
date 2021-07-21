@@ -27,7 +27,7 @@
     [self.artworkView setImageWithURL:imageURL];
     self.artworkView.layer.cornerRadius = 5;
     
-    self.artistLabel.text = self.post.artist.name;
+    [self.artistButton setTitle:self.post.artist.name forState:UIControlStateNormal];
     self.titleLabel.text = self.post[@"title"];
     self.yearLabel.text = self.post[@"year"];
     self.priceLabel.text = self.post[@"price"];

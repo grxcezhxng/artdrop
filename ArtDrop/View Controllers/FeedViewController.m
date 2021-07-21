@@ -12,6 +12,8 @@
 #import "Post.h"
 #import "PostCell.h"
 #import "DetailViewController.h"
+#import "Artist.h"
+#import "ArtistViewController.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -98,6 +100,16 @@
          DetailViewController *const detailsViewController = [segue destinationViewController];
          detailsViewController.post = post;
      }
+     
+//     if ([segue.destinationViewController isKindOfClass:[ArtistViewController class] ]){
+//         
+//         UITableViewCell *const tappedCell = sender;
+//         NSIndexPath *const indexPath = [self.tableView indexPathForCell:tappedCell];
+//         Post *const post = self.arrayOfPosts[indexPath.row];
+//         Artist *const artist = post.artist;
+//         ArtistViewController *const artistViewController = [segue destinationViewController];
+//         artistViewController.artist = artist;
+//     }
  }
 
 @end

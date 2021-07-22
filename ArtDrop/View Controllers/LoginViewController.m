@@ -82,11 +82,13 @@
     self.usernameField.layer.masksToBounds=YES;
     self.usernameField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.usernameField.layer.borderWidth= 1.0f;
+    self.usernameField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.passwordField.layer.cornerRadius= 8.0f;
     self.passwordField.layer.masksToBounds=YES;
     self.passwordField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.passwordField.layer.borderWidth= 1.0f;
+    self.passwordField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.loginButton.layer.cornerRadius = 10;
     self.loginButton.layer.masksToBounds=YES;

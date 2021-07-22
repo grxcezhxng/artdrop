@@ -11,7 +11,7 @@
 #import "Artist.h"
 #import <MapKit/MapKit.h>
 
-@interface DetailViewController ()
+@interface DetailViewController () <MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *artworkView;
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
@@ -43,6 +43,44 @@
     [self _renderMapView];
 }
 
+- (IBAction)handleInquire:(id)sender {
+    NSString *messageBody = @"iOS programming is so fun!";
+    NSArray *toRecipents = [NSArray arrayWithObject:self.post.author.email];
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    if ([MFMailComposeViewController canSendMail]) {
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"Test mail"];
+        [picker setMessageBody:messageBody isHTML:NO];
+        [picker setToRecipients:toRecipents];
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+            
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+            
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+            
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+            
+        default:
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 - (void)_renderMapView {
     self.mapView.delegate = self;
     
@@ -63,7 +101,7 @@
             [self.mapView addAnnotation:placemark];
         }
     }
-    ];
+     ];
     
     // Using lat and long to annotate
     //    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(self.post.location.latitude.floatValue, self.post.location.longitude.floatValue);
@@ -116,7 +154,7 @@
 }
 
 - (void)_renderStyling {
-    self.artistProfilePhoto.layer.cornerRadius = 33; 
+    self.artistProfilePhoto.layer.cornerRadius = 33;
     self.saleIndicator.layer.cornerRadius = 5;
     self.mapView.layer.cornerRadius = 8;
     self.artworkView.layer.cornerRadius = 5;

@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UIButton *signupButton;
 
@@ -24,6 +25,7 @@
     [super viewDidLoad];
     self.usernameField.delegate = self;
     self.passwordField.delegate = self;
+    self.emailField.delegate = self;
     self.nameField.delegate = self;
     [self _renderStyling];
 }
@@ -33,6 +35,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.usernameField resignFirstResponder];
     [self.passwordField resignFirstResponder];
+    [self.emailField resignFirstResponder];
     [self.nameField resignFirstResponder];
     return YES;
 }
@@ -57,6 +60,7 @@
     PFUser *const newUser = [PFUser user];
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
+    newUser.email = self.emailField.text;
     [newUser setObject:self.nameField.text forKey:@"name"];
     
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
@@ -86,16 +90,25 @@
     self.usernameField.layer.masksToBounds=YES;
     self.usernameField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.usernameField.layer.borderWidth= 1.0f;
+    self.usernameField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.passwordField.layer.cornerRadius= 8.0f;
     self.passwordField.layer.masksToBounds=YES;
     self.passwordField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.passwordField.layer.borderWidth= 1.0f;
+    self.passwordField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
+    
+    self.emailField.layer.cornerRadius= 8.0f;
+    self.emailField.layer.masksToBounds=YES;
+    self.emailField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.emailField.layer.borderWidth= 1.0f;
+    self.emailField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.nameField.layer.cornerRadius= 8.0f;
     self.nameField.layer.masksToBounds=YES;
     self.nameField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.nameField.layer.borderWidth= 1.0f;
+    self.nameField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.signupButton.layer.cornerRadius = 10;
     self.signupButton.layer.masksToBounds=YES;

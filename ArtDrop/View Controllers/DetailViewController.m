@@ -52,39 +52,35 @@
 }
 
 - (IBAction)handleInquire:(id)sender {
-    NSString *const messageBody = @"iOS programming is so fun!";
+    NSString *const messageBody = [NSString stringWithFormat:@"Hi,\n\nI'm interested in a work in your ArtDrop collection, %@, and would love to set up a time to discuss...", self.post.title];
     NSArray *const toRecipents = [NSArray arrayWithObject:self.post.author.email];
     MFMailComposeViewController *const picker = [[MFMailComposeViewController alloc] init];
     if ([MFMailComposeViewController canSendMail]) {
         picker.mailComposeDelegate = self;
-        [picker setSubject:@"Test mail"];
+        NSString *const subject = [NSString stringWithFormat:@"%@ : Inquiry", self.post.title];
+        [picker setSubject:subject];
         [picker setMessageBody:messageBody isHTML:NO];
         [picker setToRecipients:toRecipents];
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
 
-#pragma mark - MFMailCompose
+#pragma mark - MFMailComposeViewController Delegate Methods
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    
     switch (result) {
         case MFMailComposeResultCancelled:
             NSLog(@"Mail cancelled");
             break;
-            
         case MFMailComposeResultSaved:
             NSLog(@"Mail saved");
             break;
-            
         case MFMailComposeResultSent:
             NSLog(@"Mail sent");
             break;
-            
         case MFMailComposeResultFailed:
             NSLog(@"Mail sent failure: %@", [error localizedDescription]);
             break;
-            
         default:
             break;
     }

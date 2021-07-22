@@ -19,7 +19,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
 
@@ -29,7 +28,6 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.nameLabel.text = PFUser.currentUser[@"name"];
     
     UIRefreshControl *const refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -41,7 +39,62 @@
     [self _fetchFeed];
 }
 
+#pragma mark - Table View Delegate Methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma mark - Table View Data Source Methods
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PostCell *const cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    Post *const post = self.arrayOfPosts[indexPath.row];
+    cell.post = post;
+    [cell setCellData];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arrayOfPosts.count;
+}
+
+#pragma mark - Refresh Control
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    NSURLSession *const session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                                                                delegate:nil
+                                                           delegateQueue:[NSOperationQueue mainQueue]];
+    session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    [self _fetchFeed];
+    [self.tableView reloadData];
+    [refreshControl endRefreshing];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[DetailViewController class] ]){
+        UITableViewCell *const tappedCell = sender;
+        NSIndexPath *const indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *const post = self.arrayOfPosts[indexPath.row];
+        DetailViewController *const detailsViewController = [segue destinationViewController];
+        detailsViewController.post = post;
+    }
+    
+    //     if ([segue.destinationViewController isKindOfClass:[ArtistViewController class] ]){
+    //         
+    //         UITableViewCell *const tappedCell = sender;
+    //         NSIndexPath *const indexPath = [self.tableView indexPathForCell:tappedCell];
+    //         Post *const post = self.arrayOfPosts[indexPath.row];
+    //         Artist *const artist = post.artist;
+    //         ArtistViewController *const artistViewController = [segue destinationViewController];
+    //         artistViewController.artist = artist;
+    //     }
+}
+
+#pragma mark - Private Helper Methods
 
 - (void)_fetchFeed {
     PFQuery *const postQuery = [PFQuery queryWithClassName:@"Post"];
@@ -60,57 +113,5 @@
     }];
 }
 
-#pragma mark - Table View Delegate Methods
-
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    PostCell *const cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-    Post *const post = self.arrayOfPosts[indexPath.row];
-    cell.post = post;
-    [cell setCellData];
-    [cell setBackgroundColor:[UIColor clearColor]];
-    return cell;
-}
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrayOfPosts.count;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-#pragma mark - Refresh Control
-
-- (void)beginRefresh:(UIRefreshControl *)refreshControl {
-    NSURLSession *const session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                                delegate:nil
-                                                           delegateQueue:[NSOperationQueue mainQueue]];
-    session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-    [self _fetchFeed];
-    [self.tableView reloadData];
-    [refreshControl endRefreshing];
-}
-
-#pragma mark - Navigation
-
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-     if ([segue.destinationViewController isKindOfClass:[DetailViewController class] ]){
-         UITableViewCell *const tappedCell = sender;
-         NSIndexPath *const indexPath = [self.tableView indexPathForCell:tappedCell];
-         Post *const post = self.arrayOfPosts[indexPath.row];
-         DetailViewController *const detailsViewController = [segue destinationViewController];
-         detailsViewController.post = post;
-     }
-     
-//     if ([segue.destinationViewController isKindOfClass:[ArtistViewController class] ]){
-//         
-//         UITableViewCell *const tappedCell = sender;
-//         NSIndexPath *const indexPath = [self.tableView indexPathForCell:tappedCell];
-//         Post *const post = self.arrayOfPosts[indexPath.row];
-//         Artist *const artist = post.artist;
-//         ArtistViewController *const artistViewController = [segue destinationViewController];
-//         artistViewController.artist = artist;
-//     }
- }
 
 @end

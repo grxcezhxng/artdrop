@@ -43,10 +43,18 @@
     [self _renderMapView];
 }
 
+#pragma mark - IB Actions
+
+- (IBAction)handleLike:(id)sender {
+    self.post.isLiked = !self.post.isLiked;
+    [self.post saveInBackgroundWithBlock: nil];
+    [self _renderData];
+}
+
 - (IBAction)handleInquire:(id)sender {
-    NSString *messageBody = @"iOS programming is so fun!";
-    NSArray *toRecipents = [NSArray arrayWithObject:self.post.author.email];
-    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    NSString *const messageBody = @"iOS programming is so fun!";
+    NSArray *const toRecipents = [NSArray arrayWithObject:self.post.author.email];
+    MFMailComposeViewController *const picker = [[MFMailComposeViewController alloc] init];
     if ([MFMailComposeViewController canSendMail]) {
         picker.mailComposeDelegate = self;
         [picker setSubject:@"Test mail"];
@@ -56,7 +64,9 @@
     }
 }
 
-- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+#pragma mark - MFMailCompose
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     
     switch (result) {
         case MFMailComposeResultCancelled:
@@ -80,6 +90,8 @@
     }
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+#pragma mark - Private Methods
 
 - (void)_renderMapView {
     self.mapView.delegate = self;
@@ -116,12 +128,6 @@
     
     [self.likeButton setTintColor:(self.post.isLiked ? [UIColor redColor] :  [UIColor whiteColor])];
     [self.likeButton setImage: (self.post.isLiked ? [UIImage systemImageNamed:@"heart.fill"] : [UIImage systemImageNamed:@"heart"]) forState: UIControlStateNormal];
-}
-
-- (IBAction)hanldeLike:(id)sender {
-    self.post.isLiked = !self.post.isLiked;
-    [self.post saveInBackgroundWithBlock: nil];
-    [self _renderData];
 }
 
 - (void)_renderStyling {

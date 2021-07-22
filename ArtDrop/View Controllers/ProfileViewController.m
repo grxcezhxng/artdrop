@@ -43,6 +43,23 @@
 
 #pragma mark - Collection View Data Source Methods
 
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.arrayOfPosts.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    PostCollectionCell *const cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PostCollectionCell" forIndexPath:indexPath];
+    Post *const post = self.arrayOfPosts[indexPath.row];
+    
+    PFFileObject *const postFile = post[@"image"];
+    NSURL *const postUrl = [NSURL URLWithString: postFile.url];
+    [cell.imageView setImageWithURL:postUrl];
+    
+    return cell;
+}
+
+#pragma mark - Private Methods
+
 - (void)_fetchUserPosts {
     PFQuery *const userQuery = [PFQuery queryWithClassName:@"Post"];
     [userQuery whereKey:@"author" equalTo:[PFUser currentUser]];
@@ -59,25 +76,6 @@
         }
     }];
 }
-
-#pragma mark - Collection View Delegate Methods
-
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.arrayOfPosts.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    PostCollectionCell *const cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PostCollectionCell" forIndexPath:indexPath];
-    Post *const post = self.arrayOfPosts[indexPath.row];
-    
-    PFFileObject *const postFile = post[@"image"];
-    NSURL *const postUrl = [NSURL URLWithString: postFile.url];
-    [cell.imageView setImageWithURL:postUrl];
-    
-    return cell;
-}
-
-#pragma mark - Private Helper Methods
 
 - (void)_renderData {
     self.nameLabel.text = PFUser.currentUser[@"name"];
@@ -97,23 +95,11 @@
     UICollectionViewFlowLayout *const layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
-    
     const CGFloat margin = 21;
     const CGFloat postersPerLine = 2;
-//    NSLog(@"%f", self.collectionView.frame.size.width);
     const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine;
     const CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 
-
 @end
 
 @implementation SettingsViewController
@@ -61,7 +60,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 #pragma mark - UIImagePickerController Delegate Methods
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
@@ -69,7 +67,6 @@
     UIImage *const resizedImage = [self _resizeImage:editedImage withSize:CGSizeMake(100, 100)];
     self.profilePhoto.image = resizedImage;
     self.profilePhoto.layer.cornerRadius = 50;
-    
     UIImage *const latestPhoto = [self _resizeImage:self.profilePhoto.image withSize:CGSizeMake(100, 100)];
     
     // save new profile photo for user
@@ -136,15 +133,15 @@
                 NSLog(@"error: %@", error);
             }
         }];
-            self.bioField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
-            self.bioField.layer.borderWidth= 1.0f;
-            [self.bioField resignFirstResponder];
-            return NO;
-        }
+        self.bioField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+        self.bioField.layer.borderWidth= 1.0f;
+        [self.bioField resignFirstResponder];
+        return NO;
+    }
     return YES;
 }
 
-#pragma mark - Private Helper Methods
+#pragma mark - Private Methods
 
 - (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *const resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
@@ -155,7 +152,6 @@
     [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *const newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
     return newImage;
 }
 

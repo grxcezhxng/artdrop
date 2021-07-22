@@ -773,7 +773,7 @@
                                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                                 <connections>
-                                                    <action selector="hanldeLike:" destination="wgu-Y5-nt6" eventType="touchUpInside" id="eTy-OO-DMz"/>
+                                                    <action selector="handleLike:" destination="wgu-Y5-nt6" eventType="touchUpInside" id="cVC-cq-ik8"/>
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qka-Xn-3Hr">

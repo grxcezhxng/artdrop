@@ -30,16 +30,6 @@
     [self _renderStyling];
 }
 
-#pragma mark - UITextField Delegate methods
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.usernameField resignFirstResponder];
-    [self.passwordField resignFirstResponder];
-    [self.emailField resignFirstResponder];
-    [self.nameField resignFirstResponder];
-    return YES;
-}
-
 #pragma mark - IBActions
 
 - (IBAction)handleSignUp:(id)sender {
@@ -53,8 +43,17 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - UITextField Delegate Methods
 
-#pragma mark - Private methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.usernameField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
+    [self.emailField resignFirstResponder];
+    [self.nameField resignFirstResponder];
+    return YES;
+}
+
+#pragma mark - Private Methods
 
 - (void)_registerUser {
     PFUser *const newUser = [PFUser user];

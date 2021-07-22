@@ -24,16 +24,7 @@
     [super viewDidLoad];
     self.usernameField.delegate = self;
     self.passwordField.delegate = self;
-    
     [self _renderStyling];
-}
-
-#pragma mark - UITextField Delegate methods
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.usernameField resignFirstResponder];
-    [self.passwordField resignFirstResponder];
-    return YES;
 }
 
 #pragma mark - IBAction methods
@@ -45,13 +36,19 @@
     [self _loginUser];
 }
 
-#pragma mark - Private methods
+#pragma mark - UITextField Delegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.usernameField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
+    return YES;
+}
+
+#pragma mark - Private Methods
 
 - (void)_loginUser {
     NSString *const username = self.usernameField.text;
     NSString *const password = self.passwordField.text;
-    NSLog(@"username: %@", username);
-    NSLog(@"password: %@", password);
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {

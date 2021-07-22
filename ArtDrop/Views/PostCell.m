@@ -19,7 +19,7 @@
 
 - (void)setCellData {
     _post = self.post;
-
+    
     self.imageView.layer.cornerRadius = 10;
     
     PFFileObject *const postPhoto = self.post.image;

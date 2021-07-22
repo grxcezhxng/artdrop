@@ -11,7 +11,6 @@
 #import "Location.h"
 #import <MapKit/MapKit.h>
 
-
 @interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -43,20 +42,6 @@
     [super viewWillAppear:animated];
 }
 
-#pragma mark - Search Bar Delegate Methods
-
-- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if([text isEqualToString:@"\n"]) {
-        NSString *location = searchBar.text;
-        self.location.name = searchBar.text;
-        self.location.address = searchBar.text;
-        self.location = [Location createLocation:searchBar.text address:searchBar.text latitude:nil longitude:nil withCompletion:nil];
-        
-        [Location annotateFromAddress:self.location.address withMapView:self.mapView];
-    }
-    return YES;
-}
-
 #pragma mark - IB Actions
 
 - (IBAction)handleTapPhoto:(id)sender {
@@ -76,6 +61,20 @@
 
 - (IBAction)handleSubmit:(id)sender {
     [self _submitData];
+}
+
+#pragma mark - Search Bar Delegate Methods
+
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if([text isEqualToString:@"\n"]) {
+        NSString *const location = searchBar.text;
+        self.location.name = searchBar.text;
+        self.location.address = searchBar.text;
+        self.location = [Location createLocation:searchBar.text address:searchBar.text latitude:nil longitude:nil withCompletion:nil];
+        
+        [Location annotateFromAddress:self.location.address withMapView:self.mapView];
+    }
+    return YES;
 }
 
 #pragma mark - UIImagePickerController Delegate Methods
@@ -110,20 +109,14 @@
     return YES;
 }
 
-#pragma mark - Private Helper Methods
+#pragma mark - Private Methods
 
 - (void)_submitData {
-    NSString *artistName = self.artistField.text;
+    NSString *const artistName = self.artistField.text;
     PFQuery *const artistQuery = [PFQuery queryWithClassName:@"Artist"];
     [artistQuery includeKey:@"name"];
     [artistQuery whereKey:@"name" equalTo:artistName];
     artistQuery.limit = 1;
-    
-// Testing lat and long
-//    float lat = 37.783333;
-//    NSNumber *latNum = @((int)(lat*100)/100.0);
-//    float lon = -122.416667;
-//    NSNumber *longNum = @((int)(lon*100)/100.0);
     
     [artistQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
@@ -150,7 +143,6 @@
                     NSLog(@"Posting error: %@", error);
                 }
             }];
-            
         } else {
             NSLog(@"Artist error: %@", error);
         }

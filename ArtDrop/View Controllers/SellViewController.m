@@ -8,6 +8,9 @@
 #import "SellViewController.h"
 #import "Post.h"
 #import "Artist.h"
+#import "Location.h"
+#import <MapKit/MapKit.h>
+
 
 @interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate>
 
@@ -98,6 +101,13 @@
     [artistQuery whereKey:@"name" equalTo:artistName];
     artistQuery.limit = 1;
     
+    float lat = 37.783333;
+    NSNumber *latNum = @((int)(lat*100)/100.0);
+    float lon = -122.416667;
+    NSNumber *longNum = @((int)(lon*100)/100.0);
+    
+    self.location = [Location createLocation:@"random location" address:@"random address" latitude:latNum longitude:longNum withCompletion:nil];
+    
     [artistQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
             NSLog(@"Successlyfully fetched artist");
@@ -114,7 +124,7 @@
                 self.artist = objects[0];
             }
             
-            [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withDescription:self.descriptionTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withDescription:self.descriptionTextView.text withLocation:self.location withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded){
                     NSLog(@"Posted successfully");
                     [self _showSubmitConfirmation];

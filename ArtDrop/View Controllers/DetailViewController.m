@@ -9,6 +9,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "ArtistViewController.h"
 #import "Artist.h"
+#import <MapKit/MapKit.h>
 
 @interface DetailViewController ()
 
@@ -23,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *sellerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sellerBioLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *inquireButton;
 
 @end
 
@@ -32,6 +35,16 @@
     [super viewDidLoad];
     [self _renderData];
     [self _renderStyling];
+    self.mapView.delegate = self;
+    
+    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(self.post.location.latitude.floatValue, self.post.location.longitude.floatValue);
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
+    MKCoordinateRegion sfRegion = {coord, span};
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    [annotation setCoordinate:coord];
+    [annotation setTitle:self.post.location.name]; //You can set the subtitle too
+    [self.mapView setRegion:sfRegion animated:false];
+    [self.mapView addAnnotation:annotation];
 }
 
 - (void)_renderData {
@@ -64,7 +77,9 @@
 }
 
 - (void)_renderStyling {
+    self.mapView.layer.cornerRadius = 8;
     self.artworkView.layer.cornerRadius = 5;
+    self.inquireButton.layer.cornerRadius = 10;
     self.sellerProfilePhoto.layer.masksToBounds = YES;
     self.sellerProfilePhoto.layer.cornerRadius = 33;
     self.likeButton.layer.cornerRadius = 16;

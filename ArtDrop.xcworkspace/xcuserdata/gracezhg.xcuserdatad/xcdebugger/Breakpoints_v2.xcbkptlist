@@ -46,9 +46,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,9 +62,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,8 +78,8 @@
             filePath = "ArtDrop/View Controllers/SellViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "-handleSubmit:"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,9 +94,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,9 +110,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -126,9 +126,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -142,9 +142,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -158,9 +158,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withCompletion:"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

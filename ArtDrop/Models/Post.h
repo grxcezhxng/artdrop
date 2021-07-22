@@ -7,6 +7,7 @@
 
 #import <Parse/Parse.h>
 #import "Artist.h"
+#import "Location.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) PFUser *author;
 @property (nonatomic, strong) Artist *artist;
+@property (nonatomic, strong) Location *location;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) PFFileObject *image;
 @property (nonatomic, strong) NSNumber *likeCount;
@@ -28,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic) BOOL isLiked;
 
-+ (void)postUserImage: ( UIImage * _Nullable )image withTitle: ( NSString * _Nullable )title withArtist: ( Artist * _Nullable )artist withMedium: ( NSString * _Nullable )medium withYear: ( NSString * _Nullable )year withSize: ( NSString * _Nullable )size withPrice: ( NSString * _Nullable )price withDescription: ( NSString * _Nullable )description withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void)postUserImage: ( UIImage * _Nullable )image withTitle: ( NSString * _Nullable )title withArtist: ( Artist * _Nullable )artist withMedium: ( NSString * _Nullable )medium withYear: ( NSString * _Nullable )year withSize: ( NSString * _Nullable )size withPrice: ( NSString * _Nullable )price withDescription: ( NSString * _Nullable )description withLocation: ( Location * _Nullable )location withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

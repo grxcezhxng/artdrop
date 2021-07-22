@@ -39,7 +39,6 @@
     [super viewWillAppear:animated];
     [self _fetchUserPosts];
     [self _renderData];
-//    [self _renderStyling];
 }
 
 #pragma mark - Collection View Data Source Methods
@@ -101,6 +100,7 @@
     
     const CGFloat margin = 21;
     const CGFloat postersPerLine = 2;
+//    NSLog(@"%f", self.collectionView.frame.size.width);
     const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine;
     const CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);

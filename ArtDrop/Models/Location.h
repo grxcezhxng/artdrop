@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *longitude;
 
 + (Location *)createLocation:(NSString*)name address:(NSString*)address latitude:( NSNumber * _Nullable )latitude longitude:( NSNumber * _Nullable )longitude withCompletion: (PFBooleanResultBlock  _Nullable)completion;
-//+ (MKMapView *)annotateFromAddress:(NSString*)address withMapView:(MKMapView *)mapView;
++ (MKMapView *)annotateFromAddress:(NSString*)address withMapView:(MKMapView *)mapView;
++ (MKMapView *)annotateFromCoords:(NSString*)name latitude:( NSNumber * _Nullable )latitude longitude:( NSNumber * _Nullable )longitude withMapView:(MKMapView *)mapView;
 
 @end
 

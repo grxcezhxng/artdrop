@@ -83,36 +83,7 @@
 
 - (void)_renderMapView {
     self.mapView.delegate = self;
-    
-    // Using address to annotate
-    NSString *location = self.post.location.address;
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:location completionHandler:^(NSArray* placemarks, NSError* error){
-        if (placemarks && placemarks.count > 0) {
-            CLPlacemark *topResult = [placemarks objectAtIndex:0];
-            MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
-            
-            MKCoordinateRegion region = self.mapView.region;
-            region.center = placemark.region.center;
-            region.span.longitudeDelta /= 8.0;
-            region.span.latitudeDelta /= 8.0;
-            
-            [self.mapView setRegion:region animated:YES];
-            [self.mapView addAnnotation:placemark];
-        }
-    }
-     ];
-    
-    // Using lat and long to annotate
-    //    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(self.post.location.latitude.floatValue, self.post.location.longitude.floatValue);
-    //    MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
-    //    MKCoordinateRegion region = {coord, span};
-    //    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    //    [annotation setCoordinate:coord];
-    //    [annotation setTitle:self.post.location.name]; //You can set the subtitle too
-    //    [self.mapView setRegion:region animated:false];
-    //    [self.mapView addAnnotation:annotation];
-    
+    [Location annotateFromAddress:self.post.location.address withMapView:self.mapView];
 }
 
 - (void)_renderData {

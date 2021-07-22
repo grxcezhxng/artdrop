@@ -52,23 +52,7 @@
         self.location.address = searchBar.text;
         self.location = [Location createLocation:searchBar.text address:searchBar.text latitude:nil longitude:nil withCompletion:nil];
         
-        // Using address to annotate
-        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        [geocoder geocodeAddressString:location completionHandler:^(NSArray* placemarks, NSError* error){
-            if (placemarks && placemarks.count > 0) {
-                CLPlacemark *topResult = [placemarks objectAtIndex:0];
-                MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
-                
-                MKCoordinateRegion region = self.mapView.region;
-                region.center = placemark.region.center;
-                region.span.longitudeDelta /= 8.0;
-                region.span.latitudeDelta /= 8.0;
-                
-                [self.mapView setRegion:region animated:YES];
-                [self.mapView addAnnotation:placemark];
-            }
-        }
-        ];
+        [Location annotateFromAddress:self.location.address withMapView:self.mapView];
     }
     return YES;
 }

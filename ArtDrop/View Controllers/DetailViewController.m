@@ -26,6 +26,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *inquireButton;
+@property (weak, nonatomic) IBOutlet UILabel *forSaleLabel;
+@property (weak, nonatomic) IBOutlet UIView *saleIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView *artistProfilePhoto;
+@property (weak, nonatomic) IBOutlet UILabel *artistName;
+@property (weak, nonatomic) IBOutlet UILabel *artistDescription;
 
 @end
 
@@ -90,6 +95,15 @@
         NSURL *const url = [NSURL URLWithString: file.url];
         [self.sellerProfilePhoto setImageWithURL:url];
     }
+    if([self.post[@"price"] isEqualToString:@"Not for sale"]) {
+        self.forSaleLabel.text = @"Not for sale";
+        self.saleIndicator.backgroundColor = UIColor.redColor;
+    }
+    else {
+        self.forSaleLabel.text = @"For Sale";
+        self.saleIndicator.backgroundColor = UIColor.greenColor;
+    }
+    self.artistName.text = self.post.artist.name;
     
     [self.likeButton setTintColor:(self.post.isLiked ? [UIColor redColor] :  [UIColor whiteColor])];
     [self.likeButton setImage: (self.post.isLiked ? [UIImage systemImageNamed:@"heart.fill"] : [UIImage systemImageNamed:@"heart"]) forState: UIControlStateNormal];
@@ -102,6 +116,8 @@
 }
 
 - (void)_renderStyling {
+    self.artistProfilePhoto.layer.cornerRadius = 33; 
+    self.saleIndicator.layer.cornerRadius = 5;
     self.mapView.layer.cornerRadius = 8;
     self.artworkView.layer.cornerRadius = 5;
     self.inquireButton.layer.cornerRadius = 10;

@@ -11,7 +11,7 @@
 #import "Location.h"
 #import <MapKit/MapKit.h>
 
-@interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate>
+@interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
@@ -34,6 +34,12 @@
     self.searchBar.delegate = self;
     self.mapView.delegate = self;
     self.descriptionTextView.delegate = self;
+    self.titleField.delegate = self;
+    self.artistField.delegate = self;
+    self.yearField.delegate = self;
+    self.mediumField.delegate = self;
+    self.dimensionsField.delegate = self;
+    self.priceField.delegate = self;
     self.imageView.userInteractionEnabled = YES;
     [self _renderStyling];
 }
@@ -67,6 +73,7 @@
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if([text isEqualToString:@"\n"]) {
+        [self.view endEditing:YES];
         NSString *const location = searchBar.text;
         self.location.name = searchBar.text;
         self.location.address = searchBar.text;
@@ -87,6 +94,13 @@
     self.imageView.image = resizedImage;
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UITextField Delegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.view endEditing:YES];
+    return YES;
 }
 
 #pragma mark - UITextView Delegate methods

@@ -6,6 +6,7 @@
 //
 
 #import "Location.h"
+#import <MapKit/MapKit.h>
 
 @implementation Location
 
@@ -29,17 +30,25 @@
     return newLocation;
 }
 
-//- (MKMapItem*)mapItem {
-//    NSDictionary *addressDict = @{(NSString*)kABPersonAddressStreetKey : _address};
+//+ (MKMapView *)annotateFromAddress:(NSString*)address withMapView:(MKMapView *)mapView {
+//    NSString *location = address;
+//    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+//        [geocoder geocodeAddressString:location completionHandler:^(NSArray* placemarks, NSError* error){
+//            if (placemarks && placemarks.count > 0) {
+//                CLPlacemark *topResult = [placemarks objectAtIndex:0];
+//                MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
 //
-//    MKPlacemark *placemark = [[MKPlacemark alloc]
-//                              initWithCoordinate:self.coordinate
-//                              addressDictionary:addressDict];
+//                MKCoordinateRegion region = mapView.region;
+//                region.center = placemark.region.center;
+//                region.span.longitudeDelta /= 8.0;
+//                region.span.latitudeDelta /= 8.0;
 //
-//    MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-//    mapItem.name = self.title;
-//
-//    return mapItem;
+//                [mapView setRegion:region animated:YES];
+//                [mapView addAnnotation:placemark];
+//            }
+//        }
+//        ];
+//    return mapView;
 //}
 
 @end

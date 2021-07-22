@@ -12,7 +12,7 @@
 #import <MapKit/MapKit.h>
 
 
-@interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate>
+@interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *priceField;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
 
@@ -30,6 +32,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.searchBar.delegate = self;
+    self.mapView.delegate = self;
     self.descriptionTextView.delegate = self;
     self.imageView.userInteractionEnabled = YES;
     [self _renderStyling];
@@ -37,6 +41,36 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+#pragma mark - Search Bar Delegate Methods
+
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if([text isEqualToString:@"\n"]) {
+        NSString *location = searchBar.text;
+        self.location.name = searchBar.text;
+        self.location.address = searchBar.text;
+        self.location = [Location createLocation:searchBar.text address:searchBar.text latitude:nil longitude:nil withCompletion:nil];
+        
+        // Using address to annotate
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:location completionHandler:^(NSArray* placemarks, NSError* error){
+            if (placemarks && placemarks.count > 0) {
+                CLPlacemark *topResult = [placemarks objectAtIndex:0];
+                MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
+                
+                MKCoordinateRegion region = self.mapView.region;
+                region.center = placemark.region.center;
+                region.span.longitudeDelta /= 8.0;
+                region.span.latitudeDelta /= 8.0;
+                
+                [self.mapView setRegion:region animated:YES];
+                [self.mapView addAnnotation:placemark];
+            }
+        }
+        ];
+    }
+    return YES;
 }
 
 #pragma mark - IB Actions
@@ -57,7 +91,7 @@
 }
 
 - (IBAction)handleSubmit:(id)sender {
-    [self _fetchArtist];
+    [self _submitData];
 }
 
 #pragma mark - UIImagePickerController Delegate Methods
@@ -94,19 +128,18 @@
 
 #pragma mark - Private Helper Methods
 
-- (void)_fetchArtist {
+- (void)_submitData {
     NSString *artistName = self.artistField.text;
     PFQuery *const artistQuery = [PFQuery queryWithClassName:@"Artist"];
     [artistQuery includeKey:@"name"];
     [artistQuery whereKey:@"name" equalTo:artistName];
     artistQuery.limit = 1;
     
-    float lat = 37.783333;
-    NSNumber *latNum = @((int)(lat*100)/100.0);
-    float lon = -122.416667;
-    NSNumber *longNum = @((int)(lon*100)/100.0);
-    
-    self.location = [Location createLocation:@"random location" address:@"random address" latitude:latNum longitude:longNum withCompletion:nil];
+// Testing lat and long
+//    float lat = 37.783333;
+//    NSNumber *latNum = @((int)(lat*100)/100.0);
+//    float lon = -122.416667;
+//    NSNumber *longNum = @((int)(lon*100)/100.0);
     
     [artistQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
@@ -175,43 +208,50 @@
 }
 
 - (void)_renderStyling {
+    self.mapView.layer.cornerRadius = 5;
     self.descriptionTextView.textColor = [UIColor lightGrayColor];
     self.descriptionTextView.text = @"Description";
-    
     self.descriptionTextView.layer.cornerRadius=8.0f;
     self.descriptionTextView.layer.masksToBounds=YES;
     self.descriptionTextView.layer.borderColor=[[UIColor lightGrayColor]CGColor];
     self.descriptionTextView.layer.borderWidth= 1.0f;
+    self.descriptionTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.titleField.layer.cornerRadius= 8.0f;
     self.titleField.layer.masksToBounds=YES;
     self.titleField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.titleField.layer.borderWidth= 1.0f;
+    self.titleField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.artistField.layer.cornerRadius= 8.0f;
     self.artistField.layer.masksToBounds=YES;
     self.artistField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.artistField.layer.borderWidth= 1.0f;
+    self.artistField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.yearField.layer.cornerRadius= 8.0f;
     self.yearField.layer.masksToBounds=YES;
     self.yearField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.yearField.layer.borderWidth= 1.0f;
+    self.yearField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.mediumField.layer.cornerRadius= 8.0f;
     self.mediumField.layer.masksToBounds=YES;
     self.mediumField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.mediumField.layer.borderWidth= 1.0f;
+    self.mediumField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.dimensionsField.layer.cornerRadius= 8.0f;
     self.dimensionsField.layer.masksToBounds=YES;
     self.dimensionsField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.dimensionsField.layer.borderWidth= 1.0f;
+    self.dimensionsField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.priceField.layer.cornerRadius= 8.0f;
     self.priceField.layer.masksToBounds=YES;
     self.priceField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.priceField.layer.borderWidth= 1.0f;
+    self.priceField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     self.submitButton.layer.cornerRadius = 10;
     self.submitButton.layer.masksToBounds=YES;

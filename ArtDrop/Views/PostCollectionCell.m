@@ -13,6 +13,7 @@
     [super awakeFromNib];
     self.imageView.layer.masksToBounds = YES;
     self.imageView.clipsToBounds = YES;
+    self.imageView.layer.cornerRadius = 3;
 }
 
 @end

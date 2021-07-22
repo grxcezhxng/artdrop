@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
+@property (weak, nonatomic) IBOutlet UILabel *worksLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 
 @end
 
@@ -50,6 +52,7 @@
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
             self.arrayOfPosts = posts;
+            self.worksLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfPosts.count];
             [self.collectionView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
@@ -78,9 +81,11 @@
 
 - (void)_renderData {
     self.nameLabel.text = PFUser.currentUser[@"name"];
-    self.usernameLabel.text  = [NSString stringWithFormat:@"%@%@", @"@", PFUser.currentUser.username];
+    NSString *const bioText = [NSString stringWithFormat:@"%@%@", @"@", PFUser.currentUser.username];
+    self.usernameLabel.text  = [NSString stringWithFormat:@"%@ | %@", bioText, PFUser.currentUser[@"bio"]];
     self.profilePhoto.userInteractionEnabled = YES;
     self.profilePhoto.layer.cornerRadius = 50;
+    
     if(PFUser.currentUser[@"profilePhoto"]) {
         PFFileObject *const file = PFUser.currentUser[@"profilePhoto"];
         NSURL *const url = [NSURL URLWithString: file.url];
@@ -90,12 +95,12 @@
 
 - (void)_renderStyling {
     UICollectionViewFlowLayout *const layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    layout.minimumInteritemSpacing = 1;
-    layout.minimumLineSpacing = 1;
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
     
     const CGFloat margin = 21;
-    const CGFloat postersPerLine = 3;
-    const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine ;
+    const CGFloat postersPerLine = 2;
+    const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine;
     const CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
 }

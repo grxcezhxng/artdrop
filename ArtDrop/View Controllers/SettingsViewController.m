@@ -11,13 +11,16 @@
 #import "UIImageView+AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface SettingsViewController () <UIImagePickerControllerDelegate, UITextViewDelegate>
+@interface SettingsViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *profilePhoto;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *bioField;
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+
 
 @end
 
@@ -85,11 +88,30 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - UITextField Delegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    self.emailField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+    self.emailField.layer.borderWidth= 1.0f;
+    self.emailField.textColor = [UIColor blackColor];
+    self.emailLabel.textColor = [UIColor darkGrayColor];
+    [PFUser.currentUser setObject:self.emailField.text forKey:@"email"];
+    [PFUser.currentUser saveInBackgroundWithBlock:nil];
+    [self.emailField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.emailField.layer.borderColor=[[UIColor systemIndigoColor]CGColor];
+    self.emailField.layer.borderWidth= 1.5f;
+    self.emailLabel.textColor = [UIColor systemIndigoColor];
+}
+
 #pragma mark - UITextView Delegate methods
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     self.bioField.text = @"";
-    self.bioField.textColor = [UIColor blackColor];
+    self.bioField.textColor = [UIColor lightGrayColor];
     self.bioField.layer.borderColor=[[UIColor systemIndigoColor]CGColor];
     self.bioField.layer.borderWidth= 1.5f;
     self.bioLabel.textColor = [UIColor systemIndigoColor];
@@ -99,7 +121,7 @@
     if([text isEqualToString:@"\n"]) {
         if(self.bioField.text.length == 0) {
             self.bioField.textColor = [UIColor lightGrayColor];
-            self.bioLabel.textColor = [UIColor lightGrayColor];
+            self.bioLabel.textColor = [UIColor darkGrayColor];
             self.bioField.text = @"Your bio goes here!";
             [self.bioField resignFirstResponder];
         }
@@ -150,7 +172,9 @@
 
 - (void)_renderData {
     self.nameLabel.text = PFUser.currentUser[@"name"];
-    self.usernameLabel.text = PFUser.currentUser[@"username"];
+    self.usernameLabel.text  = [NSString stringWithFormat:@"%@%@", @"@", PFUser.currentUser.username];
+    self.emailField.delegate = self; 
+    self.emailField.text = PFUser.currentUser[@"email"];
     self.bioField.delegate = self;
     if(PFUser.currentUser[@"bio"]) {
         self.bioField.text = PFUser.currentUser[@"bio"];
@@ -173,17 +197,14 @@
     self.bioField.layer.cornerRadius=8.0f;
     self.bioField.layer.masksToBounds=YES;
     self.bioField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
-    self.bioField.layer.borderWidth= 1.0f;
+    self.bioField.layer.borderWidth= 0.5f;
+    self.bioField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
+    
+    self.emailField.layer.cornerRadius= 8.0f;
+    self.emailField.layer.masksToBounds=YES;
+    self.emailField.layer.borderWidth= 0.25f;
+    self.emailField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
+    self.emailField.textColor = [UIColor blackColor];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -289,9 +289,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="D3o-JV-RiZ">
-                                <rect key="frame" x="0.0" y="311" width="414" height="448"/>
+                                <rect key="frame" x="0.0" y="312" width="414" height="447"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="EuK-NQ-AwL">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="EuK-NQ-AwL">
                                     <size key="itemSize" width="252" height="252"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -344,7 +344,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Lf-3g-3eW">
-                                <rect key="frame" x="381" y="20" width="23" height="23"/>
+                                <rect key="frame" x="381" y="15" width="23" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="23" id="DbI-25-fVK"/>
                                     <constraint firstAttribute="height" constant="23" id="caK-Hb-N7k"/>
@@ -398,7 +398,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="npv-ZI-Uab">
-                                <rect key="frame" x="0.0" y="280" width="414" height="32"/>
+                                <rect key="frame" x="0.0" y="280" width="414" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="oW6-ch-qUP"/>
+                                </constraints>
                                 <segments>
                                     <segment title="First"/>
                                     <segment title="Second"/>
@@ -425,7 +428,7 @@
                             <constraint firstItem="9UG-hW-1Jd" firstAttribute="centerY" secondItem="ZC2-Wv-lNy" secondAttribute="centerY" id="bIe-s9-ljS"/>
                             <constraint firstItem="9UG-hW-1Jd" firstAttribute="top" secondItem="cMz-6k-gaf" secondAttribute="bottom" constant="6" id="dHQ-Yq-SbZ"/>
                             <constraint firstItem="Tnf-Aq-FMs" firstAttribute="trailing" secondItem="hzE-h3-bb2" secondAttribute="trailing" id="e2M-kE-0Ps"/>
-                            <constraint firstItem="7Lf-3g-3eW" firstAttribute="top" secondItem="Tnf-Aq-FMs" secondAttribute="top" constant="20" id="f3R-Sl-NTc"/>
+                            <constraint firstItem="7Lf-3g-3eW" firstAttribute="top" secondItem="Tnf-Aq-FMs" secondAttribute="top" constant="15" id="f3R-Sl-NTc"/>
                             <constraint firstItem="ejj-gv-stc" firstAttribute="centerX" secondItem="19l-An-ytT" secondAttribute="centerX" id="jcq-PI-ysX"/>
                             <constraint firstItem="gln-Lo-X15" firstAttribute="leading" secondItem="rA4-S9-xjB" secondAttribute="trailing" id="kyh-v7-ta8"/>
                             <constraint firstItem="gln-Lo-X15" firstAttribute="top" secondItem="f74-yt-Wz6" secondAttribute="bottom" constant="6" id="mJZ-I1-bJO"/>
@@ -1279,6 +1282,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" systemColor="systemIndigoColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" systemColor="systemIndigoColor"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="JYx-Uq-0lS" kind="relationship" relationship="viewControllers" id="56n-bp-ge3"/>

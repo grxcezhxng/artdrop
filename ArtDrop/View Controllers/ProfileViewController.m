@@ -30,6 +30,7 @@
     [super viewDidLoad];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    [self _fetchUserPosts];
     [self _renderData];
     [self _renderStyling];
 }
@@ -38,7 +39,7 @@
     [super viewWillAppear:animated];
     [self _fetchUserPosts];
     [self _renderData];
-    [self _renderStyling];
+//    [self _renderStyling];
 }
 
 #pragma mark - Collection View Data Source Methods

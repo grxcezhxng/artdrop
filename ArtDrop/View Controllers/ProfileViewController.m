@@ -19,8 +19,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
+@property (strong, nonatomic) NSArray *arrayOfUserPosts;
+@property (strong, nonatomic) NSMutableArray *arrayOfUserLikes;
 @property (weak, nonatomic) IBOutlet UILabel *worksLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
 
 @end
 
@@ -33,24 +36,40 @@
     [self _fetchUserPosts];
     [self _renderData];
     [self _renderStyling];
+    self.segmentControl.selectedSegmentIndex = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self _fetchUserPosts];
+    [self _fetchUserLikes];
     [self _renderData];
+}
+
+#pragma mark - IB Actions
+
+- (IBAction)indexChanged:(id)sender {
+    [self.collectionView reloadData];
 }
 
 #pragma mark - Collection View Data Source Methods
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.arrayOfPosts.count;
+    if(self.segmentControl.selectedSegmentIndex == 0) {
+        return self.arrayOfUserPosts.count;
+    }
+    return self.arrayOfUserLikes.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PostCollectionCell *const cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PostCollectionCell" forIndexPath:indexPath];
-    Post *const post = self.arrayOfPosts[indexPath.row];
-    
+    Post *post;
+    if(self.segmentControl.selectedSegmentIndex == 0) {
+        post = self.arrayOfUserPosts[indexPath.row];
+    }
+    else {
+        post = self.arrayOfUserLikes[indexPath.row];
+    }
     PFFileObject *const postFile = post[@"image"];
     NSURL *const postUrl = [NSURL URLWithString: postFile.url];
     [cell.imageView setImageWithURL:postUrl];
@@ -68,8 +87,30 @@
     userQuery.limit = 30;
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
-            self.arrayOfPosts = posts;
-            self.worksLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfPosts.count];
+            self.arrayOfUserPosts = posts;
+            self.worksLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserPosts.count];
+            [self.collectionView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void)_fetchUserLikes {
+    self.arrayOfUserLikes = [[NSMutableArray alloc] init];
+    PFQuery *const userQuery = [PFQuery queryWithClassName:@"Post"];
+    [userQuery orderByDescending:@"createdAt"];
+    [userQuery includeKey:@"author"]; // pointers
+    [userQuery includeKey:@"likedByUser"];
+    userQuery.limit = 100;
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            for (Post* post in posts) {
+                if([post.likedByUser containsObject:PFUser.currentUser.objectId]) {
+                    [self.arrayOfUserLikes addObject:post];
+                }
+            }
+            self.likesLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserLikes.count];
             [self.collectionView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
@@ -92,9 +133,12 @@
 }
 
 - (void)_renderStyling {
+    [self.segmentControl setImage:[UIImage systemImageNamed:@"square.grid.2x2.fill"] forSegmentAtIndex:0];
+    [self.segmentControl setImage:[UIImage systemImageNamed:@"suit.heart.fill"] forSegmentAtIndex:1];
+    
     UICollectionViewFlowLayout *const layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.minimumInteritemSpacing = 0;
-    layout.minimumLineSpacing = 0;
+    layout.minimumLineSpacing = 1;
     const CGFloat margin = 21;
     const CGFloat postersPerLine = 2;
     const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine;

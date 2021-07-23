@@ -38,11 +38,13 @@
 
 - (IBAction)handleLike:(id)sender {
     if(self.post.isLiked){
+        self.post.isLiked = NO;
         [self.post.likedByUser removeObject:PFUser.currentUser.objectId];
         [self.post setObject:self.post.likedByUser forKey:@"likedByUser"];
         [self.post saveInBackground];
         
     } else  {
+        self.post.isLiked = YES;
         [self.post.likedByUser addObject:PFUser.currentUser.objectId];
         [self.post setObject:self.post.likedByUser forKey:@"likedByUser"];
         [self.post saveInBackground];

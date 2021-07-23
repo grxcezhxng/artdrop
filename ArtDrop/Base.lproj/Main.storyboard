@@ -406,6 +406,9 @@
                                     <segment title="First"/>
                                     <segment title="Second"/>
                                 </segments>
+                                <connections>
+                                    <action selector="indexChanged:" destination="9Ap-ei-zSf" eventType="valueChanged" id="CWB-nm-Vlw"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Tnf-Aq-FMs"/>
@@ -451,6 +454,7 @@
                         <outlet property="likesLabel" destination="f74-yt-Wz6" id="tVO-DG-Vqs"/>
                         <outlet property="nameLabel" destination="Gpi-GK-dmG" id="Ojm-Of-iUO"/>
                         <outlet property="profilePhoto" destination="ejj-gv-stc" id="TJ2-JU-caa"/>
+                        <outlet property="segmentControl" destination="npv-ZI-Uab" id="8KH-d3-Wtn"/>
                         <outlet property="usernameLabel" destination="M9j-Od-7yK" id="vNQ-n6-w3b"/>
                         <outlet property="worksLabel" destination="cMz-6k-gaf" id="8AU-k4-zFB"/>
                     </connections>

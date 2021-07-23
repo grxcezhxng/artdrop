@@ -33,7 +33,6 @@
     [super viewDidLoad];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    [self _fetchUserPosts];
     [self _renderData];
     [self _renderStyling];
     self.segmentControl.selectedSegmentIndex = 0;
@@ -99,7 +98,7 @@
 - (void)_fetchUserLikes {
     self.arrayOfUserLikes = [[NSMutableArray alloc] init];
     PFQuery *const userQuery = [PFQuery queryWithClassName:@"Post"];
-    [userQuery orderByDescending:@"createdAt"];
+    [userQuery orderByDescending:@"updatedAt"];
     [userQuery includeKey:@"author"]; // pointers
     [userQuery includeKey:@"likedByUser"];
     userQuery.limit = 100;
@@ -137,8 +136,8 @@
     [self.segmentControl setImage:[UIImage systemImageNamed:@"suit.heart.fill"] forSegmentAtIndex:1];
     
     UICollectionViewFlowLayout *const layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    layout.minimumInteritemSpacing = 0;
-    layout.minimumLineSpacing = 1;
+    layout.minimumInteritemSpacing = 2;
+    layout.minimumLineSpacing = 4;
     const CGFloat margin = 21;
     const CGFloat postersPerLine = 2;
     const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine;

@@ -46,7 +46,16 @@
 #pragma mark - IB Actions
 
 - (IBAction)handleLike:(id)sender {
-    self.post.isLiked = !self.post.isLiked;
+    if(self.post.isLiked){
+        [self.post.likedByUser removeObject:PFUser.currentUser.objectId];
+        [self.post setObject:self.post.likedByUser forKey:@"likedByUser"];
+        [self.post saveInBackground];
+        
+    } else  {
+        [self.post.likedByUser addObject:PFUser.currentUser.objectId];
+        [self.post setObject:self.post.likedByUser forKey:@"likedByUser"];
+        [self.post saveInBackground];
+    }
     [self.post saveInBackgroundWithBlock: nil];
     [self _renderData];
 }
@@ -122,6 +131,7 @@
     }
     self.artistName.text = self.post.artist.name;
     
+    self.post.isLiked = [self.post.likedByUser containsObject:PFUser.currentUser.objectId];
     [self.likeButton setTintColor:(self.post.isLiked ? [UIColor redColor] :  [UIColor whiteColor])];
     [self.likeButton setImage: (self.post.isLiked ? [UIImage systemImageNamed:@"heart.fill"] : [UIImage systemImageNamed:@"heart"]) forState: UIControlStateNormal];
 }

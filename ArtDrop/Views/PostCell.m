@@ -31,13 +31,22 @@
     self.titleLabel.text = self.post[@"title"];
     self.yearLabel.text = self.post[@"year"];
     self.priceLabel.text = self.post[@"price"];
+    self.post.isLiked = [self.post.likedByUser containsObject:PFUser.currentUser.objectId];
     [self.likeButton setTintColor:(self.post.isLiked ? [UIColor redColor] :  [UIColor whiteColor])];
     [self.likeButton setImage: (self.post.isLiked ? [UIImage systemImageNamed:@"heart.fill"] : [UIImage systemImageNamed:@"heart"]) forState: UIControlStateNormal];
 }
 
 - (IBAction)handleLike:(id)sender {
-    self.post.isLiked = !self.post.isLiked;
-    [self.post saveInBackgroundWithBlock: nil];
+    if(self.post.isLiked){
+        [self.post.likedByUser removeObject:PFUser.currentUser.objectId];
+        [self.post setObject:self.post.likedByUser forKey:@"likedByUser"];
+        [self.post saveInBackground];
+        
+    } else  {
+        [self.post.likedByUser addObject:PFUser.currentUser.objectId];
+        [self.post setObject:self.post.likedByUser forKey:@"likedByUser"];
+        [self.post saveInBackground];
+    }
     [self setCellData];
 }
 

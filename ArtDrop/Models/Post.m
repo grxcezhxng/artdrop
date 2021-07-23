@@ -17,14 +17,13 @@
 @dynamic location;
 @dynamic title;
 @dynamic image;
-@dynamic likeCount;
-@dynamic commentCount;
 @dynamic createdAt;
 @dynamic medium;
 @dynamic year;
 @dynamic size;
 @dynamic price;
 @dynamic isLiked;
+@dynamic likedByUser;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -42,8 +41,7 @@
     newPost.description = description;
     newPost.location = location; 
     newPost.isLiked = NO;
-    newPost.likeCount = @(0);
-    newPost.commentCount = @(0);
+    newPost.likedByUser = [NSMutableArray new];
     newPost.createdAt = [NSDate date];
     
     if ([price isEqualToString:@""]) {

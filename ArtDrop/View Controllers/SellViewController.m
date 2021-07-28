@@ -77,7 +77,24 @@
         NSString *const location = searchBar.text;
         self.location.name = searchBar.text;
         self.location.address = searchBar.text;
-        self.location = [Location createLocation:searchBar.text address:searchBar.text latitude:nil longitude:nil withCompletion:nil];
+        
+        CLGeocoder *const geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:location completionHandler:^(NSArray* placemarks, NSError* error){
+            if (placemarks && placemarks.count > 0) {
+                CLPlacemark *const topResult = [placemarks objectAtIndex:0];
+                MKPlacemark *const placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
+                
+                CLLocation *location = placemark.location;
+                CLLocationCoordinate2D coordinate = location.coordinate;
+                
+                self.location.latitude = [NSNumber numberWithDouble:coordinate.latitude];
+                self.location.longitude = [NSNumber numberWithDouble:coordinate.longitude];
+                
+            }
+        }
+         ];
+        
+        self.location = [Location createLocation:searchBar.text address:searchBar.text latitude:self.location.latitude longitude:self.location.longitude withCompletion:nil];
         
         [Location annotateFromAddress:self.location.address withMapView:self.mapView];
     }

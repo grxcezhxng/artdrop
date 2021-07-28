@@ -38,6 +38,12 @@
             CLPlacemark *const topResult = [placemarks objectAtIndex:0];
             MKPlacemark *const placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
             
+            CLLocation *location = placemark.location;
+            CLLocationCoordinate2D coordinate = location.coordinate;
+            
+            NSLog(@"Latitude %f", coordinate.latitude);
+            NSLog(@"Longitude %f", coordinate.longitude);
+            
             MKCoordinateRegion region = mapView.region;
             region.center = placemark.region.center;
             region.span.longitudeDelta /= 8.0;

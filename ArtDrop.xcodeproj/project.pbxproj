@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0C07149ED17F866BBB4BD8E0 /* Pods_ArtDropTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EE92EACA69F1F1906E6C3F4 /* Pods_ArtDropTests.framework */; };
 		54D433FDC34FA8D4D8B86A93 /* Pods_ArtDrop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C001863EC7CBA639455B91DB /* Pods_ArtDrop.framework */; };
+		A62DE85226B0B02900D2036E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE85126B0B02900D2036E /* MapViewController.m */; };
 		A632CB53269CD5280078E0AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB52269CD5280078E0AF /* AppDelegate.m */; };
 		A632CB56269CD5280078E0AF /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB55269CD5280078E0AF /* SceneDelegate.m */; };
 		A632CB5C269CD5280078E0AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A632CB5A269CD5280078E0AF /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		A632CBA926A1675F0078E0AF /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CBA826A1675F0078E0AF /* SettingsViewController.m */; };
 		A632CBAC26A7FD000078E0AF /* ArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CBAB26A7FD000078E0AF /* ArtistViewController.m */; };
 		A632CBAF26A8786F0078E0AF /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CBAE26A8786F0078E0AF /* Location.m */; };
+		A632CBB226AB8D310078E0AF /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CBB126AB8D310078E0AF /* ExploreViewController.m */; };
 		A9D37C84EF904A146AA35D1A /* Pods_ArtDrop_ArtDropUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199082B368D18557D77A009D /* Pods_ArtDrop_ArtDropUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		1C54311AF6C7A5097A9A7B14 /* Pods-ArtDrop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtDrop.release.xcconfig"; path = "Target Support Files/Pods-ArtDrop/Pods-ArtDrop.release.xcconfig"; sourceTree = "<group>"; };
 		1E3C26CBDDB2F8B17657DE65 /* Pods-ArtDropTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtDropTests.debug.xcconfig"; path = "Target Support Files/Pods-ArtDropTests/Pods-ArtDropTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5EE92EACA69F1F1906E6C3F4 /* Pods_ArtDropTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArtDropTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A62DE85026B0B02900D2036E /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		A62DE85126B0B02900D2036E /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		A632CB4E269CD5280078E0AF /* ArtDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A632CB51269CD5280078E0AF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A632CB52269CD5280078E0AF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 		A632CBAB26A7FD000078E0AF /* ArtistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtistViewController.m; sourceTree = "<group>"; };
 		A632CBAD26A8786F0078E0AF /* Location.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		A632CBAE26A8786F0078E0AF /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		A632CBB026AB8D310078E0AF /* ExploreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
+		A632CBB126AB8D310078E0AF /* ExploreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
 		C001863EC7CBA639455B91DB /* Pods_ArtDrop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArtDrop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7343A087CFA40A7D43EE332 /* Pods-ArtDrop-ArtDropUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtDrop-ArtDropUITests.debug.xcconfig"; path = "Target Support Files/Pods-ArtDrop-ArtDropUITests/Pods-ArtDrop-ArtDropUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EDB99C11005522252F3CA526 /* Pods-ArtDropTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtDropTests.release.xcconfig"; path = "Target Support Files/Pods-ArtDropTests/Pods-ArtDropTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -257,6 +263,10 @@
 				A632CBA826A1675F0078E0AF /* SettingsViewController.m */,
 				A632CBAA26A7FD000078E0AF /* ArtistViewController.h */,
 				A632CBAB26A7FD000078E0AF /* ArtistViewController.m */,
+				A632CBB026AB8D310078E0AF /* ExploreViewController.h */,
+				A632CBB126AB8D310078E0AF /* ExploreViewController.m */,
+				A62DE85026B0B02900D2036E /* MapViewController.h */,
+				A62DE85126B0B02900D2036E /* MapViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -501,6 +511,7 @@
 				A632CB9A269D569E0078E0AF /* SellViewController.m in Sources */,
 				A632CB8B269D2AAB0078E0AF /* LoginViewController.m in Sources */,
 				A632CB8E269D30BB0078E0AF /* SignUpViewController.m in Sources */,
+				A62DE85226B0B02900D2036E /* MapViewController.m in Sources */,
 				A632CB53269CD5280078E0AF /* AppDelegate.m in Sources */,
 				A632CBAC26A7FD000078E0AF /* ArtistViewController.m in Sources */,
 				A632CBA626A162850078E0AF /* PostCollectionCell.m in Sources */,
@@ -512,6 +523,7 @@
 				A632CB56269CD5280078E0AF /* SceneDelegate.m in Sources */,
 				A632CB94269D52370078E0AF /* Post.m in Sources */,
 				A632CBA3269FA0E50078E0AF /* DetailViewController.m in Sources */,
+				A632CBB226AB8D310078E0AF /* ExploreViewController.m in Sources */,
 				A632CBAF26A8786F0078E0AF /* Location.m in Sources */,
 				A632CBA926A1675F0078E0AF /* SettingsViewController.m in Sources */,
 			);

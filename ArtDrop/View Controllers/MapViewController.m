@@ -25,6 +25,19 @@
     [super viewDidLoad];
     [self _fetchLocations];
     self.mapView.delegate = self;
+    self.mapView.layer.cornerRadius = 20;
+}
+
+#pragma mark - MKMapView Delegate Methods
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+    
+    annotationView.image = [UIImage systemImageNamed:@"square.grid.2x2.fill"];
+    annotationView.canShowCallout = YES;
+    annotationView.calloutOffset = CGPointMake(-5, 5);
+
+    return annotationView;
 }
 
 #pragma mark - Private Helper Methods
@@ -70,17 +83,6 @@
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-}
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
-    
-    annotationView.image = [UIImage systemImageNamed:@"square.grid.2x2.fill"];
-    annotationView.canShowCallout = YES;
-    annotationView.calloutOffset = CGPointMake(-5, 5);
-
-    return annotationView;
-    
 }
 
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {

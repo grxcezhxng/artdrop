@@ -86,13 +86,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cGK-XW-Fzk">
-                                <rect key="frame" x="0.0" y="105" width="414" height="791"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cGK-XW-Fzk">
+                                <rect key="frame" x="15" y="105" width="384" height="722"/>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="M6L-VH-gwL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cGK-XW-Fzk" firstAttribute="top" secondItem="M6L-VH-gwL" secondAttribute="top" constant="105" id="I2l-Zf-yZT"/>
+                            <constraint firstItem="cGK-XW-Fzk" firstAttribute="trailing" secondItem="M6L-VH-gwL" secondAttribute="trailing" constant="-15" id="IOs-5z-3Qc"/>
+                            <constraint firstItem="cGK-XW-Fzk" firstAttribute="leading" secondItem="M6L-VH-gwL" secondAttribute="leading" constant="15" id="WgM-WA-opv"/>
+                            <constraint firstAttribute="bottom" secondItem="cGK-XW-Fzk" secondAttribute="bottom" constant="15" id="ip6-JU-thF"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3cU-fz-eE4"/>
                     <connections>

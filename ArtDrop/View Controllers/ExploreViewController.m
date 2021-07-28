@@ -20,8 +20,30 @@
     [super viewDidLoad];
     self.tableView.hidden = TRUE;
 //    self.mapModule.hidden = TRUE;
-    self.mapModule.layer.cornerRadius = 15;
     // Do any additional setup after loading the view.
+}
+
+#pragma mark - Private Helper Methods
+
+- (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+- (void)_renderStyling {
+    self.mapModule.layer.cornerRadius = 15;
+    self.mapModule.layer.opacity = 0.8;
+    UIImage *const resizedImage = [self _resizeImage:[UIImage imageNamed:@"map.png"] withSize:CGSizeMake(375, 200)];
+    [self.mapModule setBackgroundColor:[UIColor colorWithPatternImage:resizedImage]];
 }
 
 /*

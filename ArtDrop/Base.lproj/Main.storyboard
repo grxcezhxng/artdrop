@@ -136,19 +136,43 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cGK-XW-Fzk">
                                 <rect key="frame" x="15" y="105" width="384" height="722"/>
                             </mapView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="vBe-bh-hkC">
+                                <rect key="frame" x="15" y="29" width="384" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v4D-aU-IQL">
+                                <rect key="frame" x="15" y="80" width="384" height="221"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultsCell" rowHeight="66" id="VQs-6p-5gh">
+                                        <rect key="frame" x="0.0" y="24.5" width="384" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VQs-6p-5gh" id="4BP-dl-aYF">
+                                            <rect key="frame" x="0.0" y="0.0" width="384" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="M6L-VH-gwL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="cGK-XW-Fzk" firstAttribute="trailing" secondItem="vBe-bh-hkC" secondAttribute="trailing" id="8uw-Ot-NwP"/>
                             <constraint firstItem="cGK-XW-Fzk" firstAttribute="top" secondItem="M6L-VH-gwL" secondAttribute="top" constant="105" id="I2l-Zf-yZT"/>
                             <constraint firstItem="cGK-XW-Fzk" firstAttribute="trailing" secondItem="M6L-VH-gwL" secondAttribute="trailing" constant="-15" id="IOs-5z-3Qc"/>
+                            <constraint firstItem="cGK-XW-Fzk" firstAttribute="leading" secondItem="vBe-bh-hkC" secondAttribute="leading" id="Ost-Gn-J0p"/>
                             <constraint firstItem="cGK-XW-Fzk" firstAttribute="leading" secondItem="M6L-VH-gwL" secondAttribute="leading" constant="15" id="WgM-WA-opv"/>
                             <constraint firstAttribute="bottom" secondItem="cGK-XW-Fzk" secondAttribute="bottom" constant="15" id="ip6-JU-thF"/>
+                            <constraint firstItem="cGK-XW-Fzk" firstAttribute="top" secondItem="vBe-bh-hkC" secondAttribute="bottom" constant="25" id="jax-Sg-t9h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3cU-fz-eE4"/>
                     <connections>
                         <outlet property="mapView" destination="cGK-XW-Fzk" id="mh8-A2-hnY"/>
+                        <outlet property="searchBar" destination="vBe-bh-hkC" id="KAb-20-E5R"/>
+                        <outlet property="tableView" destination="v4D-aU-IQL" id="gN8-cB-gCe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pj3-39-ZNl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

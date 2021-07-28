@@ -12,21 +12,98 @@
 #import "Parse/Parse.h"
 #import "Post.h"
 
-@interface MapViewController ()<MKMapViewDelegate>
+@interface MapViewController ()<MKMapViewDelegate, UISearchBarDelegate, MKLocalSearchCompleterDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
 @property (nonatomic, strong) NSArray *arrayOfLocations;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(nonatomic, strong) NSArray <MKLocalSearchCompletion *> *searchResults;
 
 @end
 
-@implementation MapViewController
+@implementation MapViewController {
+    MKLocalSearchCompleter *searchCompleter;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self _fetchLocations];
     self.mapView.delegate = self;
+    self.searchBar.delegate = self;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.hidden = TRUE;
     self.mapView.layer.cornerRadius = 20;
+    //    CLLocationCoordinate2D sf = CLLocationCoordinate2DMake(37.7749,122.4194);
+    //        [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(sf, 2000, 2000)];
+    
+    searchCompleter = [[MKLocalSearchCompleter alloc] init];
+    searchCompleter.delegate = self;
+    self.searchResults = [[NSArray alloc] init];
+}
+
+#pragma mark - Search Bar Delegate Methods
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    searchCompleter.queryFragment = searchText;
+    self.tableView.hidden = FALSE;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    self.tableView.hidden = TRUE;
+}
+
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if([text isEqualToString:@"\n"]) {
+        [self.view endEditing:YES];
+    }
+    self.tableView.hidden = TRUE;
+    return YES;
+}
+
+#pragma mark - TableView Delegate Methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:true];
+    MKLocalSearchCompletion *completion = self.searchResults[indexPath.row];
+    
+    NSString *const location = completion.title;
+    CLGeocoder *const geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:location completionHandler:^(NSArray* placemarks, NSError* error){
+        if (placemarks && placemarks.count > 0) {
+            CLPlacemark *const topResult = [placemarks objectAtIndex:0];
+            MKPlacemark *const placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
+            
+            CLLocation *location = placemark.location;
+            CLLocationCoordinate2D coordinate = location.coordinate;
+            
+            [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(coordinate, 6000, 6000) animated:YES];
+        }
+    }
+     ];
+    self.tableView.hidden = TRUE;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.searchResults count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchResultsCell"];
+    MKLocalSearchCompletion *const result = self.searchResults[indexPath.row];
+    cell.textLabel.text = result.title;
+    cell.detailTextLabel.text = result.subtitle;
+    return cell;
+}
+
+#pragma mark - MKLocalSearchCompleter Delegate Methods
+- (void)completerDidUpdateResults:(MKLocalSearchCompleter *)completer {
+    self.searchResults = completer.results;
+    [self.tableView reloadData];
+}
+- (void)completer:(MKLocalSearchCompleter *)completer didFailWithError:(NSError *)error {
 }
 
 #pragma mark - MKMapView Delegate Methods
@@ -103,9 +180,10 @@
                 [arrAnnotation addObject:annotation];
             }
             [self.mapView addAnnotations:arrAnnotation];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
         }
+        //        else {
+        //            NSLog(@"%@", error.localizedDescription);
+        //        }
     }];
 }
 

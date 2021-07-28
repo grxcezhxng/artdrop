@@ -10,6 +10,7 @@
 		0C07149ED17F866BBB4BD8E0 /* Pods_ArtDropTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EE92EACA69F1F1906E6C3F4 /* Pods_ArtDropTests.framework */; };
 		54D433FDC34FA8D4D8B86A93 /* Pods_ArtDrop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C001863EC7CBA639455B91DB /* Pods_ArtDrop.framework */; };
 		A62DE85226B0B02900D2036E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE85126B0B02900D2036E /* MapViewController.m */; };
+		A62DE85826B1790300D2036E /* ArtAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE85726B1790300D2036E /* ArtAnnotation.m */; };
 		A632CB53269CD5280078E0AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB52269CD5280078E0AF /* AppDelegate.m */; };
 		A632CB56269CD5280078E0AF /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB55269CD5280078E0AF /* SceneDelegate.m */; };
 		A632CB5C269CD5280078E0AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A632CB5A269CD5280078E0AF /* Main.storyboard */; };
@@ -61,6 +62,8 @@
 		5EE92EACA69F1F1906E6C3F4 /* Pods_ArtDropTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArtDropTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A62DE85026B0B02900D2036E /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		A62DE85126B0B02900D2036E /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		A62DE85626B1790300D2036E /* ArtAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArtAnnotation.h; sourceTree = "<group>"; };
+		A62DE85726B1790300D2036E /* ArtAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtAnnotation.m; sourceTree = "<group>"; };
 		A632CB4E269CD5280078E0AF /* ArtDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A632CB51269CD5280078E0AF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A632CB52269CD5280078E0AF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -240,6 +243,8 @@
 				A632CB96269D54770078E0AF /* PostCell.m */,
 				A632CBA426A162850078E0AF /* PostCollectionCell.h */,
 				A632CBA526A162850078E0AF /* PostCollectionCell.m */,
+				A62DE85626B1790300D2036E /* ArtAnnotation.h */,
+				A62DE85726B1790300D2036E /* ArtAnnotation.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -517,6 +522,7 @@
 				A632CBA626A162850078E0AF /* PostCollectionCell.m in Sources */,
 				A632CBA0269E53B30078E0AF /* Artist.m in Sources */,
 				A632CB9D269D58B10078E0AF /* ProfileViewController.m in Sources */,
+				A62DE85826B1790300D2036E /* ArtAnnotation.m in Sources */,
 				A632CB97269D54770078E0AF /* PostCell.m in Sources */,
 				A632CB64269CD52B0078E0AF /* main.m in Sources */,
 				A632CB91269D411B0078E0AF /* FeedViewController.m in Sources */,

@@ -8,6 +8,7 @@
 #import "MapViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "ArtAnnotation.h"
 #import "Parse/Parse.h"
 #import "Post.h"
 
@@ -31,13 +32,33 @@
 #pragma mark - MKMapView Delegate Methods
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+    if ([annotation isKindOfClass:[MKUserLocation class]]){
+        return nil;
+    }
     
-    annotationView.image = [UIImage systemImageNamed:@"square.grid.2x2.fill"];
-    annotationView.canShowCallout = YES;
-    annotationView.calloutOffset = CGPointMake(-5, 5);
-
-    return annotationView;
+    if ([annotation isKindOfClass:[ArtAnnotation class]]) {
+        ArtAnnotation *artAnnotation = (ArtAnnotation *)annotation;
+        
+        MKAnnotationView *pinView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomPinAnnotationView"];
+        if (!pinView) {
+            pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
+            pinView.canShowCallout = YES;
+            pinView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)];
+            pinView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            pinView.calloutOffset = CGPointMake(0, 4);
+            if (artAnnotation.image) {
+                UIImageView *calloutImage = (UIImageView*)pinView.leftCalloutAccessoryView;
+                calloutImage.image = artAnnotation.image;
+                pinView.image = artAnnotation.image;
+            }
+        }
+        else {
+            pinView.annotation = annotation;
+        }
+        pinView.image = artAnnotation.image;
+        return pinView;
+    }
+    return nil;
 }
 
 #pragma mark - Private Helper Methods
@@ -53,7 +74,6 @@
         if (posts != nil) {
             self.arrayOfPosts = posts;
             NSMutableArray *locations = [[NSMutableArray alloc] init];
-            
             for (Post *post in self.arrayOfPosts) {
                 if (post.location.latitude && post.location.longitude) {
                     double latitude = [post.location.latitude doubleValue];
@@ -62,30 +82,34 @@
                     [locations addObject:location];
                 }
             }
-            
             self.arrayOfLocations = locations;
             
+            NSMutableArray *arrAnnotation = [[NSMutableArray alloc] init];
             for (int i = 0; i < [self.arrayOfLocations count]; i++) {
-                
+                Post *post = self.arrayOfPosts[i];
+                ArtAnnotation *annotation = [[ArtAnnotation alloc] init];
+                annotation.post = post;
                 CLLocation *location = self.arrayOfLocations[i];
                 CLLocationCoordinate2D coordinate = [location coordinate];
-                Post *post = self.arrayOfPosts[i];
-                
-                // Set the coordinate and post for the annotation
-                MKPointAnnotation *const annotation = [[MKPointAnnotation alloc] init];
                 annotation.coordinate = coordinate;
-//                annotation.post = post;
                 
-                [self.mapView addAnnotation:annotation];
+                PFFileObject *imageFile = post.image;
+                if (imageFile) {
+                    NSURL *url = [NSURL URLWithString: imageFile.url];
+                    NSData *fileData = [NSData dataWithContentsOfURL: url];
+                    UIImage *photo = [[UIImage alloc] initWithData:fileData];
+                    annotation.image = [self _resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
+                }
+                [arrAnnotation addObject:annotation];
             }
-            
+            [self.mapView addAnnotations:arrAnnotation];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
     }];
 }
 
-- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+- (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
     resizeImageView.contentMode = UIViewContentModeScaleAspectFill;

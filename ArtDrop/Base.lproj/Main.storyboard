@@ -145,7 +145,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultsCell" rowHeight="66" id="VQs-6p-5gh">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MapSearchCell" rowHeight="66" id="VQs-6p-5gh">
                                         <rect key="frame" x="0.0" y="24.5" width="384" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VQs-6p-5gh" id="4BP-dl-aYF">
@@ -191,7 +191,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEh-QN-M8e">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1450"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1600"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mVT-pK-tvx">
                                                 <rect key="frame" x="57" y="50" width="300" height="300"/>
@@ -246,7 +246,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWR-8t-qZJ">
-                                                <rect key="frame" x="57" y="1335" width="300" height="42"/>
+                                                <rect key="frame" x="57" y="1485" width="300" height="42"/>
                                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="42" id="XZi-bH-31g"/>
@@ -328,11 +328,26 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9c8-xX-M2Y">
-                                                <rect key="frame" x="57" y="1155" width="300" height="150"/>
+                                                <rect key="frame" x="57" y="1155" width="300" height="300"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="DA9-hE-NKQ"/>
+                                                    <constraint firstAttribute="height" constant="300" id="DA9-hE-NKQ"/>
                                                 </constraints>
                                             </mapView>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bZv-z1-NbQ">
+                                                <rect key="frame" x="57" y="1155" width="300" height="177"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SellSearchCell" id="eYc-br-FFs">
+                                                        <rect key="frame" x="0.0" y="24.5" width="300" height="43.5"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eYc-br-FFs" id="ONf-IQ-eqs">
+                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -351,7 +366,7 @@
                                             <constraint firstItem="GLI-kG-T4d" firstAttribute="top" secondItem="dRN-P2-JAj" secondAttribute="bottom" constant="20" id="Fgh-xj-ZRQ"/>
                                             <constraint firstItem="f6X-Zf-BjK" firstAttribute="top" secondItem="mPi-MO-Aym" secondAttribute="bottom" constant="10" id="G9u-MN-3d9"/>
                                             <constraint firstItem="cVF-sO-8YG" firstAttribute="top" secondItem="f6X-Zf-BjK" secondAttribute="bottom" constant="20" id="Gss-Ip-SAA"/>
-                                            <constraint firstAttribute="height" constant="1450" id="H5k-HI-n0j"/>
+                                            <constraint firstAttribute="height" constant="1600" id="H5k-HI-n0j"/>
                                             <constraint firstItem="2me-Cs-tVW" firstAttribute="top" secondItem="UL9-jQ-tWa" secondAttribute="bottom" constant="20" id="JOh-wd-UXK"/>
                                             <constraint firstItem="UL9-jQ-tWa" firstAttribute="leading" secondItem="cVF-sO-8YG" secondAttribute="leading" id="L0r-YS-Tne"/>
                                             <constraint firstItem="UL9-jQ-tWa" firstAttribute="top" secondItem="cVF-sO-8YG" secondAttribute="bottom" constant="10" id="Lu3-Im-8F2"/>
@@ -420,6 +435,7 @@
                         <outlet property="priceField" destination="UL9-jQ-tWa" id="hJz-Qf-jSX"/>
                         <outlet property="searchBar" destination="UTh-pa-mFZ" id="G36-jB-0Gm"/>
                         <outlet property="submitButton" destination="eWR-8t-qZJ" id="T0a-1o-dnQ"/>
+                        <outlet property="tableView" destination="bZv-z1-NbQ" id="zci-uS-gE6"/>
                         <outlet property="titleField" destination="K5l-lF-deN" id="epx-sZ-ABc"/>
                         <outlet property="yearField" destination="XmR-F3-IKs" id="nZ2-9K-IYA"/>
                     </connections>

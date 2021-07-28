@@ -36,8 +36,8 @@
     self.tableView.dataSource = self;
     self.tableView.hidden = TRUE;
     self.mapView.layer.cornerRadius = 20;
-    //    CLLocationCoordinate2D sf = CLLocationCoordinate2DMake(37.7749,122.4194);
-    //        [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(sf, 2000, 2000)];
+        CLLocationCoordinate2D sf = CLLocationCoordinate2DMake(37.783333, -122.416667);
+            [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(sf, 1000000, 1000000)];
     
     searchCompleter = [[MKLocalSearchCompleter alloc] init];
     searchCompleter.delegate = self;
@@ -91,7 +91,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchResultsCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MapSearchCell"];
     MKLocalSearchCompletion *const result = self.searchResults[indexPath.row];
     cell.textLabel.text = result.title;
     cell.detailTextLabel.text = result.subtitle;

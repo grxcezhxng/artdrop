@@ -11,7 +11,7 @@
 #import "Location.h"
 #import <MapKit/MapKit.h>
 
-@interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate, UITextFieldDelegate>
+@interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
@@ -24,15 +24,21 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(nonatomic, strong) NSArray <MKLocalSearchCompletion *> *searchResults;
 
 @end
 
-@implementation SellViewController
+@implementation SellViewController {
+    MKLocalSearchCompleter *searchCompleter;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.searchBar.delegate = self;
     self.mapView.delegate = self;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     self.descriptionTextView.delegate = self;
     self.titleField.delegate = self;
     self.artistField.delegate = self;
@@ -42,6 +48,10 @@
     self.priceField.delegate = self;
     self.imageView.userInteractionEnabled = YES;
     [self _renderStyling];
+    
+    searchCompleter = [[MKLocalSearchCompleter alloc] init];
+    searchCompleter.delegate = self;
+    self.searchResults = [[NSArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -71,6 +81,16 @@
 
 #pragma mark - Search Bar Delegate Methods
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    searchCompleter.queryFragment = searchText;
+    self.tableView.hidden = FALSE;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    self.tableView.hidden = TRUE;
+}
+
+
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if([text isEqualToString:@"\n"]) {
         [self.view endEditing:YES];
@@ -89,16 +109,65 @@
                 
                 self.location.latitude = [NSNumber numberWithDouble:coordinate.latitude];
                 self.location.longitude = [NSNumber numberWithDouble:coordinate.longitude];
-                
             }
         }
          ];
-        
         self.location = [Location createLocation:searchBar.text address:searchBar.text latitude:self.location.latitude longitude:self.location.longitude withCompletion:nil];
-        
         [Location annotateFromAddress:self.location.address withMapView:self.mapView];
     }
+    self.tableView.hidden = TRUE;
     return YES;
+}
+
+#pragma mark - TableView Delegate Methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:true];
+    MKLocalSearchCompletion *completion = self.searchResults[indexPath.row];
+    
+    NSString *const location = completion.title;
+    self.location.name = completion.title;
+    self.location.address = completion.title;
+    NSLog(@"Subtitle %@", completion.subtitle);
+    CLGeocoder *const geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:location completionHandler:^(NSArray* placemarks, NSError* error){
+        if (placemarks && placemarks.count > 0) {
+            CLPlacemark *const topResult = [placemarks objectAtIndex:0];
+            MKPlacemark *const placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
+            
+            CLLocation *location = placemark.location;
+            CLLocationCoordinate2D coordinate = location.coordinate;
+            [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(coordinate, 1000000, 1000000) animated:YES];
+            
+            self.location.latitude = [NSNumber numberWithDouble:coordinate.latitude];
+            self.location.longitude = [NSNumber numberWithDouble:coordinate.longitude];
+        }
+    }
+     ];
+    
+    self.location = [Location createLocation:self.location.name address:self.location.address latitude:self.location.latitude longitude:self.location.longitude withCompletion:nil];
+    [Location annotateFromAddress:self.location.address withMapView:self.mapView];
+    self.tableView.hidden = TRUE;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.searchResults count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SellSearchCell"];
+    MKLocalSearchCompletion *const result = self.searchResults[indexPath.row];
+    cell.textLabel.text = result.title;
+    cell.detailTextLabel.text = result.subtitle;
+    return cell;
+}
+
+#pragma mark - MKLocalSearchCompleter Delegate Methods
+- (void)completerDidUpdateResults:(MKLocalSearchCompleter *)completer {
+    self.searchResults = completer.results;
+    [self.tableView reloadData];
+}
+- (void)completer:(MKLocalSearchCompleter *)completer didFailWithError:(NSError *)error {
 }
 
 #pragma mark - UIImagePickerController Delegate Methods
@@ -217,6 +286,7 @@
 }
 
 - (void)_renderStyling {
+    self.tableView.hidden = TRUE;
     self.mapView.layer.cornerRadius = 5;
     self.descriptionTextView.textColor = [UIColor lightGrayColor];
     self.descriptionTextView.text = @"Description";

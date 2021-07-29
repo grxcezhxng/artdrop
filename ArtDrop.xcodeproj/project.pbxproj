@@ -15,6 +15,7 @@
 		A62DE86726B2398900D2036E /* ArtAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE86626B2398900D2036E /* ArtAPIManager.m */; };
 		A62DE86A26B277B600D2036E /* ArtistCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE86926B277B600D2036E /* ArtistCollectionCell.m */; };
 		A62DE87226B28A2E00D2036E /* UIButton+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE87126B28A2E00D2036E /* UIButton+Extensions.m */; };
+		A62DE87526B28C8800D2036E /* UITextField+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE87426B28C8800D2036E /* UITextField+Extensions.m */; };
 		A632CB53269CD5280078E0AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB52269CD5280078E0AF /* AppDelegate.m */; };
 		A632CB56269CD5280078E0AF /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB55269CD5280078E0AF /* SceneDelegate.m */; };
 		A632CB5C269CD5280078E0AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A632CB5A269CD5280078E0AF /* Main.storyboard */; };
@@ -76,6 +77,8 @@
 		A62DE86926B277B600D2036E /* ArtistCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtistCollectionCell.m; sourceTree = "<group>"; };
 		A62DE87126B28A2E00D2036E /* UIButton+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Extensions.m"; sourceTree = "<group>"; };
 		A62DE87326B28A3D00D2036E /* UIButton+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Extensions.h"; sourceTree = "<group>"; };
+		A62DE87426B28C8800D2036E /* UITextField+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extensions.m"; sourceTree = "<group>"; };
+		A62DE87626B28C9600D2036E /* UITextField+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extensions.h"; sourceTree = "<group>"; };
 		A632CB4E269CD5280078E0AF /* ArtDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A632CB51269CD5280078E0AF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A632CB52269CD5280078E0AF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -191,6 +194,8 @@
 			children = (
 				A62DE87326B28A3D00D2036E /* UIButton+Extensions.h */,
 				A62DE87126B28A2E00D2036E /* UIButton+Extensions.m */,
+				A62DE87626B28C9600D2036E /* UITextField+Extensions.h */,
+				A62DE87426B28C8800D2036E /* UITextField+Extensions.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -571,6 +576,7 @@
 				A632CBA3269FA0E50078E0AF /* DetailViewController.m in Sources */,
 				A632CBB226AB8D310078E0AF /* ExploreViewController.m in Sources */,
 				A62DE86126B18C3500D2036E /* SearchCell.m in Sources */,
+				A62DE87526B28C8800D2036E /* UITextField+Extensions.m in Sources */,
 				A632CBAF26A8786F0078E0AF /* Location.m in Sources */,
 				A632CBA926A1675F0078E0AF /* SettingsViewController.m in Sources */,
 			);

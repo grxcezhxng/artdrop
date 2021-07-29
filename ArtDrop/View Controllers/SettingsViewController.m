@@ -10,6 +10,7 @@
 #import "Parse/Parse.h"
 #import "UIImageView+AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UITextField+Extensions.h"
 
 @interface SettingsViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UITextFieldDelegate>
 
@@ -190,17 +191,13 @@
 }
 
 - (void)_renderStyling {
+    [self.emailField setupTheme];
+    
     self.bioField.layer.cornerRadius=8.0f;
     self.bioField.layer.masksToBounds=YES;
     self.bioField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
     self.bioField.layer.borderWidth= 0.5f;
     self.bioField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
-    self.emailField.layer.cornerRadius= 8.0f;
-    self.emailField.layer.masksToBounds=YES;
-    self.emailField.layer.borderWidth= 0.25f;
-    self.emailField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    self.emailField.textColor = [UIColor blackColor];
 }
 
 @end

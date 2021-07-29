@@ -9,6 +9,7 @@
 #import "SceneDelegate.h"
 #import "Parse/Parse.h"
 #import "UIButton+Extensions.h"
+#import "UITextField+Extensions.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -86,29 +87,12 @@
 }
 
 - (void)_renderStyling {
-    self.usernameField.layer.cornerRadius= 8.0f;
-    self.usernameField.layer.masksToBounds=YES;
-    self.usernameField.layer.borderColor=[[UIColor grayColor]CGColor];
-    self.usernameField.layer.borderWidth= 1.0f;
-    self.usernameField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
-    self.passwordField.layer.cornerRadius= 8.0f;
-    self.passwordField.layer.masksToBounds=YES;
-    self.passwordField.layer.borderColor=[[UIColor grayColor]CGColor];
-    self.passwordField.layer.borderWidth= 1.0f;
-    self.passwordField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
-    self.emailField.layer.cornerRadius= 8.0f;
-    self.emailField.layer.masksToBounds=YES;
-    self.emailField.layer.borderColor=[[UIColor grayColor]CGColor];
-    self.emailField.layer.borderWidth= 1.0f;
-    self.emailField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
-    self.nameField.layer.cornerRadius= 8.0f;
-    self.nameField.layer.masksToBounds=YES;
-    self.nameField.layer.borderColor=[[UIColor grayColor]CGColor];
-    self.nameField.layer.borderWidth= 1.0f;
-    self.nameField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
+    [self.usernameField setupTheme];
+    [self.passwordField setupTheme];
+    [self.usernameField setupTheme];
+    [self.emailField setupTheme];
+    [self.usernameField setupTheme];
+    [self.nameField setupTheme];
 
     [self.signupButton setupTheme];
 }

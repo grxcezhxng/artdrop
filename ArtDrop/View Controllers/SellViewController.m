@@ -12,6 +12,7 @@
 #import "ArtAPIManager.h"
 #import <MapKit/MapKit.h>
 #import "UIButton+Extensions.h"
+#import "UITextField+Extensions.h"
 
 @interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -299,41 +300,12 @@
     self.descriptionTextView.layer.borderWidth= 1.0f;
     self.descriptionTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
-    self.titleField.layer.cornerRadius= 8.0f;
-    self.titleField.layer.masksToBounds=YES;
-    self.titleField.layer.borderColor=[[UIColor grayColor]CGColor];
-    self.titleField.layer.borderWidth= 1.0f;
-    self.titleField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
-    self.artistField.layer.cornerRadius= 8.0f;
-    self.artistField.layer.masksToBounds=YES;
-    self.artistField.layer.borderColor=[[UIColor grayColor]CGColor];
-    self.artistField.layer.borderWidth= 1.0f;
-    self.artistField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
-    self.yearField.layer.cornerRadius= 8.0f;
-    self.yearField.layer.masksToBounds=YES;
-    self.yearField.layer.borderColor=[[UIColor grayColor]CGColor];
-    self.yearField.layer.borderWidth= 1.0f;
-    self.yearField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
-    self.mediumField.layer.cornerRadius= 8.0f;
-    self.mediumField.layer.masksToBounds=YES;
-    self.mediumField.layer.borderColor=[[UIColor grayColor]CGColor];
-    self.mediumField.layer.borderWidth= 1.0f;
-    self.mediumField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
-    self.dimensionsField.layer.cornerRadius= 8.0f;
-    self.dimensionsField.layer.masksToBounds=YES;
-    self.dimensionsField.layer.borderColor=[[UIColor grayColor]CGColor];
-    self.dimensionsField.layer.borderWidth= 1.0f;
-    self.dimensionsField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
-    self.priceField.layer.cornerRadius= 8.0f;
-    self.priceField.layer.masksToBounds=YES;
-    self.priceField.layer.borderColor=[[UIColor grayColor]CGColor];
-    self.priceField.layer.borderWidth= 1.0f;
-    self.priceField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
+    [self.titleField setupTheme];
+    [self.artistField setupTheme];
+    [self.yearField setupTheme];
+    [self.mediumField setupTheme];
+    [self.dimensionsField setupTheme];
+    [self.priceField setupTheme];
     
     [self.submitButton setupTheme];
 }

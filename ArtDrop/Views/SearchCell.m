@@ -17,7 +17,6 @@
 
 - (void)setCellData {
     _post = self.post;
-    
     self.artworkImage.layer.cornerRadius = 10;
     PFFileObject *const postPhoto = self.post.image;
     NSURL *const imageURL = [NSURL URLWithString:postPhoto.url];

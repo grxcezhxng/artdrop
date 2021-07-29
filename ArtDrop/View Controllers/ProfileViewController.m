@@ -11,6 +11,7 @@
 #import "PostCollectionCell.h"
 #import "Post.h"
 #import "UIImageView+AFNetworking.h"
+#import "ArtAPIManager.h"
 
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -98,41 +99,25 @@
 #pragma mark - Private Methods
 
 - (void)_fetchUserPosts {
-    PFQuery *const userQuery = [PFQuery queryWithClassName:@"Post"];
-    [userQuery whereKey:@"author" equalTo:[PFUser currentUser]];
-    [userQuery orderByDescending:@"createdAt"];
-    [userQuery includeKey:@"author"]; // pointers
-    userQuery.limit = 30;
-    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if (posts != nil) {
-            self.arrayOfUserPosts = posts;
-            self.worksLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserPosts.count];
-            [self.collectionView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
+    ArtAPIManager *manager = [ArtAPIManager new];
+    [manager fetchUserPosts:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
+        self.arrayOfUserPosts = posts;
+        self.worksLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserPosts.count];
+        [self.collectionView reloadData];
     }];
 }
 
 - (void)_fetchUserLikes {
-    self.arrayOfUserLikes = [[NSMutableArray alloc] init];
-    PFQuery *const userQuery = [PFQuery queryWithClassName:@"Post"];
-    [userQuery orderByDescending:@"updatedAt"];
-    [userQuery includeKey:@"author"]; // pointers
-    [userQuery includeKey:@"likedByUser"];
-    userQuery.limit = 100;
-    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if (posts != nil) {
-            for (Post* post in posts) {
-                if([post.likedByUser containsObject:PFUser.currentUser.objectId]) {
-                    [self.arrayOfUserLikes addObject:post];
-                }
+    ArtAPIManager *manager = [ArtAPIManager new];
+    [manager fetchFeed:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
+        self.arrayOfUserLikes = [[NSMutableArray alloc] init];
+        for (Post* post in posts) {
+            if([post.likedByUser containsObject:PFUser.currentUser.objectId]) {
+                [self.arrayOfUserLikes addObject:post];
             }
-            self.likesLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserLikes.count];
-            [self.collectionView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
         }
+        self.likesLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserLikes.count];
+        [self.collectionView reloadData];
     }];
 }
 

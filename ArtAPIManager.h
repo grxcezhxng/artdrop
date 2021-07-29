@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSURLSession *session;
 
 - (void)fetchArtistInfo:(void(^)(Artist *artist, NSError *error))completion withName:(NSString*) name;
+- (void)fetchFeed:(void(^)(NSArray *posts, NSError *error))completion;
+- (void)fetchUserPosts:(void(^)(NSArray *posts, NSError *error))completion;
+- (void)fetchArtistPosts:(void(^)(NSArray *posts, NSError *error))completion withArtist:(Artist*) artist;
 
 @end
 

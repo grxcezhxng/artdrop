@@ -69,20 +69,11 @@
 #pragma mark - Private Methods
 
 - (void)_fetchArtistPosts {
-    PFQuery *const userQuery = [PFQuery queryWithClassName:@"Post"];
-    [userQuery whereKey:@"artist" equalTo:self.artist];
-    [userQuery orderByDescending:@"createdAt"];
-    [userQuery includeKey:@"artist"]; // pointers
-    userQuery.limit = 30;
-    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if (posts != nil) {
-            self.arrayOfPosts = posts;
-            //            self.worksLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfPosts.count];
-            [self.collectionView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
-    }];
+    ArtAPIManager *manager = [ArtAPIManager new];
+    [manager fetchArtistPosts:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
+        self.arrayOfPosts = posts;
+        [self.collectionView reloadData];
+    } withArtist:self.artist];
 }
 
 - (void)_renderData {

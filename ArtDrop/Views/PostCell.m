@@ -24,7 +24,6 @@
     
     PFFileObject *const postPhoto = self.post.image;
     NSURL *const imageURL = [NSURL URLWithString:postPhoto.url];
-    //    [self.artworkView setImageWithURL:imageURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
     __weak PostCell *weakSelf = self;
     [self.artworkView setImageWithURLRequest:request placeholderImage:nil

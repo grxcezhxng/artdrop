@@ -54,6 +54,15 @@
     [newPost saveInBackgroundWithBlock: completion];
 }
 
+//+ (NSArray *)postsWithArray:(NSArray *)postsArray {
+//    NSMutableArray *posts = [NSMutableArray array];
+//    for (NSDictionary *dictionary in dictionaries) {
+//        Movie *movie = [[Movie alloc] initWithDictionary:dictionary];
+//        [movies addObject:movie];
+//    }
+//    return movies;
+//}
+
 #pragma mark - Private Methods
 
 + (PFFileObject *)_getPFFileFromImage: (UIImage * _Nullable)image {

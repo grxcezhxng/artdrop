@@ -11,6 +11,7 @@
 #import "ArtAnnotation.h"
 #import "Parse/Parse.h"
 #import "Post.h"
+#import "ArtAPIManager.h"
 
 @interface MapViewController ()<MKMapViewDelegate, UISearchBarDelegate, MKLocalSearchCompleterDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -36,8 +37,8 @@
     self.tableView.dataSource = self;
     self.tableView.hidden = TRUE;
     self.mapView.layer.cornerRadius = 20;
-        CLLocationCoordinate2D sf = CLLocationCoordinate2DMake(37.783333, -122.416667);
-            [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(sf, 1000000, 1000000)];
+    CLLocationCoordinate2D sf = CLLocationCoordinate2DMake(37.783333, -122.416667);
+    [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(sf, 1000000, 1000000)];
     
     searchCompleter = [[MKLocalSearchCompleter alloc] init];
     searchCompleter.delegate = self;
@@ -141,50 +142,43 @@
 #pragma mark - Private Helper Methods
 
 - (void)_fetchLocations {
-    PFQuery *const postQuery = [PFQuery queryWithClassName:@"Post"];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    [postQuery includeKey:@"artist"];
-    [postQuery includeKey:@"location"];
-    postQuery.limit = 40;
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if (posts != nil) {
-            self.arrayOfPosts = posts;
-            NSMutableArray *locations = [[NSMutableArray alloc] init];
-            for (Post *post in self.arrayOfPosts) {
-                if (post.location.latitude && post.location.longitude) {
-                    double latitude = [post.location.latitude doubleValue];
-                    double longitude = [post.location.longitude doubleValue];
-                    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-                    [locations addObject:location];
-                }
+    ArtAPIManager *manager = [ArtAPIManager new];
+    [manager fetchFeed:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
+        self.arrayOfPosts = posts;
+        NSMutableArray *locations = [[NSMutableArray alloc] init];
+        for (Post *post in self.arrayOfPosts) {
+            if (post.location.latitude && post.location.longitude) {
+                double latitude = [post.location.latitude doubleValue];
+                double longitude = [post.location.longitude doubleValue];
+                CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+                [locations addObject:location];
             }
-            self.arrayOfLocations = locations;
-            
-            NSMutableArray *arrAnnotation = [[NSMutableArray alloc] init];
-            for (int i = 0; i < [self.arrayOfLocations count]; i++) {
-                Post *post = self.arrayOfPosts[i];
-                ArtAnnotation *annotation = [[ArtAnnotation alloc] init];
-                annotation.post = post;
-                CLLocation *location = self.arrayOfLocations[i];
-                CLLocationCoordinate2D coordinate = [location coordinate];
-                annotation.coordinate = coordinate;
-                
-                PFFileObject *imageFile = post.image;
-                if (imageFile) {
-                    NSURL *url = [NSURL URLWithString: imageFile.url];
-                    NSData *fileData = [NSData dataWithContentsOfURL: url];
-                    UIImage *photo = [[UIImage alloc] initWithData:fileData];
-                    annotation.image = [self _resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
-                }
-                [arrAnnotation addObject:annotation];
-            }
-            [self.mapView addAnnotations:arrAnnotation];
         }
-        //        else {
-        //            NSLog(@"%@", error.localizedDescription);
-        //        }
+        self.arrayOfLocations = locations;
+        [self _addAnnotations];
     }];
+}
+
+- (void)_addAnnotations {
+    NSMutableArray *arrAnnotation = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [self.arrayOfLocations count]; i++) {
+        Post *post = self.arrayOfPosts[i];
+        ArtAnnotation *annotation = [[ArtAnnotation alloc] init];
+        annotation.post = post;
+        CLLocation *location = self.arrayOfLocations[i];
+        CLLocationCoordinate2D coordinate = [location coordinate];
+        annotation.coordinate = coordinate;
+        
+        PFFileObject *imageFile = post.image;
+        if (imageFile) {
+            NSURL *url = [NSURL URLWithString: imageFile.url];
+            NSData *fileData = [NSData dataWithContentsOfURL: url];
+            UIImage *photo = [[UIImage alloc] initWithData:fileData];
+            annotation.image = [self _resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
+        }
+        [arrAnnotation addObject:annotation];
+    }
+    [self.mapView addAnnotations:arrAnnotation];
 }
 
 - (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
@@ -200,15 +194,5 @@
     
     return newImage;
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

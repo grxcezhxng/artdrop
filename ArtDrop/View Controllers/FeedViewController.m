@@ -14,6 +14,7 @@
 #import "DetailViewController.h"
 #import "Artist.h"
 #import "ArtistViewController.h"
+#import "ArtAPIManager.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -98,19 +99,10 @@
 #pragma mark - Private Helper Methods
 
 - (void)_fetchFeed {
-    PFQuery *const postQuery = [PFQuery queryWithClassName:@"Post"];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    [postQuery includeKey:@"artist"];
-    [postQuery includeKey:@"location"];
-    postQuery.limit = 40;
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if (posts != nil) {
-            self.arrayOfPosts = posts;
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
+    ArtAPIManager *manager = [ArtAPIManager new];
+    [manager fetchFeed:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
+        self.arrayOfPosts = posts;
+        [self.tableView reloadData];
     }];
 }
 

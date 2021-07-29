@@ -8,6 +8,7 @@
 #import "ExploreViewController.h"
 #import "SearchCell.h"
 #import "Post.h"
+#import "ArtAPIManager.h"
 
 @interface ExploreViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -89,20 +90,11 @@
 #pragma mark - Private Helper Methods
 
 - (void)_fetchResults {
-    PFQuery *const postQuery = [PFQuery queryWithClassName:@"Post"];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    [postQuery includeKey:@"artist"];
-    [postQuery includeKey:@"location"];
-    postQuery.limit = 40;
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if (posts != nil) {
-            self.arrayOfPosts = posts;
-            self.arrayOfFilteredPosts = posts;
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
+    ArtAPIManager *manager = [ArtAPIManager new];
+    [manager fetchFeed:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
+        self.arrayOfPosts = posts;
+        self.arrayOfFilteredPosts = posts;
+        [self.tableView reloadData];
     }];
 }
 
@@ -127,15 +119,5 @@
     UIImage *const resizedImage = [self _resizeImage:[UIImage imageNamed:@"map.png"] withSize:CGSizeMake(375, 200)];
     [self.mapModule setBackgroundColor:[UIColor colorWithPatternImage:resizedImage]];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

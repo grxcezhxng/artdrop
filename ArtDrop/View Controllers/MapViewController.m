@@ -45,6 +45,12 @@
     self.searchResults = [[NSArray alloc] init];
 }
 
+#pragma mark - Pragma Mark
+
+- (IBAction)handleBack:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Search Bar Delegate Methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

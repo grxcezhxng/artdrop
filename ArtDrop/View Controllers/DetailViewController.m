@@ -46,6 +46,10 @@
 
 #pragma mark - IB Actions
 
+- (IBAction)handleBack:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)handleLike:(id)sender {
     if (self.post.isLiked) {
         [self.post.likedByUser removeObject:PFUser.currentUser.objectId];

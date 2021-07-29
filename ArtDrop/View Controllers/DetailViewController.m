@@ -29,8 +29,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *forSaleLabel;
 @property (weak, nonatomic) IBOutlet UIView *saleIndicator;
 @property (weak, nonatomic) IBOutlet UIImageView *artistProfilePhoto;
-@property (weak, nonatomic) IBOutlet UILabel *artistName;
 @property (weak, nonatomic) IBOutlet UILabel *artistDescription;
+@property (weak, nonatomic) IBOutlet UIButton *artistName;
 
 @end
 
@@ -109,6 +109,11 @@
     [self.artworkView setImageWithURL:imageURL];
     
     self.artistLabel.text = self.post.artist.name;
+    self.artistDescription.text = self.post.artist.bio;
+    NSURL *artistPhoto = [NSURL URLWithString:self.post.artist.photoUrl];
+    [self.artistProfilePhoto setImageWithURL:artistPhoto];
+    self.artistProfilePhoto.layer.cornerRadius = 33;
+    
     self.titleLabel.text = self.post[@"title"];
     self.yearLabel.text = self.post[@"year"];
     self.mediumLabel.text = self.post[@"medium"];
@@ -129,7 +134,7 @@
         self.forSaleLabel.text = @"For Sale";
         self.saleIndicator.backgroundColor = UIColor.greenColor;
     }
-    self.artistName.text = self.post.artist.name;
+    [self.artistName setTitle:self.post.artist.name forState:UIControlStateNormal];
     
     self.post.isLiked = [self.post.likedByUser containsObject:PFUser.currentUser.objectId];
     [self.likeButton setTintColor:(self.post.isLiked ? [UIColor redColor] :  [UIColor whiteColor])];
@@ -150,6 +155,16 @@
     self.likeButton.backgroundColor = UIColor.blackColor;
     const CGFloat spacing = 1;
     self.likeButton.imageEdgeInsets = UIEdgeInsetsMake(spacing, spacing, spacing, spacing);
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[ArtistViewController class] ]){
+        Artist *const artist = self.post.artist;
+        ArtistViewController *const artistViewController = [segue destinationViewController];
+        artistViewController.artist = artist;
+    }
 }
 
 @end

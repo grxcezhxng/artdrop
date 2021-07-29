@@ -12,7 +12,7 @@
 @dynamic userID;
 @dynamic name;
 @dynamic bio;
-@dynamic profilePhoto;
+@dynamic photoUrl;
 @dynamic nationality;
 @dynamic birthYear;
 
@@ -20,10 +20,11 @@
     return @"Artist";
 }
 
-+ (Artist *)createArtist:( NSString * _Nullable )name withBio: ( NSString * _Nullable )bio withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (Artist *)createArtist:( NSString * _Nullable )name withBio: ( NSString * _Nullable )bio withImageUrl:( NSString * _Nullable )imageUrl withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     Artist *const newArtist = [Artist new];
     newArtist.name = name;
     newArtist.bio = bio;
+    newArtist.photoUrl = imageUrl;
     
     [newArtist saveInBackgroundWithBlock: completion];
     return newArtist;

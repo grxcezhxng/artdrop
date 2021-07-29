@@ -14,11 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *bio;
-@property (nonatomic, strong) PFFileObject *profilePhoto;
+@property (nonatomic, strong) NSString *photoUrl;
 @property (nonatomic, strong) NSString *nationality;
 @property (nonatomic, strong) NSDate *birthYear;
 
-+ (Artist *) createArtist:( NSString * _Nullable )name withBio: ( NSString * _Nullable )bio withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (Artist *) createArtist:( NSString * _Nullable )name withBio: ( NSString * _Nullable )bio withImageUrl:( NSString * _Nullable )imageUrl withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

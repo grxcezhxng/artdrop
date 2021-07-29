@@ -9,6 +9,7 @@
 #import "Post.h"
 #import "Artist.h"
 #import "Location.h"
+#import "ArtAPIManager.h"
 #import <MapKit/MapKit.h>
 
 @interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
@@ -222,19 +223,24 @@
         if (!error) {
             NSLog(@"Successlyfully fetched artist");
             if([objects count] == 0) {
-                self.artist = [Artist createArtist:artistName withBio:@"" withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-                    if (succeeded){
-                        NSLog(@"Artist created successfully");
-                    } else {
-                        NSLog(@"Artist error: %@", error);
-                    }
-                }];
+                ArtAPIManager *manager = [ArtAPIManager new];
+                [manager fetchArtistInfo:^(Artist* artist, NSError *error){
+                    self.artist = artist;
+                    [self _postArtwork];
+                } withName:artistName];
             }
             else {
                 self.artist = objects[0];
+                [self _postArtwork];
             }
-            
-            [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withDescription:self.descriptionTextView.text withLocation:self.location withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        } else {
+            NSLog(@"Artist error: %@", error);
+        }
+    }];
+}
+
+- (void)_postArtwork {
+    [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withDescription:self.descriptionTextView.text withLocation:self.location withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded){
                     NSLog(@"Posted successfully");
                     [self _showSubmitConfirmation];
@@ -243,10 +249,6 @@
                     NSLog(@"Posting error: %@", error);
                 }
             }];
-        } else {
-            NSLog(@"Artist error: %@", error);
-        }
-    }];
 }
 
 - (void)_showSubmitConfirmation {

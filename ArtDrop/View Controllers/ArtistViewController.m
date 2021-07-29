@@ -6,10 +6,15 @@
 //
 
 #import "ArtistViewController.h"
+#import "ArtAPIManager.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ArtistViewController ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *profilePhoto;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bioLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -18,7 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.artistNameLabel.text = self.artist.name;
-    // Do any additional setup after loading the view.
+    self.bioLabel.text = self.artist.bio;
+    
+    NSURL *artistPhoto = [NSURL URLWithString:self.artist.photoUrl];
+    [self.profilePhoto setImageWithURL:artistPhoto];
+    self.profilePhoto.layer.cornerRadius = 60;
 }
 
 /*

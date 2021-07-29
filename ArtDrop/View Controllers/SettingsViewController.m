@@ -11,6 +11,7 @@
 #import "UIImageView+AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UITextField+Extensions.h"
+#import "UITextView+Extensions.h"
 
 @interface SettingsViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UITextFieldDelegate>
 
@@ -192,12 +193,7 @@
 
 - (void)_renderStyling {
     [self.emailField setupTheme];
-    
-    self.bioField.layer.cornerRadius=8.0f;
-    self.bioField.layer.masksToBounds=YES;
-    self.bioField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
-    self.bioField.layer.borderWidth= 0.5f;
-    self.bioField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
+    [self.bioField setupTheme];
 }
 
 @end

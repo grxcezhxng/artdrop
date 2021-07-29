@@ -13,6 +13,7 @@
 #import <MapKit/MapKit.h>
 #import "UIButton+Extensions.h"
 #import "UITextField+Extensions.h"
+#import "UITextView+Extensions.h"
 
 @interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -292,13 +293,8 @@
 - (void)_renderStyling {
     self.tableView.hidden = TRUE;
     self.mapView.layer.cornerRadius = 5;
-    self.descriptionTextView.textColor = [UIColor lightGrayColor];
     self.descriptionTextView.text = @"Description";
-    self.descriptionTextView.layer.cornerRadius=8.0f;
-    self.descriptionTextView.layer.masksToBounds=YES;
-    self.descriptionTextView.layer.borderColor=[[UIColor lightGrayColor]CGColor];
-    self.descriptionTextView.layer.borderWidth= 1.0f;
-    self.descriptionTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
+    [self.descriptionTextView setupTheme];
     
     [self.titleField setupTheme];
     [self.artistField setupTheme];

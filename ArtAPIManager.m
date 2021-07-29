@@ -50,7 +50,7 @@
     }];
 }
 
-// Fetch posts by a certain artist
+// Fetch posts by a certain artist 
 - (void)fetchArtistPosts:(void(^)(NSArray *posts, NSError *error))completion withArtist:(Artist*) artist {
     PFQuery *const userQuery = [PFQuery queryWithClassName:@"Post"];
     [userQuery whereKey:@"artist" equalTo:artist];

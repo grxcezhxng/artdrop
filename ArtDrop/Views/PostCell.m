@@ -24,7 +24,26 @@
     
     PFFileObject *const postPhoto = self.post.image;
     NSURL *const imageURL = [NSURL URLWithString:postPhoto.url];
-    [self.artworkView setImageWithURL:imageURL];
+    //    [self.artworkView setImageWithURL:imageURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    __weak PostCell *weakSelf = self;
+    [self.artworkView setImageWithURLRequest:request placeholderImage:nil
+                                     success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
+        if (imageResponse) {
+            weakSelf.artworkView.alpha = 0.0;
+            weakSelf.artworkView.image = image;
+            
+            //Animate UIImageView back to alpha 1 over 0.3sec
+            [UIView animateWithDuration:0.4 animations:^{
+                weakSelf.artworkView.alpha = 1.0;
+            }];
+        }
+        else {
+            weakSelf.artworkView.image = image;
+        }
+    }
+                                     failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
+    }];
     self.artworkView.layer.cornerRadius = 5;
     
     [self.artistButton setTitle:self.post.artist.name forState:UIControlStateNormal];

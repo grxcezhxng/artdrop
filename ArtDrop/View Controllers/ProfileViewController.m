@@ -69,9 +69,28 @@
     else {
         post = self.arrayOfUserLikes[indexPath.row];
     }
+    // Fade in the image
     PFFileObject *const postFile = post[@"image"];
     NSURL *const postUrl = [NSURL URLWithString: postFile.url];
-    [cell.imageView setImageWithURL:postUrl];
+    NSURLRequest *request = [NSURLRequest requestWithURL:postUrl];
+    __weak PostCollectionCell *weakSelf = cell;
+    [cell.imageView setImageWithURLRequest:request placeholderImage:nil
+                                   success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
+        if (imageResponse) {;
+            weakSelf.imageView.alpha = 0.0;
+            weakSelf.imageView.image = image;
+            
+            //Animate UIImageView back to alpha 1 over 0.3sec
+            [UIView animateWithDuration:0.4 animations:^{
+                weakSelf.imageView.alpha = 1.0;
+            }];
+        }
+        else {
+            weakSelf.imageView.image = image;
+        }
+    }
+                                   failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
+    }];
     
     return cell;
 }

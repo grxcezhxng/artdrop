@@ -13,6 +13,7 @@
 		A62DE85826B1790300D2036E /* ArtAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE85726B1790300D2036E /* ArtAnnotation.m */; };
 		A62DE86126B18C3500D2036E /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE86026B18C3500D2036E /* SearchCell.m */; };
 		A62DE86726B2398900D2036E /* ArtAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE86626B2398900D2036E /* ArtAPIManager.m */; };
+		A62DE86A26B277B600D2036E /* ArtistCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DE86926B277B600D2036E /* ArtistCollectionCell.m */; };
 		A632CB53269CD5280078E0AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB52269CD5280078E0AF /* AppDelegate.m */; };
 		A632CB56269CD5280078E0AF /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CB55269CD5280078E0AF /* SceneDelegate.m */; };
 		A632CB5C269CD5280078E0AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A632CB5A269CD5280078E0AF /* Main.storyboard */; };
@@ -70,6 +71,8 @@
 		A62DE86026B18C3500D2036E /* SearchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
 		A62DE86526B2398900D2036E /* ArtAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArtAPIManager.h; sourceTree = "<group>"; };
 		A62DE86626B2398900D2036E /* ArtAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtAPIManager.m; sourceTree = "<group>"; };
+		A62DE86826B277B600D2036E /* ArtistCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArtistCollectionCell.h; sourceTree = "<group>"; };
+		A62DE86926B277B600D2036E /* ArtistCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtistCollectionCell.m; sourceTree = "<group>"; };
 		A632CB4E269CD5280078E0AF /* ArtDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A632CB51269CD5280078E0AF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A632CB52269CD5280078E0AF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -258,6 +261,8 @@
 			children = (
 				A632CB95269D54770078E0AF /* PostCell.h */,
 				A632CB96269D54770078E0AF /* PostCell.m */,
+				A62DE86826B277B600D2036E /* ArtistCollectionCell.h */,
+				A62DE86926B277B600D2036E /* ArtistCollectionCell.m */,
 				A632CBA426A162850078E0AF /* PostCollectionCell.h */,
 				A632CBA526A162850078E0AF /* PostCollectionCell.m */,
 				A62DE85626B1790300D2036E /* ArtAnnotation.h */,
@@ -536,6 +541,7 @@
 				A62DE86726B2398900D2036E /* ArtAPIManager.m in Sources */,
 				A632CB8B269D2AAB0078E0AF /* LoginViewController.m in Sources */,
 				A632CB8E269D30BB0078E0AF /* SignUpViewController.m in Sources */,
+				A62DE86A26B277B600D2036E /* ArtistCollectionCell.m in Sources */,
 				A62DE85226B0B02900D2036E /* MapViewController.m in Sources */,
 				A632CB53269CD5280078E0AF /* AppDelegate.m in Sources */,
 				A632CBAC26A7FD000078E0AF /* ArtistViewController.m in Sources */,

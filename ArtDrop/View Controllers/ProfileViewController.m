@@ -74,8 +74,8 @@
     // Fade in the image
     PFFileObject *const postFile = post[@"image"];
     NSURL *const postUrl = [NSURL URLWithString: postFile.url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:postUrl];
-    __weak PostCollectionCell *weakSelf = cell;
+    NSURLRequest *const request = [NSURLRequest requestWithURL:postUrl];
+    __weak PostCollectionCell *const weakSelf = cell;
     [cell.imageView setImageWithURLRequest:request placeholderImage:nil
                                    success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
         if (imageResponse) {
@@ -97,7 +97,7 @@
 #pragma mark - Network Calls
 
 - (void)_fetchUserPosts {
-    ArtAPIManager *manager = [ArtAPIManager new];
+    ArtAPIManager *const manager = [ArtAPIManager new];
     [manager fetchUserPosts:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
         self.arrayOfUserPosts = posts;
         self.worksLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserPosts.count];
@@ -106,7 +106,7 @@
 }
 
 - (void)_fetchUserLikes {
-    ArtAPIManager *manager = [ArtAPIManager new];
+    ArtAPIManager *const manager = [ArtAPIManager new];
     [manager fetchFeed:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
         self.arrayOfUserLikes = [[NSMutableArray alloc] init];
         for (Post* post in posts) {

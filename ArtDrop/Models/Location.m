@@ -37,8 +37,8 @@
         if (placemarks && placemarks.count > 0) {
             CLPlacemark *const topResult = [placemarks objectAtIndex:0];
             MKPlacemark *const placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
-            CLLocation *location = placemark.location;
-            CLLocationCoordinate2D coordinate = location.coordinate;
+            const CLLocation *location = placemark.location;
+            const CLLocationCoordinate2D coordinate = location.coordinate;
             
             MKCoordinateRegion region = mapView.region;
             region.center = placemark.region.center;
@@ -49,7 +49,7 @@
             [mapView addAnnotation:placemark];
         }
     }
-     ];
+    ];
     return mapView;
 }
 

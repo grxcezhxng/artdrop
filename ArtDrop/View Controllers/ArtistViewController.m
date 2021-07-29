@@ -10,7 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "ArtistCollectionCell.h"
 
-@interface ArtistViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface ArtistViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (strong, nonatomic) NSArray *arrayOfPosts;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePhoto;
@@ -39,13 +39,13 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ArtistCollectionCell *const cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ArtistCollectionCell" forIndexPath:indexPath];
-    Post *post = self.arrayOfPosts[indexPath.row];
+    Post *const post = self.arrayOfPosts[indexPath.row];
     
     // Fade in the image
     PFFileObject *const postFile = post[@"image"];
     NSURL *const postUrl = [NSURL URLWithString: postFile.url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:postUrl];
-    __weak ArtistCollectionCell *weakSelf = cell;
+    NSURLRequest *const request = [NSURLRequest requestWithURL:postUrl];
+    __weak ArtistCollectionCell *const weakSelf = cell;
     [cell.imageView setImageWithURLRequest:request placeholderImage:nil
                                    success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
         if (imageResponse) {
@@ -68,7 +68,7 @@
 #pragma mark - Network Calls
 
 - (void)_fetchArtistPosts {
-    ArtAPIManager *manager = [ArtAPIManager new];
+    ArtAPIManager *const manager = [ArtAPIManager new];
     [manager fetchArtistPosts:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
         self.arrayOfPosts = posts;
         [self.collectionView reloadData];
@@ -81,7 +81,7 @@
     self.artistNameLabel.text = self.artist.name;
     self.bioLabel.text = self.artist.bio;
     
-    NSURL *artistPhoto = [NSURL URLWithString:self.artist.photoUrl];
+    NSURL *const artistPhoto = [NSURL URLWithString:self.artist.photoUrl];
     [self.profilePhoto setImageWithURL:artistPhoto];
 }
 

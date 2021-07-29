@@ -110,7 +110,7 @@
     
     self.artistLabel.text = self.post.artist.name;
     self.artistDescription.text = self.post.artist.bio;
-    NSURL *artistPhoto = [NSURL URLWithString:self.post.artist.photoUrl];
+    NSURL *const artistPhoto = [NSURL URLWithString:self.post.artist.photoUrl];
     [self.artistProfilePhoto setImageWithURL:artistPhoto];
     self.artistProfilePhoto.layer.cornerRadius = 33;
     

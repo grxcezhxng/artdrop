@@ -23,8 +23,8 @@
     self.imageView.layer.cornerRadius = 10;
     PFFileObject *const postPhoto = self.post.image;
     NSURL *const imageURL = [NSURL URLWithString:postPhoto.url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
-    __weak PostCell *weakSelf = self;
+    NSURLRequest *const request = [NSURLRequest requestWithURL:imageURL];
+    __weak PostCell *const weakSelf = self;
     [self.artworkView setImageWithURLRequest:request placeholderImage:nil
                                      success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
         if (imageResponse) {

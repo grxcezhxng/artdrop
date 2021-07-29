@@ -69,7 +69,7 @@
     self.tableView.hidden = FALSE;
     
     if (searchText.length != 0) {
-        NSPredicate *filterByName = [NSPredicate predicateWithBlock:^BOOL(NSDictionary *evaluatedObject, NSDictionary *bindings) {
+        NSPredicate *const filterByName = [NSPredicate predicateWithBlock:^BOOL(NSDictionary *evaluatedObject, NSDictionary *bindings) {
             return [evaluatedObject[@"title"] containsString:searchText] || [evaluatedObject[@"artist"][@"name"] containsString:searchText];
         }];
         self.arrayOfFilteredPosts = [self.arrayOfPosts filteredArrayUsingPredicate:filterByName];
@@ -89,7 +89,7 @@
 #pragma mark - Network Calls
 
 - (void)_fetchResults {
-    ArtAPIManager *manager = [ArtAPIManager new];
+    ArtAPIManager *const manager = [ArtAPIManager new];
     [manager fetchFeed:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
         self.arrayOfPosts = posts;
         self.arrayOfFilteredPosts = posts;
@@ -100,14 +100,14 @@
 #pragma mark - Private Methods
 
 - (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
-    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    UIImageView *const resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
     resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
     resizeImageView.image = image;
     
     UIGraphicsBeginImageContext(size);
     [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *const newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return newImage;

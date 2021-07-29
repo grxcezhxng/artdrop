@@ -98,7 +98,7 @@
 #pragma mark - Network Calls
 
 - (void)_fetchFeed {
-    ArtAPIManager *manager = [ArtAPIManager new];
+    ArtAPIManager *const manager = [ArtAPIManager new];
     [manager fetchFeed:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
         self.arrayOfPosts = posts;
         [self.tableView reloadData];

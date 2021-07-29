@@ -106,14 +106,14 @@
                 CLPlacemark *const topResult = [placemarks objectAtIndex:0];
                 MKPlacemark *const placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
                 
-                CLLocation *location = placemark.location;
-                CLLocationCoordinate2D coordinate = location.coordinate;
+                CLLocation *const location = placemark.location;
+                const CLLocationCoordinate2D coordinate = location.coordinate;
                 
                 self.location.latitude = [NSNumber numberWithDouble:coordinate.latitude];
                 self.location.longitude = [NSNumber numberWithDouble:coordinate.longitude];
             }
         }
-         ];
+        ];
         self.location = [Location createLocation:searchBar.text address:searchBar.text latitude:self.location.latitude longitude:self.location.longitude withCompletion:nil];
         [Location annotateFromAddress:self.location.address withMapView:self.mapView];
     }
@@ -125,27 +125,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:true];
-    MKLocalSearchCompletion *completion = self.searchResults[indexPath.row];
+    MKLocalSearchCompletion *const completion = self.searchResults[indexPath.row];
     
     NSString *const location = completion.title;
     self.location.name = completion.title;
     self.location.address = completion.title;
-    NSLog(@"Subtitle %@", completion.subtitle);
     CLGeocoder *const geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:location completionHandler:^(NSArray* placemarks, NSError* error){
+    [geocoder geocodeAddressString:location completionHandler:^(NSArray* placemarks, NSError* error) {
         if (placemarks && placemarks.count > 0) {
             CLPlacemark *const topResult = [placemarks objectAtIndex:0];
             MKPlacemark *const placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
             
-            CLLocation *location = placemark.location;
-            CLLocationCoordinate2D coordinate = location.coordinate;
+            CLLocation *const location = placemark.location;
+            const CLLocationCoordinate2D coordinate = location.coordinate;
             [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(coordinate, 1000000, 1000000) animated:YES];
             
             self.location.latitude = [NSNumber numberWithDouble:coordinate.latitude];
             self.location.longitude = [NSNumber numberWithDouble:coordinate.longitude];
         }
     }
-     ];
+    ];
     
     self.location = [Location createLocation:self.location.name address:self.location.address latitude:self.location.latitude longitude:self.location.longitude withCompletion:nil];
     [Location annotateFromAddress:self.location.address withMapView:self.mapView];
@@ -159,7 +158,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SellSearchCell"];
+    UITableViewCell *const cell = [tableView dequeueReusableCellWithIdentifier:@"SellSearchCell"];
     MKLocalSearchCompletion *const result = self.searchResults[indexPath.row];
     cell.textLabel.text = result.title;
     cell.detailTextLabel.text = result.subtitle;
@@ -260,7 +259,7 @@
         if (!error) {
             NSLog(@"Successlyfully fetched artist");
             if([objects count] == 0) {
-                ArtAPIManager *manager = [ArtAPIManager new];
+                ArtAPIManager *const manager = [ArtAPIManager new];
                 [manager fetchArtistInfo:^(Artist* artist, NSError *error){
                     self.artist = artist;
                     [self _postArtwork];

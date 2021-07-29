@@ -69,7 +69,6 @@
             NSLog(@"Error: %@", error.localizedDescription);
         } else {
             NSLog(@"User registered successfully");
-            
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];

@@ -10,6 +10,7 @@
 #import "ArtistViewController.h"
 #import "Artist.h"
 #import <MapKit/MapKit.h>
+#import "UIButton+Extensions.h"
 
 @interface DetailViewController () <MFMailComposeViewControllerDelegate>
 
@@ -146,7 +147,7 @@
     self.saleIndicator.layer.cornerRadius = 5;
     self.mapView.layer.cornerRadius = 8;
     self.artworkView.layer.cornerRadius = 5;
-    self.inquireButton.layer.cornerRadius = 10;
+    [self.inquireButton setupTheme];
     self.sellerProfilePhoto.layer.masksToBounds = YES;
     self.sellerProfilePhoto.layer.cornerRadius = 33;
     self.likeButton.layer.cornerRadius = 16;

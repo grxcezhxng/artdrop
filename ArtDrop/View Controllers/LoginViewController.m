@@ -9,6 +9,7 @@
 #import "SceneDelegate.h"
 #import "Parse/Parse.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIButton+Extensions.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 
@@ -87,8 +88,7 @@
     self.passwordField.layer.borderWidth= 1.0f;
     self.passwordField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
-    self.loginButton.layer.cornerRadius = 10;
-    self.loginButton.layer.masksToBounds=YES;
+    [self.loginButton setupTheme];
 }
 
 @end

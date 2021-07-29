@@ -63,6 +63,7 @@
     }];
 }
 
+// Fetch artist info from Artsy API
 - (void)fetchArtistInfo:(void(^)(Artist* artist, NSError *error))completion withName:(NSString*) name{
     NSString* slug = [name stringByReplacingOccurrencesOfString:@" "
                                          withString:@"-"];

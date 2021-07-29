@@ -11,6 +11,7 @@
 #import "Location.h"
 #import "ArtAPIManager.h"
 #import <MapKit/MapKit.h>
+#import "UIButton+Extensions.h"
 
 @interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -334,8 +335,7 @@
     self.priceField.layer.borderWidth= 1.0f;
     self.priceField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
-    self.submitButton.layer.cornerRadius = 10;
-    self.submitButton.layer.masksToBounds=YES;
+    [self.submitButton setupTheme];
 }
 
 @end

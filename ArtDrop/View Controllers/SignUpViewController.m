@@ -8,6 +8,7 @@
 #import "SignUpViewController.h"
 #import "SceneDelegate.h"
 #import "Parse/Parse.h"
+#import "UIButton+Extensions.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -108,9 +109,8 @@
     self.nameField.layer.borderColor=[[UIColor grayColor]CGColor];
     self.nameField.layer.borderWidth= 1.0f;
     self.nameField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
-    self.signupButton.layer.cornerRadius = 10;
-    self.signupButton.layer.masksToBounds=YES;
+
+    [self.signupButton setupTheme];
 }
 
 @end

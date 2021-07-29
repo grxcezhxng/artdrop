@@ -35,7 +35,7 @@
 #pragma mark - IBActions
 
 - (IBAction)handleSignUp:(id)sender {
-    if(([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) || [self.nameField.text isEqual:@""] ) {
+    if (([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) || [self.nameField.text isEqual:@""]) {
         [self _showErrorAlert];
     }
     [self _registerUser];
@@ -93,7 +93,6 @@
     [self.emailField setupTheme];
     [self.usernameField setupTheme];
     [self.nameField setupTheme];
-
     [self.signupButton setupTheme];
 }
 

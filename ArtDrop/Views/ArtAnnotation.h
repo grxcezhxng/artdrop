@@ -11,7 +11,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//@interface ArtAnnotation : NSObject <MKAnnotation>
 @interface ArtAnnotation : MKAnnotationView
 
 @property (strong, nonatomic) UIImage *image;

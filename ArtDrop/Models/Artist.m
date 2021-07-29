@@ -20,7 +20,7 @@
     return @"Artist";
 }
 
-+ (Artist *)createArtist:( NSString * _Nullable )name withBio: ( NSString * _Nullable )bio withImageUrl:( NSString * _Nullable )imageUrl withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (Artist *)createArtist:(NSString * _Nullable)name withBio:(NSString * _Nullable)bio withImageUrl:(NSString * _Nullable)imageUrl withCompletion:(PFBooleanResultBlock  _Nullable)completion {
     Artist *const newArtist = [Artist new];
     newArtist.name = name;
     newArtist.bio = bio;

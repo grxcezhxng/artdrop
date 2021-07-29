@@ -21,7 +21,6 @@
     _post = self.post;
     
     self.imageView.layer.cornerRadius = 10;
-    
     PFFileObject *const postPhoto = self.post.image;
     NSURL *const imageURL = [NSURL URLWithString:postPhoto.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
@@ -36,15 +35,13 @@
             [UIView animateWithDuration:0.4 animations:^{
                 weakSelf.artworkView.alpha = 1.0;
             }];
-        }
-        else {
+        } else {
             weakSelf.artworkView.image = image;
         }
-    }
-                                     failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
     }];
-    self.artworkView.layer.cornerRadius = 5;
     
+    self.artworkView.layer.cornerRadius = 5;
     [self.artistButton setTitle:self.post.artist.name forState:UIControlStateNormal];
     self.titleLabel.text = self.post[@"title"];
     self.yearLabel.text = self.post[@"year"];
@@ -54,13 +51,14 @@
     [self.likeButton setImage: (self.post.isLiked ? [UIImage systemImageNamed:@"heart.fill"] : [UIImage systemImageNamed:@"heart"]) forState: UIControlStateNormal];
 }
 
+#pragma mark - IB Actions
+
 - (IBAction)handleLike:(id)sender {
-    if(self.post.isLiked){
+    if (self.post.isLiked) {
         self.post.isLiked = NO;
         [self.post.likedByUser removeObject:PFUser.currentUser.objectId];
         [self.post setObject:self.post.likedByUser forKey:@"likedByUser"];
         [self.post saveInBackground];
-        
     } else  {
         self.post.isLiked = YES;
         [self.post.likedByUser addObject:PFUser.currentUser.objectId];
@@ -69,6 +67,8 @@
     }
     [self setCellData];
 }
+
+#pragma mark - Private Methods
 
 - (void)_renderStyling {
     self.likeButton.layer.cornerRadius = 16;

@@ -55,7 +55,7 @@
 #pragma mark - Collection View Data Source Methods
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if(self.segmentControl.selectedSegmentIndex == 0) {
+    if (self.segmentControl.selectedSegmentIndex == 0) {
         return self.arrayOfUserPosts.count;
     }
     return self.arrayOfUserLikes.count;
@@ -64,12 +64,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PostCollectionCell *const cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PostCollectionCell" forIndexPath:indexPath];
     Post *post;
-    if(self.segmentControl.selectedSegmentIndex == 0) {
+    if (self.segmentControl.selectedSegmentIndex == 0) {
         post = self.arrayOfUserPosts[indexPath.row];
     }
     else {
         post = self.arrayOfUserLikes[indexPath.row];
     }
+    
     // Fade in the image
     PFFileObject *const postFile = post[@"image"];
     NSURL *const postUrl = [NSURL URLWithString: postFile.url];
@@ -77,7 +78,7 @@
     __weak PostCollectionCell *weakSelf = cell;
     [cell.imageView setImageWithURLRequest:request placeholderImage:nil
                                    success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
-        if (imageResponse) {;
+        if (imageResponse) {
             weakSelf.imageView.alpha = 0.0;
             weakSelf.imageView.image = image;
             
@@ -85,18 +86,15 @@
             [UIView animateWithDuration:0.4 animations:^{
                 weakSelf.imageView.alpha = 1.0;
             }];
-        }
-        else {
+        } else {
             weakSelf.imageView.image = image;
         }
-    }
-                                   failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
     }];
-    
     return cell;
 }
 
-#pragma mark - Private Methods
+#pragma mark - Network Calls
 
 - (void)_fetchUserPosts {
     ArtAPIManager *manager = [ArtAPIManager new];
@@ -112,7 +110,7 @@
     [manager fetchFeed:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
         self.arrayOfUserLikes = [[NSMutableArray alloc] init];
         for (Post* post in posts) {
-            if([post.likedByUser containsObject:PFUser.currentUser.objectId]) {
+            if ([post.likedByUser containsObject:PFUser.currentUser.objectId]) {
                 [self.arrayOfUserLikes addObject:post];
             }
         }
@@ -120,6 +118,8 @@
         [self.collectionView reloadData];
     }];
 }
+
+#pragma mark - Private Methods
 
 - (void)_renderData {
     self.nameLabel.text = PFUser.currentUser[@"name"];

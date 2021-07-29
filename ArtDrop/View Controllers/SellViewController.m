@@ -71,8 +71,7 @@
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    else {
+    } else {
         NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
@@ -93,7 +92,6 @@
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     self.tableView.hidden = TRUE;
 }
-
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if([text isEqualToString:@"\n"]) {
@@ -154,6 +152,8 @@
     self.tableView.hidden = TRUE;
 }
 
+#pragma mark - TableView Data Source Methods
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.searchResults count];
 }
@@ -170,8 +170,6 @@
 - (void)completerDidUpdateResults:(MKLocalSearchCompleter *)completer {
     self.searchResults = completer.results;
     [self.tableView reloadData];
-}
-- (void)completer:(MKLocalSearchCompleter *)completer didFailWithError:(NSError *)error {
 }
 
 #pragma mark - UIImagePickerController Delegate Methods
@@ -215,45 +213,6 @@
 
 #pragma mark - Private Methods
 
-- (void)_submitData {
-    NSString *const artistName = self.artistField.text;
-    PFQuery *const artistQuery = [PFQuery queryWithClassName:@"Artist"];
-    [artistQuery includeKey:@"name"];
-    [artistQuery whereKey:@"name" equalTo:artistName];
-    artistQuery.limit = 1;
-    
-    [artistQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        if (!error) {
-            NSLog(@"Successlyfully fetched artist");
-            if([objects count] == 0) {
-                ArtAPIManager *manager = [ArtAPIManager new];
-                [manager fetchArtistInfo:^(Artist* artist, NSError *error){
-                    self.artist = artist;
-                    [self _postArtwork];
-                } withName:artistName];
-            }
-            else {
-                self.artist = objects[0];
-                [self _postArtwork];
-            }
-        } else {
-            NSLog(@"Artist error: %@", error);
-        }
-    }];
-}
-
-- (void)_postArtwork {
-    [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withDescription:self.descriptionTextView.text withLocation:self.location withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-                if (succeeded){
-                    NSLog(@"Posted successfully");
-                    [self _showSubmitConfirmation];
-                    [self _resetForm];
-                } else {
-                    NSLog(@"Posting error: %@", error);
-                }
-            }];
-}
-
 - (void)_showSubmitConfirmation {
     UIAlertController *const alert = [UIAlertController alertControllerWithTitle:@"Successfully uploaded :)" message:@"" preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *const okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -290,19 +249,55 @@
     return newImage;
 }
 
+- (void)_submitData {
+    NSString *const artistName = self.artistField.text;
+    PFQuery *const artistQuery = [PFQuery queryWithClassName:@"Artist"];
+    [artistQuery includeKey:@"name"];
+    [artistQuery whereKey:@"name" equalTo:artistName];
+    artistQuery.limit = 1;
+    
+    [artistQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"Successlyfully fetched artist");
+            if([objects count] == 0) {
+                ArtAPIManager *manager = [ArtAPIManager new];
+                [manager fetchArtistInfo:^(Artist* artist, NSError *error){
+                    self.artist = artist;
+                    [self _postArtwork];
+                } withName:artistName];
+            } else {
+                self.artist = objects[0];
+                [self _postArtwork];
+            }
+        } else {
+            NSLog(@"Artist error: %@", error);
+        }
+    }];
+}
+
+- (void)_postArtwork {
+    [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withDescription:self.descriptionTextView.text withLocation:self.location withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"Posted successfully");
+            [self _showSubmitConfirmation];
+            [self _resetForm];
+        } else {
+            NSLog(@"Posting error: %@", error);
+        }
+    }];
+}
+
 - (void)_renderStyling {
     self.tableView.hidden = TRUE;
     self.mapView.layer.cornerRadius = 5;
     self.descriptionTextView.text = @"Description";
     [self.descriptionTextView setupTheme];
-    
     [self.titleField setupTheme];
     [self.artistField setupTheme];
     [self.yearField setupTheme];
     [self.mediumField setupTheme];
     [self.dimensionsField setupTheme];
     [self.priceField setupTheme];
-    
     [self.submitButton setupTheme];
 }
 

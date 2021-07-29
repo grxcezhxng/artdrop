@@ -19,7 +19,7 @@
     return @"Location";
 }
 
-+ (Location *)createLocation:(NSString*)name address:(NSString*)address latitude:( NSNumber * _Nullable )latitude longitude:( NSNumber * _Nullable )longitude withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (Location *)createLocation:(NSString*)name address:(NSString*)address latitude:(NSNumber * _Nullable)latitude longitude:(NSNumber * _Nullable)longitude withCompletion: (PFBooleanResultBlock _Nullable)completion {
     Location *const newLocation = [Location new];
     newLocation.name = name;
     newLocation.address = address;
@@ -37,7 +37,6 @@
         if (placemarks && placemarks.count > 0) {
             CLPlacemark *const topResult = [placemarks objectAtIndex:0];
             MKPlacemark *const placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
-            
             CLLocation *location = placemark.location;
             CLLocationCoordinate2D coordinate = location.coordinate;
             
@@ -54,7 +53,7 @@
     return mapView;
 }
 
-+ (MKMapView *)annotateFromCoords:(NSString*)name latitude:( NSNumber * _Nullable )latitude longitude:( NSNumber * _Nullable )longitude withMapView:(MKMapView *)mapView {
++ (MKMapView *)annotateFromCoords:(NSString*)name latitude:(NSNumber * _Nullable)latitude longitude:(NSNumber * _Nullable)longitude withMapView:(MKMapView *)mapView {
     const CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(latitude.floatValue, longitude.floatValue);
     const MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
     const MKCoordinateRegion region = {coord, span};

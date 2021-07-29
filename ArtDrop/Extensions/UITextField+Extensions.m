@@ -9,8 +9,7 @@
 
 @implementation UITextField (Extensions)
 
-- (void)setupTheme
-{
+- (void)setupTheme {
     self.layer.cornerRadius= 8.0f;
     self.layer.masksToBounds=YES;
     self.layer.borderColor=[[UIColor grayColor]CGColor];

@@ -32,7 +32,7 @@
 #pragma mark - IBAction methods
 
 - (IBAction)handleLogin:(id)sender {
-    if([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
+    if ([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
         [self _showErrorAlert];
     }
     [self _loginUser];

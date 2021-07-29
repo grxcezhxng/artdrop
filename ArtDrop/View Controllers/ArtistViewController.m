@@ -37,9 +37,10 @@
     return self.arrayOfPosts.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ArtistCollectionCell *const cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ArtistCollectionCell" forIndexPath:indexPath];
     Post *post = self.arrayOfPosts[indexPath.row];
+    
     // Fade in the image
     PFFileObject *const postFile = post[@"image"];
     NSURL *const postUrl = [NSURL URLWithString: postFile.url];
@@ -47,7 +48,7 @@
     __weak ArtistCollectionCell *weakSelf = cell;
     [cell.imageView setImageWithURLRequest:request placeholderImage:nil
                                    success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
-        if (imageResponse) {;
+        if (imageResponse) {
             weakSelf.imageView.alpha = 0.0;
             weakSelf.imageView.image = image;
             
@@ -55,18 +56,16 @@
             [UIView animateWithDuration:0.4 animations:^{
                 weakSelf.imageView.alpha = 1.0;
             }];
-        }
-        else {
+        } else {
             weakSelf.imageView.image = image;
         }
-    }
-                                   failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
     }];
     
     return cell;
 }
 
-#pragma mark - Private Methods
+#pragma mark - Network Calls
 
 - (void)_fetchArtistPosts {
     ArtAPIManager *manager = [ArtAPIManager new];
@@ -75,6 +74,8 @@
         [self.collectionView reloadData];
     } withArtist:self.artist];
 }
+
+#pragma mark - Private Methods
 
 - (void)_renderData {
     self.artistNameLabel.text = self.artist.name;
@@ -95,15 +96,5 @@
     const CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

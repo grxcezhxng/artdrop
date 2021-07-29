@@ -73,21 +73,20 @@
             return [evaluatedObject[@"title"] containsString:searchText] || [evaluatedObject[@"artist"][@"name"] containsString:searchText];
         }];
         self.arrayOfFilteredPosts = [self.arrayOfPosts filteredArrayUsingPredicate:filterByName];
-    }
-    else {
+    } else {
         self.arrayOfFilteredPosts = self.arrayOfPosts;
     }
     [self.tableView reloadData];
 }
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if([text isEqualToString:@"\n"]) {
+    if ([text isEqualToString:@"\n"]) {
         [self.view endEditing:YES];
     }
     return YES;
 }
 
-#pragma mark - Private Helper Methods
+#pragma mark - Network Calls
 
 - (void)_fetchResults {
     ArtAPIManager *manager = [ArtAPIManager new];
@@ -97,6 +96,8 @@
         [self.tableView reloadData];
     }];
 }
+
+#pragma mark - Private Methods
 
 - (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];

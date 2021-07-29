@@ -47,12 +47,11 @@
 #pragma mark - IB Actions
 
 - (IBAction)handleLike:(id)sender {
-    if(self.post.isLiked){
+    if (self.post.isLiked) {
         [self.post.likedByUser removeObject:PFUser.currentUser.objectId];
         [self.post setObject:self.post.likedByUser forKey:@"likedByUser"];
         [self.post saveInBackground];
-        
-    } else  {
+    } else {
         [self.post.likedByUser addObject:PFUser.currentUser.objectId];
         [self.post setObject:self.post.likedByUser forKey:@"likedByUser"];
         [self.post saveInBackground];
@@ -122,16 +121,16 @@
     self.descriptionLabel.text = self.post[@"description"];
     self.sellerNameLabel.text = self.post.author[@"name"];
     self.sellerBioLabel.text = self.post.author[@"bio"];
-    if(self.post.author[@"profilePhoto"]) {
+    if (self.post.author[@"profilePhoto"]) {
         PFFileObject *const file = self.post.author[@"profilePhoto"];
         NSURL *const url = [NSURL URLWithString: file.url];
         [self.sellerProfilePhoto setImageWithURL:url];
     }
-    if([self.post[@"price"] isEqualToString:@"Not for sale"]) {
+    
+    if ([self.post[@"price"] isEqualToString:@"Not for sale"]) {
         self.forSaleLabel.text = @"Not for sale";
         self.saleIndicator.backgroundColor = UIColor.redColor;
-    }
-    else {
+    } else {
         self.forSaleLabel.text = @"For Sale";
         self.saleIndicator.backgroundColor = UIColor.greenColor;
     }
@@ -161,7 +160,7 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[ArtistViewController class] ]){
+    if ([segue.destinationViewController isKindOfClass:[ArtistViewController class]]){
         Artist *const artist = self.post.artist;
         ArtistViewController *const artistViewController = [segue destinationViewController];
         artistViewController.artist = artist;

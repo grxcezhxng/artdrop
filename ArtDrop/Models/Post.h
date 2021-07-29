@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL isLiked;
 @property (nonatomic, strong) NSMutableArray *likedByUser;
 
-+ (void)postUserImage: ( UIImage * _Nullable )image withTitle: ( NSString * _Nullable )title withArtist: ( Artist * _Nullable )artist withMedium: ( NSString * _Nullable )medium withYear: ( NSString * _Nullable )year withSize: ( NSString * _Nullable )size withPrice: ( NSString * _Nullable )price withDescription: ( NSString * _Nullable )description withLocation: ( Location * _Nullable )location withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void)postUserImage:(UIImage * _Nullable)image withTitle:(NSString * _Nullable)title withArtist:(Artist * _Nullable)artist withMedium:(NSString * _Nullable)medium withYear:( NSString * _Nullable)year withSize: (NSString * _Nullable)size withPrice:(NSString * _Nullable)price withDescription:(NSString * _Nullable)description withLocation:(Location * _Nullable)location withCompletion:(PFBooleanResultBlock _Nullable)completion;
 
 @end
 

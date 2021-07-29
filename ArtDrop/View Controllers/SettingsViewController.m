@@ -50,8 +50,7 @@
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    else {
+    } else {
         NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
@@ -71,7 +70,7 @@
     self.profilePhoto.layer.cornerRadius = 50;
     UIImage *const latestPhoto = [self _resizeImage:self.profilePhoto.image withSize:CGSizeMake(100, 100)];
     
-    // save new profile photo for user
+    // Save new profile photo for user
     NSData *const imageData = UIImagePNGRepresentation(latestPhoto);
     PFFileObject *const file = [PFFileObject fileObjectWithName:@"image.png" data:imageData];
     [PFUser.currentUser setObject:file forKey:@"profilePhoto"];
@@ -79,8 +78,7 @@
     [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded) {
             NSLog(@"Sucessfully saved user photo");
-        }
-        else {
+        } else {
             NSLog(@"error: %@", error);
         }
     }];
@@ -123,15 +121,13 @@
             self.bioLabel.textColor = [UIColor darkGrayColor];
             self.bioField.text = @"Your bio goes here!";
             [self.bioField resignFirstResponder];
-        }
-        else {
+        } else {
             [PFUser.currentUser setObject:self.bioField.text forKey:@"bio"];
         }
         [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if(succeeded) {
                 NSLog(@"Sucessfully saved user bio");
-            }
-            else {
+            } else {
                 NSLog(@"error: %@", error);
             }
         }];
@@ -176,8 +172,7 @@
     self.bioField.delegate = self;
     if(PFUser.currentUser[@"bio"]) {
         self.bioField.text = PFUser.currentUser[@"bio"];
-    }
-    else {
+    } else {
         self.bioField.textColor = [UIColor lightGrayColor];
         self.bioField.text = @"Your bio goes here!";
     }

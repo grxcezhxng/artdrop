@@ -57,7 +57,7 @@
 }
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if([text isEqualToString:@"\n"]) {
+    if ([text isEqualToString:@"\n"]) {
         [self.view endEditing:YES];
     }
     self.tableView.hidden = TRUE;
@@ -87,6 +87,8 @@
     self.tableView.hidden = TRUE;
 }
 
+#pragma mark - TableView Data Source Methods
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.searchResults count];
 }
@@ -104,16 +106,13 @@
     self.searchResults = completer.results;
     [self.tableView reloadData];
 }
-- (void)completer:(MKLocalSearchCompleter *)completer didFailWithError:(NSError *)error {
-}
 
 #pragma mark - MKMapView Delegate Methods
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    if ([annotation isKindOfClass:[MKUserLocation class]]){
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
     }
-    
     if ([annotation isKindOfClass:[ArtAnnotation class]]) {
         ArtAnnotation *artAnnotation = (ArtAnnotation *)annotation;
         
@@ -129,8 +128,7 @@
                 calloutImage.image = artAnnotation.image;
                 pinView.image = artAnnotation.image;
             }
-        }
-        else {
+        } else {
             pinView.annotation = annotation;
         }
         pinView.image = artAnnotation.image;
@@ -139,7 +137,7 @@
     return nil;
 }
 
-#pragma mark - Private Helper Methods
+#pragma mark - Network Calls
 
 - (void)_fetchLocations {
     ArtAPIManager *manager = [ArtAPIManager new];
@@ -157,6 +155,22 @@
         self.arrayOfLocations = locations;
         [self _addAnnotations];
     }];
+}
+
+#pragma mark - Private Methods
+
+- (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 - (void)_addAnnotations {
@@ -179,20 +193,6 @@
         [arrAnnotation addObject:annotation];
     }
     [self.mapView addAnnotations:arrAnnotation];
-}
-
-- (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
-    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    
-    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
-    resizeImageView.image = image;
-    
-    UIGraphicsBeginImageContext(size);
-    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
 }
 
 @end

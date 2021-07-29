@@ -9,12 +9,10 @@
 
 @implementation UIButton (Extensions)
 
-- (void)setupTheme
-{
+- (void)setupTheme {
     self.backgroundColor = [UIColor systemIndigoColor];
     self.layer.cornerRadius = 10;
     self.layer.masksToBounds = YES;
-    
 }
 
 @end

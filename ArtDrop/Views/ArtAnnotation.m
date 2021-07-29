@@ -14,7 +14,6 @@
 @end
 
 @implementation ArtAnnotation
-//@synthesize title,subtitle,coordinate,image;
 
 - (NSString *)title {
     return self.post.title;

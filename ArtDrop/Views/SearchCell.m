@@ -25,4 +25,5 @@
     self.titleLabel.text = self.post[@"title"];
     self.artistLabel.text = self.post.artist.name;
 }
+
 @end

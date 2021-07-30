@@ -6,6 +6,7 @@
 //
 
 #import "ExploreViewController.h"
+#import "DetailViewController.h"
 #import "SearchCell.h"
 #import "Post.h"
 #import "ArtAPIManager.h"
@@ -84,6 +85,18 @@
         [self.view endEditing:YES];
     }
     return YES;
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[DetailViewController class] ]) {
+        UITableViewCell *const tappedCell = sender;
+        NSIndexPath *const indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *const post = self.arrayOfPosts[indexPath.row];
+        DetailViewController *const detailsViewController = [segue destinationViewController];
+        detailsViewController.post = post;
+    }
 }
 
 #pragma mark - Network Calls

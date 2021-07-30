@@ -63,6 +63,7 @@
                                             <outlet property="artistLabel" destination="xNU-L3-BEw" id="x2r-Wx-AnB"/>
                                             <outlet property="artworkImage" destination="VHx-JZ-g4U" id="f8G-KE-zQC"/>
                                             <outlet property="titleLabel" destination="BM1-ai-G0n" id="wZQ-uQ-G7x"/>
+                                            <segue destination="wgu-Y5-nt6" kind="presentation" id="8Db-T5-ygj"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -123,7 +124,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-2986.9565217391305" y="876.5625"/>
+            <point key="canvasLocation" x="-2988" y="877"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="yZf-r6-WOp">
@@ -926,7 +927,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aS1-YI-AAC">
-                                <rect key="frame" x="20" y="274" width="374" height="480"/>
+                                <rect key="frame" x="20" y="274" width="374" height="529"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="02F-Fr-S7C">
                                     <size key="itemSize" width="128" height="128"/>
@@ -1571,6 +1572,9 @@
             <point key="canvasLocation" x="-1271.0144927536232" y="876.5625"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="8Db-T5-ygj"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>

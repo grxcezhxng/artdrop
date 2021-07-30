@@ -78,8 +78,8 @@
             filePath = "ArtDrop/View Controllers/SellViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "-handleSubmit:"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "ArtDrop/View Controllers/SellViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "-_submitData"
             landmarkType = "7">
             <Locations>
@@ -414,8 +414,8 @@
             filePath = "ArtDrop/View Controllers/SellViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "-_submitData"
             landmarkType = "7">
          </BreakpointContent>

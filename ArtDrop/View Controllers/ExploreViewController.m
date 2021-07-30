@@ -10,6 +10,7 @@
 #import "SearchCell.h"
 #import "Post.h"
 #import "ArtAPIManager.h"
+#import "ArtHelper.h"
 
 @interface ExploreViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -112,25 +113,12 @@
 
 #pragma mark - Private Methods
 
-- (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
-    UIImageView *const resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    
-    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
-    resizeImageView.image = image;
-    
-    UIGraphicsBeginImageContext(size);
-    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *const newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
-
 - (void)_renderStyling {
     self.tableView.hidden = TRUE;
     self.mapModule.layer.cornerRadius = 15;
     self.mapModule.layer.opacity = 0.8;
-    UIImage *const resizedImage = [self _resizeImage:[UIImage imageNamed:@"map.png"] withSize:CGSizeMake(375, 200)];
+    ArtHelper *const imageHelper = [ArtHelper new];
+    UIImage *const resizedImage = [imageHelper resizeImage:[UIImage imageNamed:@"map.png"] withSize:CGSizeMake(375, 200)];
     [self.mapModule setBackgroundColor:[UIColor colorWithPatternImage:resizedImage]];
 }
 

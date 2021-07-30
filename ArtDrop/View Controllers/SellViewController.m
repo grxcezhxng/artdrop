@@ -14,6 +14,7 @@
 #import "UIButton+Extensions.h"
 #import "UITextField+Extensions.h"
 #import "UITextView+Extensions.h"
+#import "ArtHelper.h"
 
 @interface SellViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -177,7 +178,8 @@
     UIImage *const editedImage = info[UIImagePickerControllerEditedImage];
     
     self.imageView.backgroundColor = UIColor.whiteColor;
-    UIImage *const resizedImage = [self _resizeImage:editedImage withSize:CGSizeMake(350, 350)];
+    ArtHelper *const imageHelper = [ArtHelper new];
+    UIImage *const resizedImage = [imageHelper resizeImage:editedImage withSize:CGSizeMake(350, 350)];
     self.imageView.image = resizedImage;
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -233,19 +235,6 @@
     [self.imageView setTintColor:[UIColor lightGrayColor]];
     self.searchBar.text = @"";
     [self.mapView removeAnnotations:self.mapView.annotations];
-}
-
-- (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
-    UIImageView *const resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
-    resizeImageView.image = image;
-    
-    UIGraphicsBeginImageContext(size);
-    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *const newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
 }
 
 - (void)_submitData {

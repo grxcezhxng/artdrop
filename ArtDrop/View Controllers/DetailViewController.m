@@ -48,9 +48,10 @@
 #pragma mark - IB Actions
 
 - (IBAction)handleBack:(id)sender {
-    SceneDelegate *const delegate = (SceneDelegate *) self.view.window.windowScene.delegate;
-    UIStoryboard *const storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticatedViewController"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    SceneDelegate *const delegate = (SceneDelegate *) self.view.window.windowScene.delegate;
+//    UIStoryboard *const storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticatedViewController"];
 }
 
 - (IBAction)handleLike:(id)sender {

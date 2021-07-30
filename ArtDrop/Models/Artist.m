@@ -30,17 +30,4 @@
     return newArtist;
 };
 
-#pragma mark - Private Methods
-
-+ (PFFileObject *)_getPFFileFromImage: (UIImage * _Nullable)image {
-    if (!image) {
-        return nil;
-    }
-    NSData *const imageData = UIImagePNGRepresentation(image);
-    if (!imageData) {
-        return nil;
-    }
-    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
-}
-
 @end

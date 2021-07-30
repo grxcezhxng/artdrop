@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UITextField+Extensions.h"
 #import "UITextView+Extensions.h"
+#import "ArtHelper.h"
 
 @interface SettingsViewController () <UIImagePickerControllerDelegate, UITextViewDelegate, UITextFieldDelegate>
 
@@ -65,10 +66,11 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     UIImage *const editedImage = info[UIImagePickerControllerEditedImage];
-    UIImage *const resizedImage = [self _resizeImage:editedImage withSize:CGSizeMake(100, 100)];
+    ArtHelper *const imageHelper = [ArtHelper new];
+    UIImage *const resizedImage = [imageHelper resizeImage:editedImage withSize:CGSizeMake(100, 100)];
     self.profilePhoto.image = resizedImage;
     self.profilePhoto.layer.cornerRadius = 50;
-    UIImage *const latestPhoto = [self _resizeImage:self.profilePhoto.image withSize:CGSizeMake(100, 100)];
+    UIImage *const latestPhoto = [imageHelper resizeImage:self.profilePhoto.image withSize:CGSizeMake(100, 100)];
     
     // Save new profile photo for user
     NSData *const imageData = UIImagePNGRepresentation(latestPhoto);
@@ -140,29 +142,6 @@
 }
 
 #pragma mark - Private Methods
-
-- (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
-    UIImageView *const resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
-    resizeImageView.image = image;
-    
-    UIGraphicsBeginImageContext(size);
-    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *const newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
-- (PFFileObject *)_getPFFileFromImage: (UIImage * _Nullable)image {
-    if (!image) {
-        return nil;
-    }
-    NSData *const imageData = UIImagePNGRepresentation(image);
-    if (!imageData) {
-        return nil;
-    }
-    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
-}
 
 - (void)_renderData {
     self.nameLabel.text = PFUser.currentUser[@"name"];

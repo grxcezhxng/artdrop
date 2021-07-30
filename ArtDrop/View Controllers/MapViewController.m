@@ -12,6 +12,7 @@
 #import "Parse/Parse.h"
 #import "Post.h"
 #import "ArtAPIManager.h"
+#import "ArtHelper.h"
 
 @interface MapViewController () <MKMapViewDelegate, UISearchBarDelegate, MKLocalSearchCompleterDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -165,20 +166,6 @@
 
 #pragma mark - Private Methods
 
-- (UIImage *)_resizeImage:(UIImage *)image withSize:(CGSize)size {
-    UIImageView *const resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    
-    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
-    resizeImageView.image = image;
-    
-    UIGraphicsBeginImageContext(size);
-    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *const newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
-
 - (void)_addAnnotations {
     NSMutableArray *const arrAnnotation = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.arrayOfLocations count]; i++) {
@@ -194,7 +181,8 @@
             NSURL *const url = [NSURL URLWithString: imageFile.url];
             NSData *const fileData = [NSData dataWithContentsOfURL: url];
             UIImage *const photo = [[UIImage alloc] initWithData:fileData];
-            annotation.image = [self _resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
+            ArtHelper *const imageHelper = [ArtHelper new];
+            annotation.image = [imageHelper resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
         }
         [arrAnnotation addObject:annotation];
     }

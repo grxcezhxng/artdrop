@@ -1554,7 +1554,7 @@
         <!--Feed-->
         <scene sceneID="BHL-4y-nzv">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KyR-vp-kSy" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FeedViewController" automaticallyAdjustsScrollViewInsets="NO" id="KyR-vp-kSy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feed" image="house.fill" catalog="system" id="yOj-35-uO0"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="emP-QV-l9X">

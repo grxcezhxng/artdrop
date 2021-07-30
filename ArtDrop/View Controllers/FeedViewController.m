@@ -5,6 +5,7 @@
 //  Created by gracezhg on 7/12/21.
 //
 
+#import <UIKit/UIKit.h>
 #import "FeedViewController.h"
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
@@ -15,8 +16,9 @@
 #import "Artist.h"
 #import "ArtistViewController.h"
 #import "ArtAPIManager.h"
+#import "SceneDelegate.h"
 
-@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
@@ -30,6 +32,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.tabBarController.delegate = self;
     
     UIRefreshControl *const refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -40,6 +43,16 @@
     [super viewWillAppear:animated];
     [self _fetchFeed];
 }
+
+// REVISIT LATER
+//#pragma mark - UITabBarControllerDelegate Methods
+//
+//- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+//    NSLog(@"tapped");
+//    SceneDelegate *const delegate = (SceneDelegate *) self.view.window.windowScene.delegate;
+//    UIStoryboard *const storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticatedViewController"];
+//}
 
 #pragma mark - Table View Delegate Methods
 

@@ -11,6 +11,7 @@
 #import "Artist.h"
 #import <MapKit/MapKit.h>
 #import "UIButton+Extensions.h"
+#import "SceneDelegate.h"
 
 @interface DetailViewController () <MFMailComposeViewControllerDelegate>
 
@@ -47,7 +48,9 @@
 #pragma mark - IB Actions
 
 - (IBAction)handleBack:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    SceneDelegate *const delegate = (SceneDelegate *) self.view.window.windowScene.delegate;
+    UIStoryboard *const storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticatedViewController"];
 }
 
 - (IBAction)handleLike:(id)sender {

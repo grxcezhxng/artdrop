@@ -156,9 +156,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Explore" image="magnifyingglass" catalog="system" id="a7g-wI-MKM"/>
                     <connections>
+                        <outlet property="highlightModule" destination="ZD4-3w-nfT" id="1Zs-4r-PTP"/>
                         <outlet property="mapModule" destination="EcC-A7-hgb" id="szd-jT-Wpw"/>
                         <outlet property="searchBar" destination="55w-9i-rJF" id="FZc-GZ-G75"/>
                         <outlet property="tableView" destination="HiA-lh-DCh" id="iIe-eq-ycs"/>
+                        <outlet property="trendingModule" destination="OXK-BU-xNP" id="ulG-HC-2Tj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXT-xa-Dfi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

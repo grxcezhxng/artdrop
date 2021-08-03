@@ -48,6 +48,7 @@
 #pragma mark - IB Actions
 
 - (IBAction)handleBack:(id)sender {
+//    [self.view.window.rootViewController dismissViewControllerAnimated:true completion:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
 //    SceneDelegate *const delegate = (SceneDelegate *) self.view.window.windowScene.delegate;
 //    UIStoryboard *const storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

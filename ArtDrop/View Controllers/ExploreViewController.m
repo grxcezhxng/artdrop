@@ -15,6 +15,8 @@
 @interface ExploreViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIView *mapModule;
+@property (weak, nonatomic) IBOutlet UIView *highlightModule;
+@property (weak, nonatomic) IBOutlet UIView *trendingModule;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
@@ -58,16 +60,22 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.mapModule.hidden = TRUE;
+    self.highlightModule.hidden = TRUE;
+    self.trendingModule.hidden = TRUE;
     self.tableView.hidden = FALSE;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     self.mapModule.hidden = FALSE;
+    self.highlightModule.hidden = FALSE;
+    self.trendingModule.hidden = FALSE;
     self.tableView.hidden = TRUE;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     self.mapModule.hidden = TRUE;
+    self.highlightModule.hidden = TRUE;
+    self.trendingModule.hidden = TRUE;
     self.tableView.hidden = FALSE;
     
     if (searchText.length != 0) {
@@ -117,6 +125,10 @@
     self.tableView.hidden = TRUE;
     self.mapModule.layer.cornerRadius = 15;
     self.mapModule.layer.opacity = 0.8;
+    self.highlightModule.layer.cornerRadius = 15;
+    self.highlightModule.layer.opacity = 0.8;
+    self.trendingModule.layer.cornerRadius = 15;
+    self.trendingModule.layer.opacity = 0.8;
     ArtHelper *const imageHelper = [ArtHelper new];
     UIImage *const resizedImage = [imageHelper resizeImage:[UIImage imageNamed:@"map.png"] withSize:CGSizeMake(375, 200)];
     [self.mapModule setBackgroundColor:[UIColor colorWithPatternImage:resizedImage]];

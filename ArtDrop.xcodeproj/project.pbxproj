@@ -185,16 +185,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A62DE86426B2395B00D2036E /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				A62DE86526B2398900D2036E /* ArtAPIManager.h */,
-				A62DE86626B2398900D2036E /* ArtAPIManager.m */,
-			);
-			name = Networking;
-			path = ..;
-			sourceTree = "<group>";
-		};
 		A62DE86B26B287DC00D2036E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,10 +223,10 @@
 		A632CB50269CD5280078E0AF /* ArtDrop */ = {
 			isa = PBXGroup;
 			children = (
+				A6FD76CD26B99E9E001A09A2 /* Networking */,
 				A632CB88269CE7CE0078E0AF /* View Controllers */,
 				A632CB86269CE7B50078E0AF /* Models */,
 				A632CB87269CE7C10078E0AF /* Views */,
-				A62DE86426B2395B00D2036E /* Networking */,
 				A6FD76C926B388AE001A09A2 /* Utilities */,
 				A62DE86B26B287DC00D2036E /* Extensions */,
 				A632CB51269CD5280078E0AF /* AppDelegate.h */,
@@ -334,6 +324,15 @@
 				A6FD76CB26B388F5001A09A2 /* ArtHelper.m */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A6FD76CD26B99E9E001A09A2 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A62DE86526B2398900D2036E /* ArtAPIManager.h */,
+				A62DE86626B2398900D2036E /* ArtAPIManager.m */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

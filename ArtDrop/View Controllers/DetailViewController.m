@@ -48,11 +48,12 @@
 #pragma mark - IB Actions
 
 - (IBAction)handleBack:(id)sender {
-//    [self.view.window.rootViewController dismissViewControllerAnimated:true completion:nil];
-    [self dismissViewControllerAnimated:YES completion:nil];
-//    SceneDelegate *const delegate = (SceneDelegate *) self.view.window.windowScene.delegate;
-//    UIStoryboard *const storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticatedViewController"];
+    if(self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (IBAction)handleLike:(id)sender {

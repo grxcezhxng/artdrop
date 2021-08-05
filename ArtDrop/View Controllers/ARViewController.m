@@ -30,6 +30,17 @@
     [self.sceneView.session pause];
 }
 
+#pragma mark - IB Actions
+
+- (IBAction)handleBack:(id)sender {
+    if(self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 #pragma mark - ARSCNViewDelegate
 
 - (void)renderer:(id <SCNSceneRenderer>)renderer didAddNode:(SCNNode *)node forAnchor:(ARAnchor *)anchor {

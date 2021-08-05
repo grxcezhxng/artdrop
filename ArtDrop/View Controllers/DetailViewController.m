@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *inquireButton;
+@property (weak, nonatomic) IBOutlet UIButton *arButton;
 @property (weak, nonatomic) IBOutlet UILabel *forSaleLabel;
 @property (weak, nonatomic) IBOutlet UIView *saleIndicator;
 @property (weak, nonatomic) IBOutlet UIImageView *artistProfilePhoto;
@@ -158,6 +159,7 @@
     self.mapView.layer.cornerRadius = 8;
     self.artworkView.layer.cornerRadius = 5;
     [self.inquireButton setupTheme];
+    [self.arButton setupTheme];
     self.sellerProfilePhoto.layer.masksToBounds = YES;
     self.sellerProfilePhoto.layer.cornerRadius = 33;
     self.likeButton.layer.cornerRadius = 16;

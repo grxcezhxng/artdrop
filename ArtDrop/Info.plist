@@ -6,6 +6,8 @@
 	<string>This app wants to use your location</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>Privacy  - Camera Usage Description</key>
+	<string>For Augmented Reality</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need library access to upload images</string>
 	<key>CFBundleExecutable</key>

@@ -40,6 +40,7 @@
 		A632CBAF26A8786F0078E0AF /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CBAE26A8786F0078E0AF /* Location.m */; };
 		A632CBB226AB8D310078E0AF /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A632CBB126AB8D310078E0AF /* ExploreViewController.m */; };
 		A6FD76CC26B388F5001A09A2 /* ArtHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FD76CB26B388F5001A09A2 /* ArtHelper.m */; };
+		A6FD76D326BBEE81001A09A2 /* ARViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FD76D226BBEE81001A09A2 /* ARViewController.m */; };
 		A9D37C84EF904A146AA35D1A /* Pods_ArtDrop_ArtDropUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199082B368D18557D77A009D /* Pods_ArtDrop_ArtDropUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -129,6 +130,8 @@
 		A632CBB126AB8D310078E0AF /* ExploreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
 		A6FD76CA26B388F5001A09A2 /* ArtHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArtHelper.h; sourceTree = "<group>"; };
 		A6FD76CB26B388F5001A09A2 /* ArtHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtHelper.m; sourceTree = "<group>"; };
+		A6FD76D126BBEE81001A09A2 /* ARViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARViewController.h; sourceTree = "<group>"; };
+		A6FD76D226BBEE81001A09A2 /* ARViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARViewController.m; sourceTree = "<group>"; };
 		C001863EC7CBA639455B91DB /* Pods_ArtDrop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArtDrop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7343A087CFA40A7D43EE332 /* Pods-ArtDrop-ArtDropUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtDrop-ArtDropUITests.debug.xcconfig"; path = "Target Support Files/Pods-ArtDrop-ArtDropUITests/Pods-ArtDrop-ArtDropUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EDB99C11005522252F3CA526 /* Pods-ArtDropTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArtDropTests.release.xcconfig"; path = "Target Support Files/Pods-ArtDropTests/Pods-ArtDropTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -313,6 +316,8 @@
 				A632CB9C269D58B10078E0AF /* ProfileViewController.m */,
 				A632CBA726A1675F0078E0AF /* SettingsViewController.h */,
 				A632CBA826A1675F0078E0AF /* SettingsViewController.m */,
+				A6FD76D126BBEE81001A09A2 /* ARViewController.h */,
+				A6FD76D226BBEE81001A09A2 /* ARViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -585,6 +590,7 @@
 				A632CBA0269E53B30078E0AF /* Artist.m in Sources */,
 				A632CB9D269D58B10078E0AF /* ProfileViewController.m in Sources */,
 				A62DE85826B1790300D2036E /* ArtAnnotation.m in Sources */,
+				A6FD76D326BBEE81001A09A2 /* ARViewController.m in Sources */,
 				A632CB97269D54770078E0AF /* PostCell.m in Sources */,
 				A632CB64269CD52B0078E0AF /* main.m in Sources */,
 				A632CB91269D411B0078E0AF /* FeedViewController.m in Sources */,

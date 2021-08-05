@@ -8,6 +8,7 @@
 #import "DetailViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "ArtistViewController.h"
+#import "ARViewController.h"
 #import "Artist.h"
 #import <MapKit/MapKit.h>
 #import "UIButton+Extensions.h"
@@ -174,6 +175,10 @@
         Artist *const artist = self.post.artist;
         ArtistViewController *const artistViewController = [segue destinationViewController];
         artistViewController.artist = artist;
+    }
+    if ([segue.destinationViewController isKindOfClass:[ARViewController class]]){
+        ARViewController *const arViewController = [segue destinationViewController];
+        arViewController.post = self.post;
     }
 }
 

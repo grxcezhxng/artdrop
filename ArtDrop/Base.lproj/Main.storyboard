@@ -1031,6 +1031,36 @@
             </objects>
             <point key="canvasLocation" x="-1272" y="2300"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="UbT-S1-XI0">
+            <objects>
+                <viewController id="dx8-Eh-UUr" customClass="ARViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lHD-O6-lvs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hek-SW-5eG">
+                                <rect key="frame" x="20" y="20" width="374" height="768"/>
+                            </arscnView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="B0Z-bB-2a4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="B0Z-bB-2a4" firstAttribute="trailing" secondItem="hek-SW-5eG" secondAttribute="trailing" constant="20" id="3eL-LB-Q4t"/>
+                            <constraint firstItem="B0Z-bB-2a4" firstAttribute="bottom" secondItem="hek-SW-5eG" secondAttribute="bottom" constant="20" id="efu-pY-P5h"/>
+                            <constraint firstItem="hek-SW-5eG" firstAttribute="top" secondItem="B0Z-bB-2a4" secondAttribute="top" constant="20" id="lYW-GO-bdg"/>
+                            <constraint firstItem="hek-SW-5eG" firstAttribute="leading" secondItem="B0Z-bB-2a4" secondAttribute="leading" constant="20" id="yh0-Go-DCt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="WmM-za-pJe"/>
+                    <connections>
+                        <outlet property="sceneView" destination="hek-SW-5eG" id="zAV-fX-ipe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W4I-iL-UXg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-500.00000000000006" y="2180.3571428571427"/>
+        </scene>
         <!--Detail View Controller-->
         <scene sceneID="zjf-nu-6aB">
             <objects>
@@ -1223,6 +1253,13 @@
                                                     <action selector="handleBack:" destination="wgu-Y5-nt6" eventType="touchUpInside" id="2rq-1w-67D"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcy-Dx-Soe">
+                                                <rect key="frame" x="204" y="1161" width="30" height="30"/>
+                                                <state key="normal" title="AR"/>
+                                                <connections>
+                                                    <segue destination="dx8-Eh-UUr" kind="show" id="BF7-Fx-4yy"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -1239,6 +1276,7 @@
                                             <constraint firstItem="hUW-JU-Qmt" firstAttribute="top" secondItem="QwC-UL-SUh" secondAttribute="bottom" constant="5" id="Ect-83-a9i"/>
                                             <constraint firstItem="Qka-Xn-3Hr" firstAttribute="top" secondItem="VQD-HJ-XQb" secondAttribute="top" constant="70" id="EtI-ey-SiC"/>
                                             <constraint firstItem="rgB-1f-S15" firstAttribute="leading" secondItem="Qka-Xn-3Hr" secondAttribute="leading" id="Ezx-G9-CCD"/>
+                                            <constraint firstItem="Zcy-Dx-Soe" firstAttribute="leading" secondItem="rDf-DS-gAz" secondAttribute="trailing" constant="16.5" id="Fn5-ZJ-yP7"/>
                                             <constraint firstItem="rDf-DS-gAz" firstAttribute="top" secondItem="LyP-ta-jfu" secondAttribute="bottom" constant="30" id="FpS-dT-ee1"/>
                                             <constraint firstItem="LyP-ta-jfu" firstAttribute="top" secondItem="0Ec-yT-Ydn" secondAttribute="bottom" constant="35" id="Gge-Ir-LQB"/>
                                             <constraint firstItem="QwC-UL-SUh" firstAttribute="top" secondItem="TT5-ug-ItO" secondAttribute="bottom" constant="5" id="H4H-Mq-uDg"/>
@@ -1265,6 +1303,7 @@
                                             <constraint firstItem="rDf-DS-gAz" firstAttribute="leading" secondItem="Qka-Xn-3Hr" secondAttribute="leading" id="ZTj-Ey-HoO"/>
                                             <constraint firstItem="Qgp-ys-Ua4" firstAttribute="leading" secondItem="Qka-Xn-3Hr" secondAttribute="leading" id="bnw-96-NZl"/>
                                             <constraint firstItem="Wu0-Vm-5pe" firstAttribute="centerY" secondItem="cis-CT-IFZ" secondAttribute="centerY" constant="-15" id="dgY-Is-Tsg"/>
+                                            <constraint firstItem="Zcy-Dx-Soe" firstAttribute="top" secondItem="LyP-ta-jfu" secondAttribute="bottom" constant="26" id="e1h-0I-icT"/>
                                             <constraint firstItem="eBf-Wa-Zso" firstAttribute="trailing" secondItem="Qka-Xn-3Hr" secondAttribute="trailing" id="e7s-FS-63l"/>
                                             <constraint firstItem="TT5-ug-ItO" firstAttribute="top" secondItem="o37-aY-7wA" secondAttribute="bottom" constant="32" id="hSz-Pw-e4B"/>
                                             <constraint firstItem="MMP-Hf-nUN" firstAttribute="top" secondItem="Wu0-Vm-5pe" secondAttribute="bottom" constant="3" id="hdX-fi-cKh"/>

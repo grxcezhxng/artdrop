@@ -129,11 +129,11 @@
     self.mapModule.layer.opacity = 0.8;
     self.highlightModule.layer.cornerRadius = 15;
     self.highlightModule.layer.opacity = 0.8;
-    ArtHelper *const imageHelper = [ArtHelper new];
-    UIImage *const resizedMapImage = [imageHelper resizeImage:[UIImage imageNamed:@"map.png"] withSize:CGSizeMake(375, 200)];
-    [self.mapModule setBackgroundColor:[UIColor colorWithPatternImage:resizedMapImage]];
-    UIImage *const resizedSearchImage = [imageHelper resizeImage:[UIImage imageNamed:@"search.png"] withSize:CGSizeMake(375, 200)];
-    [self.highlightModule setBackgroundColor:[UIColor colorWithPatternImage:resizedSearchImage]];
+//    ArtHelper *const imageHelper = [ArtHelper new];
+//    UIImage *const resizedMapImage = [imageHelper resizeImage:[UIImage imageNamed:@"map.png"] withSize:CGSizeMake(375, 250)];
+//    [self.mapModule setBackgroundColor:[UIColor colorWithPatternImage:resizedMapImage]];
+//    UIImage *const resizedSearchImage = [imageHelper resizeImage:[UIImage imageNamed:@"search.png"] withSize:CGSizeMake(375, 250)];
+//    [self.highlightModule setBackgroundColor:[UIColor colorWithPatternImage:resizedSearchImage]];
 }
 
 @end

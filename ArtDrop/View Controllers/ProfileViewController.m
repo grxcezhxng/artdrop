@@ -140,9 +140,9 @@
     [self.segmentControl setImage:[UIImage systemImageNamed:@"suit.heart.fill"] forSegmentAtIndex:1];
     
     UICollectionViewFlowLayout *const layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    layout.minimumInteritemSpacing = 2;
+    layout.minimumInteritemSpacing = 1;
     layout.minimumLineSpacing = 4;
-    const CGFloat margin = 21;
+    const CGFloat margin = 14;
     const CGFloat postersPerLine = 2;
     const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine;
     const CGFloat itemHeight = itemWidth;

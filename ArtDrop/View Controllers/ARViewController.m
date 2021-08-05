@@ -64,10 +64,8 @@
         }];
         
         self.currentNode = [SCNNode nodeWithGeometry:plane];
-            
         self.currentNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
         [self.currentNode setTransform:SCNMatrix4MakeRotation(-M_PI / 2, 1, 0, 0)];
-
         [node addChildNode:self.currentNode];
     }
 }

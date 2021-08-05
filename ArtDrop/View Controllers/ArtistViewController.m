@@ -31,6 +31,17 @@
     [self _renderData];
 }
 
+#pragma mark - IB Actions
+
+- (IBAction)handleBack:(id)sender {
+    if(self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 #pragma mark - Collection View Data Source Methods
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

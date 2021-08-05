@@ -13,6 +13,7 @@
 #import "Post.h"
 #import "ArtAPIManager.h"
 #import "ArtHelper.h"
+#import "DetailViewController.h"
 
 @interface MapViewController () <MKMapViewDelegate, UISearchBarDelegate, MKLocalSearchCompleterDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -128,7 +129,9 @@
             pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
             pinView.canShowCallout = YES;
             pinView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)];
-            pinView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+//            [button addTarget:self action:@selector(handleShowDetail) forControlEvents:UIControlEventTouchUpInside];
+            pinView.rightCalloutAccessoryView = button;
             pinView.calloutOffset = CGPointMake(0, 4);
             if (artAnnotation.image) {
                 UIImageView *const calloutImage = (UIImageView*)pinView.leftCalloutAccessoryView;
@@ -142,6 +145,22 @@
         return pinView;
     }
     return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control API_UNAVAILABLE(tvos) {
+    ArtAnnotation *const artAnnotation = (ArtAnnotation *)(view.annotation);
+    self.post = artAnnotation.post;
+    [self performSegueWithIdentifier:@"mapToDetails" sender:control];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"mapToDetails"]) {
+        Post *const post = self.post;
+        DetailViewController *const detailsViewController = [segue destinationViewController];
+        detailsViewController.post = post;
+    }
 }
 
 #pragma mark - Network Calls

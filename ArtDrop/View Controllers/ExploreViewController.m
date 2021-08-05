@@ -34,6 +34,12 @@
     [self _fetchResults];
 }
 
+- (IBAction)handleSearch:(id)sender {
+    self.mapModule.hidden = TRUE;
+    self.highlightModule.hidden = TRUE;
+    self.tableView.hidden = FALSE;
+}
+
 #pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -124,8 +130,10 @@
     self.highlightModule.layer.cornerRadius = 15;
     self.highlightModule.layer.opacity = 0.8;
     ArtHelper *const imageHelper = [ArtHelper new];
-    UIImage *const resizedImage = [imageHelper resizeImage:[UIImage imageNamed:@"map.png"] withSize:CGSizeMake(375, 200)];
-    [self.mapModule setBackgroundColor:[UIColor colorWithPatternImage:resizedImage]];
+    UIImage *const resizedMapImage = [imageHelper resizeImage:[UIImage imageNamed:@"map.png"] withSize:CGSizeMake(375, 200)];
+    [self.mapModule setBackgroundColor:[UIColor colorWithPatternImage:resizedMapImage]];
+    UIImage *const resizedSearchImage = [imageHelper resizeImage:[UIImage imageNamed:@"search.png"] withSize:CGSizeMake(375, 200)];
+    [self.highlightModule setBackgroundColor:[UIColor colorWithPatternImage:resizedSearchImage]];
 }
 
 @end

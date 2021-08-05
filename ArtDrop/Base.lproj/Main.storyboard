@@ -86,6 +86,9 @@
                                     <constraint firstAttribute="height" constant="200" id="au8-vc-tB1"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="qeK-xP-0KJ"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="WJf-pj-pWf" appends="YES" id="fEA-S2-63v"/>
+                                </connections>
                             </view>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="55w-9i-rJF">
                                 <rect key="frame" x="0.0" y="30" width="414" height="51"/>
@@ -144,6 +147,12 @@
                     <connections>
                         <outlet property="delegate" destination="EcC-A7-hgb" id="Fad-cS-Gsw"/>
                         <segue destination="gNK-1s-fc0" kind="presentation" modalPresentationStyle="fullScreen" id="HWm-7j-qFT"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="WJf-pj-pWf">
+                    <connections>
+                        <action selector="handleSearch:" destination="kGL-20-SVn" id="cvF-GV-62f"/>
+                        <outlet property="delegate" destination="ZD4-3w-nfT" id="w2P-24-vc2"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -212,11 +221,12 @@
                         <outlet property="mapView" destination="cGK-XW-Fzk" id="mh8-A2-hnY"/>
                         <outlet property="searchBar" destination="vBe-bh-hkC" id="KAb-20-E5R"/>
                         <outlet property="tableView" destination="v4D-aU-IQL" id="gN8-cB-gCe"/>
+                        <segue destination="wgu-Y5-nt6" kind="show" identifier="mapToDetails" id="4fk-hi-EUx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pj3-39-ZNl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2988.4057971014495" y="1587.7232142857142"/>
+            <point key="canvasLocation" x="-2988" y="1587"/>
         </scene>
         <!--Sell-->
         <scene sceneID="atm-XD-qlb">
@@ -950,7 +960,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aS1-YI-AAC">
-                                <rect key="frame" x="20" y="274" width="374" height="480"/>
+                                <rect key="frame" x="20" y="274" width="374" height="529"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="02F-Fr-S7C">
                                     <size key="itemSize" width="128" height="128"/>
@@ -983,10 +993,19 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ5-mc-L4c">
+                                <rect key="frame" x="20" y="15" width="13" height="22"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="chevron.backward" catalog="system"/>
+                                <connections>
+                                    <action selector="handleBack:" destination="UPM-DS-h3B" eventType="touchUpInside" id="FsT-Hi-qCr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Paf-db-aVT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="aS1-YI-AAC" firstAttribute="leading" secondItem="oQ5-mc-L4c" secondAttribute="leading" id="1Yz-lm-8ZB"/>
                             <constraint firstItem="Np0-D9-yHg" firstAttribute="top" secondItem="IcR-G9-mx6" secondAttribute="bottom" constant="10" id="68d-QS-ZqT"/>
                             <constraint firstItem="aS1-YI-AAC" firstAttribute="top" secondItem="p0I-RQ-riI" secondAttribute="bottom" constant="25" id="6Ko-sY-JAX"/>
                             <constraint firstItem="Np0-D9-yHg" firstAttribute="centerX" secondItem="2Sp-Kr-VnM" secondAttribute="centerX" id="EKE-ih-8LX"/>
@@ -997,6 +1016,7 @@
                             <constraint firstItem="IcR-G9-mx6" firstAttribute="top" secondItem="Paf-db-aVT" secondAttribute="top" constant="66" id="kzh-XX-X9M"/>
                             <constraint firstItem="Paf-db-aVT" firstAttribute="trailing" secondItem="aS1-YI-AAC" secondAttribute="trailing" constant="20" id="p5e-Tj-Iae"/>
                             <constraint firstItem="p0I-RQ-riI" firstAttribute="top" secondItem="Np0-D9-yHg" secondAttribute="bottom" constant="8" id="xQg-LZ-3OE"/>
+                            <constraint firstItem="oQ5-mc-L4c" firstAttribute="top" secondItem="Paf-db-aVT" secondAttribute="top" constant="15" id="zPj-iw-YS2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ONv-TV-QPa"/>
@@ -1020,7 +1040,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D9i-Ow-ePd">
-                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQD-HJ-XQb">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1316"/>
@@ -1192,7 +1212,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="UPM-DS-h3B" kind="presentation" identifier="artistSegue" modalPresentationStyle="currentContext" id="yz0-Cc-VCG"/>
+                                                    <segue destination="UPM-DS-h3B" kind="show" identifier="artistSegue" id="yz0-Cc-VCG"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXO-Ok-qjz">
@@ -1596,7 +1616,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5GF-6w-dSB"/>
+        <segue reference="4fk-hi-EUx"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>

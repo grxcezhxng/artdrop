@@ -44,16 +44,6 @@
     [self _fetchFeed];
 }
 
-// REVISIT LATER
-//#pragma mark - UITabBarControllerDelegate Methods
-//
-//- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-//    NSLog(@"tapped");
-//    SceneDelegate *const delegate = (SceneDelegate *) self.view.window.windowScene.delegate;
-//    UIStoryboard *const storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticatedViewController"];
-//}
-
 #pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -95,18 +85,6 @@
         DetailViewController *const detailsViewController = [segue destinationViewController];
         detailsViewController.post = post;
     }
-    
-    // TO DO LATER: artist page navigation
-    //    if ([segue.destinationViewController isKindOfClass:[ArtistViewController class] ]){
-    //        UITableViewCell *const tappedCell = sender;
-    //        NSIndexPath *const indexPath = [self.tableView indexPathForCell:tappedCell];
-    //        Post *const post = self.arrayOfPosts[indexPath.row];
-    //        NSLog(@"%@", post.title);
-    //        Artist *const artist = post.artist;
-    //        NSLog(@"%@", artist.name);
-    //        ArtistViewController *const artistViewController = [segue destinationViewController];
-    //        artistViewController.artist = artist;
-    //    }
 }
 
 #pragma mark - Network Calls

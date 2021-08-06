@@ -32,12 +32,28 @@
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     [self _fetchResults];
+    
+    UIRefreshControl *const refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
 }
+
+#pragma mark - IB Actions
 
 - (IBAction)handleSearch:(id)sender {
     self.mapModule.hidden = TRUE;
     self.highlightModule.hidden = TRUE;
     self.tableView.hidden = FALSE;
+}
+
+#pragma mark - Refresh Control
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    NSURLSession *const session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    [self _fetchResults];
+    [self.tableView reloadData];
+    [refreshControl endRefreshing];
 }
 
 #pragma mark - Table View Delegate Methods

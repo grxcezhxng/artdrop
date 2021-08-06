@@ -130,7 +130,6 @@
             pinView.canShowCallout = YES;
             pinView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-//            [button addTarget:self action:@selector(handleShowDetail) forControlEvents:UIControlEventTouchUpInside];
             pinView.rightCalloutAccessoryView = button;
             pinView.calloutOffset = CGPointMake(0, 4);
             if (artAnnotation.image) {

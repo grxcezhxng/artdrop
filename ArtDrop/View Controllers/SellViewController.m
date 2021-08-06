@@ -59,6 +59,9 @@
     searchCompleter = [[MKLocalSearchCompleter alloc] init];
     searchCompleter.delegate = self;
     self.searchResults = [[NSArray alloc] init];
+    
+    const CLLocationCoordinate2D sf = CLLocationCoordinate2DMake(37.783333, -122.416667);
+    [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(sf, 10000000, 10000000)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,12 +76,6 @@
     imagePickerVC.allowsEditing = FALSE;
     
     imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    } else {
-//        NSLog(@"Camera 🚫 available so we will use photo library instead");
-//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//    }
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
@@ -142,7 +139,6 @@
             
             CLLocation *const location = placemark.location;
             const CLLocationCoordinate2D coordinate = location.coordinate;
-            [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(coordinate, 1000000, 1000000) animated:YES];
             
             self.location.latitude = [NSNumber numberWithDouble:coordinate.latitude];
             self.location.longitude = [NSNumber numberWithDouble:coordinate.longitude];
@@ -249,6 +245,8 @@
     [self.imageView setTintColor:[UIColor lightGrayColor]];
     self.searchBar.text = @"";
     [self.mapView removeAnnotations:self.mapView.annotations];
+    const CLLocationCoordinate2D sf = CLLocationCoordinate2DMake(37.783333, -122.416667);
+    [self.mapView setRegion: MKCoordinateRegionMakeWithDistance(sf, 10000000, 10000000)];
 }
 
 - (void)_submitData {

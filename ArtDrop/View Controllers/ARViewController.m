@@ -53,8 +53,12 @@
             
         ARPlaneAnchor *const planeAnchor = (ARPlaneAnchor *)anchor;
             
-        // dimensions are hardcoded
-        SCNPlane *const plane = [SCNPlane planeWithWidth:0.5 height:0.5];
+        // calculate dimensions in meters
+        const double artWidth = [self.post.width floatValue] / 100.0;
+        const double artHeight = [self.post.height floatValue] / 100.0;
+        const CGFloat myWidth = (CGFloat) artWidth;
+        const CGFloat myHeight = (CGFloat) artHeight;
+        SCNPlane *const plane = [SCNPlane planeWithWidth:myWidth height:myHeight];
         PFFileObject *const pfImage = self.post.image;
         [pfImage getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
             if (error == nil) {

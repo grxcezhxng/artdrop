@@ -69,7 +69,7 @@
     ArtHelper *const imageHelper = [ArtHelper new];
     UIImage *const resizedImage = [imageHelper resizeImage:editedImage withSize:CGSizeMake(100, 100)];
     self.profilePhoto.image = resizedImage;
-    self.profilePhoto.layer.cornerRadius = 50;
+    self.profilePhoto.layer.cornerRadius = 60;
     UIImage *const latestPhoto = [imageHelper resizeImage:self.profilePhoto.image withSize:CGSizeMake(100, 100)];
     
     // Save new profile photo for user
@@ -110,7 +110,7 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     self.bioField.text = @"";
-    self.bioField.textColor = [UIColor lightGrayColor];
+    self.bioField.textColor = [UIColor blackColor];
     self.bioField.layer.borderColor=[[UIColor systemIndigoColor]CGColor];
     self.bioField.layer.borderWidth= 1.5f;
     self.bioLabel.textColor = [UIColor systemIndigoColor];
@@ -119,7 +119,7 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if([text isEqualToString:@"\n"]) {
         if(self.bioField.text.length == 0) {
-            self.bioField.textColor = [UIColor lightGrayColor];
+            self.bioField.textColor = [UIColor blackColor];
             self.bioLabel.textColor = [UIColor darkGrayColor];
             self.bioField.text = @"Your bio goes here!";
             [self.bioField resignFirstResponder];
@@ -133,7 +133,7 @@
                 NSLog(@"error: %@", error);
             }
         }];
-        self.bioField.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+        self.bioField.layer.borderColor=[[UIColor grayColor]CGColor];
         self.bioField.layer.borderWidth= 1.0f;
         [self.bioField resignFirstResponder];
         return NO;
@@ -152,7 +152,7 @@
     if(PFUser.currentUser[@"bio"]) {
         self.bioField.text = PFUser.currentUser[@"bio"];
     } else {
-        self.bioField.textColor = [UIColor lightGrayColor];
+        self.bioField.textColor = [UIColor blackColor];
         self.bioField.text = @"Your bio goes here!";
     }
     

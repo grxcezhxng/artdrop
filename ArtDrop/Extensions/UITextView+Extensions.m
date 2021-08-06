@@ -10,7 +10,7 @@
 @implementation UITextView (Extensions)
 
 - (void)setupTheme {
-    self.textColor = [UIColor lightGrayColor];
+    self.textColor = [UIColor blackColor];
     self.layer.cornerRadius=8.0f;
     self.layer.masksToBounds=YES;
     self.layer.borderColor=[[UIColor grayColor]CGColor];

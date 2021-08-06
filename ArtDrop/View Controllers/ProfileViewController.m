@@ -128,7 +128,12 @@
 - (void)_renderData {
     self.nameLabel.text = PFUser.currentUser[@"name"];
     NSString *const bioText = [NSString stringWithFormat:@"%@%@", @"@", PFUser.currentUser.username];
-    self.usernameLabel.text  = [NSString stringWithFormat:@"%@ | %@", bioText, PFUser.currentUser[@"bio"]];
+    if(PFUser.currentUser[@"bio"]) {
+        self.usernameLabel.text  = [NSString stringWithFormat:@"%@ | %@", bioText, PFUser.currentUser[@"bio"]];
+    }
+    else {
+        self.usernameLabel.text  = bioText;
+    }
     self.profilePhoto.userInteractionEnabled = YES;
     self.profilePhoto.layer.cornerRadius = 50;
     

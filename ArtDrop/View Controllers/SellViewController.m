@@ -182,7 +182,7 @@
     self.imageView.backgroundColor = UIColor.whiteColor;
     ArtHelper *const imageHelper = [ArtHelper new];
     const double myWidth = [self.widthField.text doubleValue];
-    const double myHeight = [self.heightField.text doubleValue];
+    double myHeight = [self.heightField.text doubleValue];
     double calcHeight;
     double calcWidth;
     if(myWidth > myHeight) {

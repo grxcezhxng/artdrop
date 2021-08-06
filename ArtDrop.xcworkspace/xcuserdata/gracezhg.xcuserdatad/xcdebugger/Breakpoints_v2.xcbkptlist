@@ -46,8 +46,8 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "+parseClassName"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,9 +62,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withWidth:withHeight:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,8 +78,8 @@
             filePath = "ArtDrop/View Controllers/SellViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "-handleSubmit:"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,9 +94,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withWidth:withHeight:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,9 +110,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withWidth:withHeight:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -126,9 +126,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withWidth:withHeight:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -142,9 +142,9 @@
             filePath = "ArtDrop/Models/Post.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withSize:withPrice:withDescription:withLocation:withCompletion:"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "+postUserImage:withTitle:withArtist:withMedium:withYear:withWidth:withHeight:withPrice:withDescription:withLocation:withCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -158,8 +158,8 @@
             filePath = "ArtDrop/View Controllers/SellViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "-_submitData"
             landmarkType = "7">
             <Locations>
@@ -414,8 +414,40 @@
             filePath = "ArtDrop/View Controllers/SellViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "-_submitData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FB2078A4-967F-480E-B80B-F5C118B2074F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArtDrop/View Controllers/SellViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "-_submitData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5B5F37F-CC58-4B51-B835-399BE8721E3D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArtDrop/View Controllers/SellViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "-_submitData"
             landmarkType = "7">
          </BreakpointContent>

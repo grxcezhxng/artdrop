@@ -69,7 +69,7 @@
 // Fetch artist info from Artsy API
 - (void)fetchArtistInfo:(void(^)(Artist* artist, NSError *error))completion withName:(NSString*) name {
     NSString *const slug = [[name stringByReplacingOccurrencesOfString:@" " withString:@"-"] lowercaseString];
-    NSString *const token = @"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IiIsInN1YmplY3RfYXBwbGljYXRpb24iOiI2MTAxZmMxOTQ3ZDY4MDAwMGY1YTFmMGIiLCJleHAiOjE2MjgxMjQ4MjUsImlhdCI6MTYyNzUyMDAyNSwiYXVkIjoiNjEwMWZjMTk0N2Q2ODAwMDBmNWExZjBiIiwiaXNzIjoiR3Jhdml0eSIsImp0aSI6IjYxMDFmYzE5N2RkODRjMDAwZmYwZWVjOSJ9.vvaLwBIbriqcGGrWWl1v1qX18tUw8re6SIF_Er-d-yo";
+    NSString *const token = @"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IiIsInN1YmplY3RfYXBwbGljYXRpb24iOiI2MTAxZmMxOTQ3ZDY4MDAwMGY1YTFmMGIiLCJleHAiOjE2Mjg4MTM4ODcsImlhdCI6MTYyODIwOTA4NywiYXVkIjoiNjEwMWZjMTk0N2Q2ODAwMDBmNWExZjBiIiwiaXNzIjoiR3Jhdml0eSIsImp0aSI6IjYxMGM3ZmJmODY1YWI4MDAwYzMyYTM5MCJ9.tKYpKBT059snAkCcD8yLRjomzoy_Y2blLbIS5tLBOko";
     [[NSUserDefaults standardUserDefaults] setObject: token forKey:@"token"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

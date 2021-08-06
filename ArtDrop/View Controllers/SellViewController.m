@@ -23,7 +23,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *artistField;
 @property (weak, nonatomic) IBOutlet UITextField *yearField;
 @property (weak, nonatomic) IBOutlet UITextField *mediumField;
-@property (weak, nonatomic) IBOutlet UITextField *dimensionsField;
+@property (weak, nonatomic) IBOutlet UITextField *widthField;
+@property (weak, nonatomic) IBOutlet UITextField *heightField;
 @property (weak, nonatomic) IBOutlet UITextField *priceField;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
@@ -49,7 +50,8 @@
     self.artistField.delegate = self;
     self.yearField.delegate = self;
     self.mediumField.delegate = self;
-    self.dimensionsField.delegate = self;
+    self.widthField.delegate = self;
+    self.heightField.delegate = self;
     self.priceField.delegate = self;
     self.imageView.userInteractionEnabled = YES;
     [self _renderStyling];
@@ -68,14 +70,15 @@
 - (IBAction)handleTapPhoto:(id)sender {
     UIImagePickerController *const imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = YES;
+    imagePickerVC.allowsEditing = FALSE;
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    } else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
+    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    } else {
+//        NSLog(@"Camera 🚫 available so we will use photo library instead");
+//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    }
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
@@ -175,11 +178,21 @@
 #pragma mark - UIImagePickerController Delegate Methods
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    UIImage *const editedImage = info[UIImagePickerControllerEditedImage];
-    
+    UIImage *const originalImage = info[UIImagePickerControllerOriginalImage];
     self.imageView.backgroundColor = UIColor.whiteColor;
     ArtHelper *const imageHelper = [ArtHelper new];
-    UIImage *const resizedImage = [imageHelper resizeImage:editedImage withSize:CGSizeMake(350, 350)];
+    const double myWidth = [self.widthField.text doubleValue];
+    const double myHeight = [self.heightField.text doubleValue];
+    double calcHeight;
+    double calcWidth;
+    if(myWidth > myHeight) {
+        calcHeight = 300 / (myWidth / myHeight);
+        calcWidth = 300;
+    } else {
+        calcWidth = 300 / (myHeight / myWidth);
+        calcHeight = 300;
+    }
+    UIImage *const resizedImage = [imageHelper resizeImage:originalImage withSize:CGSizeMake(calcWidth, calcHeight)];
     self.imageView.image = resizedImage;
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -228,7 +241,8 @@
     self.artistField.text = @"";
     self.mediumField.text = @"";
     self.yearField.text = @"";
-    self.dimensionsField.text = @"";
+    self.widthField.text = @"";
+    self.heightField.text = @"";
     self.priceField.text = @"";
     self.descriptionTextView.text = @"";
     self.imageView.image = [self.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -264,7 +278,11 @@
 }
 
 - (void)_postArtwork {
-    [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withSize:self.dimensionsField.text withPrice:self.priceField.text withDescription:self.descriptionTextView.text withLocation:self.location withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myWidth = [f numberFromString:self.widthField.text];
+    NSNumber *myHeight = [f numberFromString:self.heightField.text];
+    [Post postUserImage:self.imageView.image withTitle:self.titleField.text withArtist:self.artist withMedium:self.mediumField.text withYear:self.yearField.text withWidth:myWidth withHeight:myHeight withPrice:self.priceField.text withDescription:self.descriptionTextView.text withLocation:self.location withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"Posted successfully");
             [self _showSubmitConfirmation];
@@ -284,7 +302,8 @@
     [self.artistField setupTheme];
     [self.yearField setupTheme];
     [self.mediumField setupTheme];
-    [self.dimensionsField setupTheme];
+    [self.widthField setupTheme];
+    [self.heightField setupTheme];
     [self.priceField setupTheme];
     [self.submitButton setupTheme];
 }

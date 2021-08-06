@@ -97,26 +97,30 @@
 #pragma mark - Network Calls
 
 - (void)_fetchUserPosts {
-    ArtAPIManager *const manager = [ArtAPIManager new];
-    [manager fetchUserPosts:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
-        self.arrayOfUserPosts = posts;
-        self.worksLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserPosts.count];
-        [self.collectionView reloadData];
-    }];
+    if([PFUser currentUser]) {
+        ArtAPIManager *const manager = [ArtAPIManager new];
+        [manager fetchUserPosts:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
+            self.arrayOfUserPosts = posts;
+            self.worksLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserPosts.count];
+            [self.collectionView reloadData];
+        }];
+    }
 }
 
 - (void)_fetchUserLikes {
-    ArtAPIManager *const manager = [ArtAPIManager new];
-    [manager fetchFeed:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
-        self.arrayOfUserLikes = [[NSMutableArray alloc] init];
-        for (Post* post in posts) {
-            if ([post.likedByUser containsObject:PFUser.currentUser.objectId]) {
-                [self.arrayOfUserLikes addObject:post];
+    if([PFUser currentUser]) {
+        ArtAPIManager *const manager = [ArtAPIManager new];
+        [manager fetchFeed:^(NSArray * _Nonnull posts, NSError * _Nonnull error) {
+            self.arrayOfUserLikes = [[NSMutableArray alloc] init];
+            for (Post* post in posts) {
+                if ([post.likedByUser containsObject:PFUser.currentUser.objectId]) {
+                    [self.arrayOfUserLikes addObject:post];
+                }
             }
-        }
-        self.likesLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserLikes.count];
-        [self.collectionView reloadData];
-    }];
+            self.likesLabel.text = [NSString stringWithFormat:@"%i", self.arrayOfUserLikes.count];
+            [self.collectionView reloadData];
+        }];
+    }
 }
 
 #pragma mark - Private Methods

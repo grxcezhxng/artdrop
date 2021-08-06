@@ -452,5 +452,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F971AB15-1D71-4288-93AE-3F269B387D19"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArtDrop/View Controllers/SettingsViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "-handleLogout:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F971AB15-1D71-4288-93AE-3F269B387D19 - 655512abfe8a91ef"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SettingsViewController handleLogout:]"
+                  moduleName = "ArtDrop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gracezhg/Documents/ArtDrop/ArtDrop/View%20Controllers/SettingsViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "43">
+               </Location>
+               <Location
+                  uuid = "F971AB15-1D71-4288-93AE-3F269B387D19 - 521ff6266f7536be"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__39-[SettingsViewController handleLogout:]_block_invoke"
+                  moduleName = "ArtDrop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gracezhg/Documents/ArtDrop/ArtDrop/View%20Controllers/SettingsViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "53">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

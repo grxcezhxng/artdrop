@@ -45,6 +45,15 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)handleBack:(id)sender {
+    if(self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 #pragma mark - UITextField Delegate Methods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

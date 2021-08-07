@@ -74,6 +74,7 @@
 
 - (IBAction)handleInquire:(id)sender {
     NSString *const messageBody = [NSString stringWithFormat:@"Hi,\n\nI'm interested in a work in your ArtDrop collection, %@, and would love to set up a time to discuss...", self.post.title];
+    self.post.author.email = @"gracezhg@stanford.edu";
     NSArray *const toRecipents = [NSArray arrayWithObject:self.post.author.email];
     MFMailComposeViewController *const picker = [[MFMailComposeViewController alloc] init];
     if ([MFMailComposeViewController canSendMail]) {

@@ -99,9 +99,9 @@
 - (void)_renderStyling {
     self.profilePhoto.layer.cornerRadius = 60;
     UICollectionViewFlowLayout *const layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    layout.minimumInteritemSpacing = 2;
-    layout.minimumLineSpacing = 4;
-    const CGFloat margin = 30;
+    layout.minimumInteritemSpacing = 1;
+    layout.minimumLineSpacing = 2;
+    const CGFloat margin = 14;
     const CGFloat postersPerLine = 2;
     const CGFloat itemWidth = (self.collectionView.frame.size.width - margin * 2)/postersPerLine;
     const CGFloat itemHeight = itemWidth;
